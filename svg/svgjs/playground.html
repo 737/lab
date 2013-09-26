@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>A clock built with the svg.js library, inspired by the Swiss Railway clock</title>
+    <meta name="description" content="Inspired by the Swiss Railway Clock, a plugin for the svg.js library." />
+    
+    <style type="text/css" media="screen">
+      html, body { background-color: #EBEBE0; width: 100%; height: 100%; overflow: hidden; margin: 0; padding: 0; font-family: 'Helvetica Neue, Helvetica', Arial, sans-serif; font-weight: 300; }
+      html, a { color: #A6A6A4; }
+      #canvas { position: relative; height: 80%; top: 10%; margin: 0 5% 0 5%; }
+      #copyright { width: 600px; margin-left: -300px; left: 50%; bottom: 0px; text-align: center; font-size: 10px; position: absolute; }
+      
+    </style>
+    
+  </head>
+  
+  <body>
+    <div id="canvas"></div>
+  </body>
+  
+  <script type="text/javascript" src="js/lib/zepto.min.js"></script>
+    <script type="text/javascript" src='js/lib/svg.js'></script>
+    <script type="text/javascript" src='js/lib/svg.draggable.js'></script>
+    <script type="text/javascript" src='js/lib/svg.easing.js'></script>
+  
+  <script type="text/javascript" charset="utf-8">
+    /* create and svg canvas */
+    var draw = SVG('canvas')
+
+    /* draw rectangle */
+    var rect = draw.rect(50,50).move(100,100).fill('#f09')
+
+    /* make rectangle jump and change color on mouse over */
+    rect.mouseover(function() {
+        this.animate(1000, SVG.easing.elastic)
+            .move(400 * Math.random(), 400 * Math.random())
+            .rotate(-45 + 90 * Math.random())
+            .fill({
+                r: ~~(Math.random() * 255)
+              , g: ~~(Math.random() * 255)
+              , b: ~~(Math.random() * 255)
+            })
+    })
+
+    /* write text at the back */
+    draw.text('svg.js playground\ntry to grab the rectangle!')
+        .back()
+        .fill('#ccc')
+        .move('50%', '40%')
+        .font({
+            family: 'Source Sans Pro'
+          , size: 18
+          , anchor: 'middle'
+        })
+  </script>
+  
+</html>
