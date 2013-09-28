@@ -352,7 +352,7 @@ describe('Animate move, size, rotate and skew', function() {
       it('with ' + shape, function() {
         var s = build[shape]().move(0,0).stroke({ width: 0, color: '#000' })
 
-        var fxin, fxout
+        var fxin, fxout;
 
         fxin = function() {
           s.animate().attr({ fill: '#f03', 'stroke-width': 3, 'fill-opacity': 0.5 }).move(150,120).size(50, 50).rotate(135).skew(0,45).after(fxout)

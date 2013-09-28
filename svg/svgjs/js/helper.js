@@ -10,7 +10,7 @@
   this.build = {
     
     rect: function() {
-      return SVG(paper[0]).size(160, 160).rect(100, 100);
+      return SVG(paper[0]).size(160, 160).rect(80, 80);
     },
 
     circle: function() {
