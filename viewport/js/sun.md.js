@@ -30,9 +30,6 @@ var BOMWidth = function() {
     return pageHWidth;
 };
 
-            
-
-
 sun.md.deviceInfo = function(){
     var _userAgent = navigator.userAgent,
         _rWins = /Windows/i,
@@ -107,7 +104,7 @@ sun.md.deviceInfo = function(){
 }();
 
 // get the view port meta-content
-sun.md.getViewPortContent = function(initWidth, initHeight, isUserScale, initScale, minScale, maxScale) {
+sun.md.parseViewPortContent = function(initWidth, initHeight, isUserScale, initScale, minScale, maxScale) {
     var w = !!initWidth ? initWidth : "device-width",
         h = !!initHeight ? initHeight : BOMHeight(),
         isUserScale = !!isUserScale ? 1 : 0,
@@ -128,7 +125,7 @@ sun.md.getViewPortContent = function(initWidth, initHeight, isUserScale, initSca
     else if(deviceType.isIOS()) {
         if (typeof w === 'number') {
             if (!initScale) {
-                initScale = (320/w).toFixed(2);
+                initScale = (window.screen.width/w).toFixed(2);
             }
         } else {
             initScale = 1;
@@ -148,5 +145,36 @@ sun.md.getViewPortContent = function(initWidth, initHeight, isUserScale, initSca
     }
 
     return domeMeta.trim();
+};
+
+// var options = {
+//     initWidth: null, 
+//     initHeight: null, 
+//     isUserScale: null, 
+//     initScale: null, 
+//     minScale: null, 
+//     maxScale: null
+// }
+sun.md.setViewPortContent = function (options) {
+    var domeMeta = document.getElementsByName('viewport'),
+        _content = '';
+
+    if (typeof options === 'string'){
+        _content = _content;
+    } else if (typeof options === 'object') {
+        _content = sun.md.parseViewPortContent(options.initWidth, options.initHeight, options.isUserScale, options.initScale, options.minScale, options.maxScale)
+    } else {
+        _content = sun.md.parseViewPortContent();
+    }
+
+    if (domeMeta.length < 0 ) {
+        
+    } else {
+        domeMeta[0].content = _content;
+    }
+};
+
+sun.md.getViewPortContent = function() {
+    return document.getElementsByName('viewport')[0].content||'no tag exist';
 };
 

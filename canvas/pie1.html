@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="UTF-8" />  
+    <title>HTML5 Demo</title>
+    <script type="text/javascript" src='jquery-1.9.1.min.js'></script>
+    <style type="text/css">
+        .cms-luckyDraw { margin: 0 auto; display: block;  border:1px solid #333 ;}
+    </style>
+</head>  
+<body>  
+    <div>
+    <canvas id="circle" class='cms-luckyDraw' width="600" height="600">您的浏览器暂不支持Canvas</canvas>  
+    <div>
+        <Input type='button' value='start' id='btn_start' />
+</body>  
+
+<script type="text/javascript">
+    
+    var sum =  8 ;
+    var GLOBAL_canvas;
+
+    function isEven(num)
+    {
+        return num % 2 == 0 ? true : false;
+    }
+
+    //load background pictrue
+    function setBg(oCVS) {
+        var pic = new Image(), x = y = 0;
+
+        oCVS.save();
+        pic.src ="images/disk.png";
+        pic.onload = function() {
+            x = - pic.width/2 ;
+            y = - pic.height/2;
+            oCVS.drawImage(pic, x, y);
+        }
+        
+    }
+
+    function drawCircle(){  
+        var DOM_canvas = document.getElementById("circle"),
+            _width = DOM_canvas.width,
+            _height = DOM_canvas.height,
+            startPoint = endPoint = 0;
+        var colors = ['#77D1F6', 'none']; //#235BDD
+        
+        var cvs = DOM_canvas.getContext("2d");
+        cvs.translate(_width/2, _height/2);
+
+        for (var i = 1; i <= sum; i++) {
+            endPoint = 2 * Math.PI * i / sum ;
+            cvs.beginPath();
+            cvs.moveTo(0, 0);
+            cvs.fillStyle = !!isEven(i) ? colors[1] : colors[0];
+            cvs.strokeStyle = '#BF0000';//!!isEven(i) ? colors[1] : colors[0];
+            cvs.arc(0, 0, 240.5, startPoint, endPoint);
+            cvs.globalCompositeOperation="destination-over";
+            cvs.fill();
+            cvs.stroke();
+            startPoint = endPoint;
+        };
+
+        cvs.rotate(18*Math.PI/180);
+        setBg(cvs);
+
+
+        GLOBAL_canvas = cvs;
+    }
+
+    drawCircle();
+
+    $('#btn_start').on('click', function() {
+        GLOBAL_canvas.restore();
+            
+        GLOBAL_canvas.rotate(Math.PI/10*Math.random())
+        GLOBAL_canvas.stroke();
+        GLOBAL_canvas.fill();
+    })
+
+</script>
+</html>  

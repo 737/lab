@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="UTF-8" />
+    <meta name='viewport' content='' />
+    <title>HTML5 Demo</title>
+    <script type="text/javascript" src='jquery-1.9.1.min.js'></script>
+    <script type="text/javascript" src='js/sun-md.js'></script>
+    <style type="text/css">
+        .cms-luckyDraw { margin: 0 auto; display: block;  border:1px solid #333 ;}
+    </style>
+</head>  
+<body>  
+    <div>
+    <canvas id="circle" class='cms-luckyDraw' width="600" height="600">您的浏览器暂不支持Canvas</canvas>  
+    <div>
+        <!-- <Input type='button' value='start' id='btn_start' />
+        <Input type='button' value='step' id='btn_step' /> -->
+</body>  
+<script type="text/javascript">
+    var oData = [
+        {
+            id: 0013,
+            type: 'image',
+            name: 'IPAD',
+            description: 'images/ipad.png'
+        },
+        {
+            id: 0011,
+            type: 'word',
+            name: '可惜了',
+            description: '积分'
+        },
+        {
+            id: 0012,
+            type: 'word',
+            name: '2',
+            description: 'images/iphone.png'
+        },
+        {
+            id: 0014,
+            type: 'word',
+            name: '6000',
+            description: '积分'
+        },
+        {
+            id: 00111,
+            type: 'word',
+            name: '3033',
+            description: 'images/car.png'
+        },
+        {
+            id: 00122,
+            type: 'word',
+            name: '4023',
+            description: '积分'
+        },
+        {
+            id: 00133,
+            type: 'word',
+            name: '50000',
+            description: 'images/ship.png'
+        },
+        {
+            id: 00144,
+            type: 'word',
+            name: '60000',
+            description: '积分'
+        }
+    ];
+
+    function isEven(num)
+    {
+        return num % 2 == 0 ? true : false;
+    }
+
+    function isDecimals(num) {
+        var regu = /^[0-9]+\.[0-9]+$/;
+        
+        return regu.test(num);
+    }
+
+    // options = { count : int }
+    var yuan = function(options) {
+        var DOM_canvas = document.getElementById("circle");
+        
+        this.count = options.count || 2;
+        this.width = DOM_canvas.width;
+        this.height = DOM_canvas.height;
+        this.ctx = DOM_canvas.getContext("2d");
+        this.data = options.data;
+        
+        this.ctx.clearRect(0, 0, this.width, this.height);
+    };
+    yuan.prototype.init = function() {
+        this.ctx.globalCompositeOperation="destination-over";
+
+        this.rotate(0);
+    };
+    yuan.prototype.setGrid = function (_anngel){
+        var startPoint = endPoint = 0;
+        var radius = 240.5;
+        var colors =  ['none', 'none']; //['#77D1F6', '#648ace'];
+        
+        this.ctx.translate(this.width/2, this.height/2);
+        this.ctx.rotate(-112.5*Math.PI/180);
+        this.ctx.translate(-this.width/2, -this.height/2);
+
+        this.ctx.save();
+        this.ctx.translate(this.width/2, this.height/2);
+
+        for (var i = 1; i <= this.count; i++) {
+            endPoint = 2 * Math.PI * i / this.count;
+            this.ctx.beginPath();
+            this.ctx.moveTo(0, 0);
+            this.ctx.fillStyle = !!isEven(i) ? colors[1] : colors[0];
+            this.ctx.strokeStyle = '#BF0000';//!!isEven(i) ? colors[1] : colors[0];
+            this.ctx.arc(0, 0, radius, startPoint, endPoint);
+            this.ctx.fill();
+            //this.ctx.stroke();
+
+            this._fillGrid(i, radius, this.count, _anngel);
+
+            startPoint = endPoint;
+        }
+        this.ctx.restore();
+    };
+    yuan.prototype._setGridBg = function(path, x, y, space, rotate){
+        var pic = new Image(),
+            me = this;
+
+        pic.src = path;
+        pic.onload = function() {
+            me.ctx.save();
+
+            me.ctx.translate(me.ctx.canvas.width/2, me.ctx.canvas.height/2);
+            me.ctx.rotate(rotate - 112.5*Math.PI/180);
+            me.ctx.drawImage(pic, -pic.width/2, pic.height/8 - space );
+            me.ctx.restore();
+        }
+    };
+    yuan.prototype._fillGrid = function(i, radius, count, _anngel) {
+        var x = Math.cos(180/count*Math.PI/180)*radius,
+            y = Math.sin(180/count*Math.PI/180)*radius,
+            nameSpace = radius*4/10,
+            descriptionSpace = radius*6/11,
+            driftRate = 180/count;
+
+        switch(i) {
+            case 1:
+                this.ctx.save();
+                this.ctx.translate(x, y);
+                this.ctx.rotate((90 + driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#fff';
+                this.ctx.font = 'normal bold 24px/24px arial,sans-serif';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(this.data[i - 1].name, 0, nameSpace);
+                this._setGridBg(this.data[i - 1].description, x, y, descriptionSpace, (90 + driftRate)*Math.PI/180 + _anngel);
+                this.ctx.restore();
+                break;
+            case 2:
+                this.ctx.save();
+                this.ctx.translate(y, x);
+                this.ctx.rotate((90 + 45 + driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#333';
+                this.ctx.font = 'normal bold 24px/24px arial,sans-serif';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(this.data[i - 1].name, 0, nameSpace);
+                this.ctx.font = 'normal bold 28px/28px arial,sans-serif';
+                this.ctx.fillText(this.data[i - 1].description, 0, descriptionSpace);
+                this.ctx.restore();
+                break;
+            case 3:
+                this.ctx.save();
+                this.ctx.translate(-y, x);
+                this.ctx.rotate(-(90 + 45 + driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#fff';
+                this.ctx.font = 'normal bold 24px/24px arial,sans-serif';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(this.data[i - 1].name, 0, nameSpace);
+                this._setGridBg(this.data[i - 1].description, -y, x, descriptionSpace, -(90 + 45 + driftRate)*Math.PI/180 + _anngel);
+                this.ctx.restore();
+                break;
+            case 4:
+                this.ctx.save();
+                this.ctx.translate(-x, y);
+                this.ctx.rotate(-(90 + driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#333';
+                this.ctx.font = 'normal bold 24px/24px arial,sans-serif';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(this.data[i - 1].name, 0, nameSpace);
+                this.ctx.font = 'normal bold 28px/28px arial,sans-serif';
+                this.ctx.fillText(this.data[i - 1].description, 0, descriptionSpace);
+                this.ctx.restore();
+                break;
+            case 5:
+                this.ctx.save();
+                this.ctx.translate(-x, -y);
+                this.ctx.rotate(-(90 - driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#fff';
+                this.ctx.font = 'normal bold 24px/24px arial,sans-serif';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(this.data[i - 1].name, 0, nameSpace);
+                this.ctx.font = 'normal bold 28px/28px arial,sans-serif';
+                this._setGridBg(this.data[i - 1].description, -x, -y, descriptionSpace, -(90 - driftRate)*Math.PI/180 + _anngel);
+                this.ctx.restore();
+                break;
+            case 6:
+                this.ctx.save();
+                this.ctx.translate(-y, -x);
+                this.ctx.rotate(-(driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#333';
+                this.ctx.font = 'normal bold 24px/24px arial,sans-serif';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(this.data[i - 1].name, 0, nameSpace);
+                this.ctx.font = 'normal bold 28px/28px arial,sans-serif';
+                this.ctx.fillText(this.data[i - 1].description, 0, descriptionSpace);
+                this.ctx.restore();
+                break;
+            case 7:
+                this.ctx.save();
+                this.ctx.translate(y, -x);
+                this.ctx.rotate(driftRate*Math.PI/180);
+                this.ctx.fillStyle = '#fff';
+                this.ctx.font = 'normal bold 24px/24px arial,sans-serif';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(this.data[i - 1].name, 0, nameSpace);
+                this.ctx.font = 'normal bold 28px/28px arial,sans-serif';
+                this._setGridBg(this.data[i - 1].description, y, -x, descriptionSpace, driftRate*Math.PI/180 + _anngel);
+                this.ctx.restore();
+                break;
+            case 8:
+                this.ctx.save();
+                this.ctx.translate(x, -y);
+                this.ctx.rotate((90 - driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#333';
+                this.ctx.font = 'normal bold 24px/24px arial,sans-serif';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(this.data[i - 1].name, 0, nameSpace);
+                this.ctx.font = 'normal bold 28px/28px arial,sans-serif';
+                this.ctx.fillText(this.data[i - 1].description, 0, descriptionSpace);
+                this.ctx.restore();
+                break;
+        }
+    };
+    yuan.prototype.setBg = function (_anngel) {
+        var pic = new Image(),
+            me = this;
+
+        pic.src ="images/disk.png";
+        pic.onload = function() {
+            me.ctx.save();
+            me.ctx.translate(me.ctx.canvas.width/2, me.ctx.canvas.height/2);
+            me.ctx.rotate(_anngel + 22.5*Math.PI/180);
+            me.ctx.drawImage(pic, -pic.width/2 , -pic.height/2);
+            me.ctx.restore();
+        }
+    };
+    yuan.prototype.rotate = function(step) {
+        var _pointer = new pointer();
+        _pointer.init();
+
+        var roAngel = step/2*360/this.count*Math.PI/180 ;
+        this.ctx.save();
+        this.ctx.translate(this.width/2, this.height/2);
+        this.ctx.rotate(roAngel);
+        this.ctx.translate(-this.width/2, -this.height/2);
+        this.setGrid(roAngel);
+        this.setBg(roAngel);
+        this.ctx.restore();
+
+        //this.ctx.clearRect(0, 0, this.width, this.height);
+    };
+
+    var pointer = function() {
+        var DOM_canvas = document.getElementById("circle");
+
+        this.width = DOM_canvas.width;
+        this.height = DOM_canvas.height;
+        this.ctx = DOM_canvas.getContext("2d");
+    };
+    pointer.prototype.init = function() {
+        var me = this;
+        var pic = new Image();
+
+        pic.src ="images/arrow.png";
+        pic.onload = function() {
+            me.ctx.save();
+            me.ctx.globalCompositeOperation="source-over";
+            me.ctx.translate(me.ctx.canvas.width/2, me.ctx.canvas.height/2);
+            me.ctx.drawImage(pic, -pic.width/2 , -pic.height + 8 );
+            me.ctx.restore();
+        }
+    };
+
+    var timer = null;
+    $('#circle').on('click', function() {
+        var assignNum = 8,          // 1  -  8
+            _counter = 0,
+            _speed = 20,
+            rev = 30 + _speed; //越小速度越快
+
+        function __interlval() {
+            var yy = new yuan({ count : 8 , data : oData});
+
+            if (_counter > (yy.count - 1)*2) {
+                _counter = 0;
+            } else {
+                _counter ++;
+            }
+
+
+            if ((_counter > (yy.count - 1)*2)||(_speed >= yy.count * rev)) {
+                if (_speed >= yy.count * rev) {
+
+                    if (assignNum > yy.count) {
+                        assignNum = 0;
+                    } else if (assignNum < 1) {
+                        assignNum = 1;
+                    }
+
+                    var __chanslate = _counter/2;
+                    if (!isDecimals(__chanslate)){
+
+
+                        if ((__chanslate === 0)&&(assignNum === 1 )){
+                            control(_speed, true);
+                        }
+                        console.log(__chanslate, _counter)
+                        if ( __chanslate  === 9 - assignNum ){
+                            control(_speed, true);
+                        }
+                    }
+
+                    //if (!isDecimals(__chanslate)&&(__chanslate === assignNum)) {
+                    // if (_counter/2 === 2) {
+                    //     control(_speed, true);
+                    // }
+                } else {
+                    control(_speed);
+                }
+
+                _speed = _speed + rev;
+            }
+            
+            
+            yy.rotate(_counter);
+        }
+
+        function control(__speed, isStop) {
+            clearInterval(timer);
+            if (!!isStop) {
+                clearInterval(timer);
+                timer = null;
+            } else {
+                timer = setInterval(__interlval, __speed);
+            }
+        }
+
+        if (!!timer) {
+            return
+        } else {
+            timer = setInterval(__interlval, _speed);
+        }
+    })
+
+    var tickSum = 0;
+    $('#btn_step').on('click', function() {
+        var yy = new yuan({ count : 8 , data : oData});
+        //console.log(tickSum);
+        //
+        console.log(tickSum)
+        if (tickSum > (yy.count - 1)*2) {
+            tickSum = 0;
+        } else {
+            tickSum ++;
+        }
+
+        yy.rotate(tickSum);
+    })
+
+    $(document).ready(function() {
+        var yy = new yuan({ count : 8 , data : oData});
+        yy.init();
+
+        var domeMeta = document.getElementsByName('viewport')[0];
+        domeMeta.content = sun.md.getViewPortContent();
+
+        //alert(sun.md.deviceInfo.screen());
+        //alert($('#circle').width());
+    })
+
+</script>
+</html>  

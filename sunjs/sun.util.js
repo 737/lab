@@ -121,3 +121,24 @@ sun.util.replaceAll = function (oString, AFindText, ARepText) {
     var raRegExp = new RegExp(AFindText.replace(/([\(\)\[\]\{\}\^\$\+\-\*\?\.\"\'\|\/\\])/g, "\\$1"), "ig");
     return oString.replace(raRegExp, ARepText);
 };
+
+sun.util.stringFormat = function(txt) {
+    var arg = arguments,
+        matchResult,
+        matLength,
+        str = txt,
+        reg = /\{\d+?\}/gmi,
+        i;
+
+    matchResult = str.match(reg);
+    if (matchResult) {
+        matLength = matchResult.length;
+        if (arg.length >= matLength) {
+            for (i = 0; i < matLength; i++) {
+                str = str.replace(matchResult[i], arg[i + 1]);
+            }
+        }
+    }
+
+    return str;
+};
