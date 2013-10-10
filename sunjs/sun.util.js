@@ -1,5 +1,5 @@
-var sc = sc || {};
-sun.util = sc.util || {};
+var sun = sun || {};
+sun.util = sun.util || {};
 
 /**
  * format number
@@ -122,6 +122,10 @@ sun.util.replaceAll = function (oString, AFindText, ARepText) {
     return oString.replace(raRegExp, ARepText);
 };
 
+/**
+ * @param => ('best {0} for {1}', 'wish', 'you')
+ * return 'best wish for you'
+ */
 sun.util.stringFormat = function(txt) {
     var arg = arguments,
         matchResult,
