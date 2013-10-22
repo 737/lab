@@ -46,6 +46,19 @@
 
 var sun = sun || {};
 
+/**
+ * it is for alex to shortcut method
+ * delete before online
+ */
+(function shortCut() {
+    tojs = function(vmodel) {
+        return ko.mapping.toJS(vmodel)
+    };
+    log = function (){
+        console.log(arguments)
+    };
+})()
+
 sun.ajax = function() {
     var mime = {
         html: 'html',

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML> 
+<html> 
+<body> 
+<canvas id="canvas" width="600"height="400">     
+         <p>Your browserdoes not support the canvas element!</p>     
+</canvas>     
+      
+<script type="text/javascript">     
+    var canvas =document.getElementById("canvas");     
+    var context2D =canvas.getContext("2d");  
+    var pic = new Image();  
+    pic.src ="milaoshu.jpg";  //注意目录结构，这里是把图片和html放在一个目录的 
+     
+    //注意下面方法中画笔状态的保护，这在很多情况下都会使用到 
+    function draw(){ 
+        context2D.clearRect(0,0,600,400); 
+        context2D.save();//保存画笔状态 
+        context2D.rotate(Math.PI/10*Math.random());//开始旋转 
+        context2D.drawImage(pic,100, 100); 
+        context2D.restore();//绘制结束以后，恢复画笔状态 
+    }
+    setInterval(draw, 1000); 
+
+    
+    
+</script>     
+</body> 
+</html> 

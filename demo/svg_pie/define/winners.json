@@ -1,0 +1,42 @@
+{
+    "status": "success",
+    "count": 2,
+    "wonners": [
+        {
+            "lottery_id": 1,
+            "user_id": 1,
+            "spend_point": 0,
+            "prize": {
+                "prize_id": 6,
+                "level": 6,
+                "lottery_id": 1,
+                "point": 10,
+                "product": null,
+                "weight": 100,
+                "created": "Thu Sep 26 08:52:32 +0800 2013",
+                "updated": "Thu Sep 26 09:21:57 +0800 2013"
+            },
+            "created": "Thu Sep 26 08:54:08 +0800 2013",
+            "updated": "Thu Sep 26 08:54:08 +0800 2013",
+            "user_name": "vincent_wjz2@gmail.com"
+        },
+        {
+            "lottery_id": 1,
+            "user_id": 1,
+            "spend_point": 0,
+            "prize": {
+                "prize_id": 6,
+                "level": 6,
+                "lottery_id": 1,
+                "point": 10,
+                "product": null,
+                "weight": 100,
+                "created": "Thu Sep 26 08:52:32 +0800 2013",
+                "updated": "Thu Sep 26 09:21:57 +0800 2013"
+            },
+            "created": "Thu Sep 26 08:54:20 +0800 2013",
+            "updated": "Thu Sep 26 08:54:20 +0800 2013",
+            "user_name": "vincent_wjz2@gmail.com"
+        }
+    ]
+}

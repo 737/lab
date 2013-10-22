@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="UTF-8" />
+    <meta name='viewport' content='' />
+    <title>HTML5 Demo</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src='jquery-1.9.1.min.js'></script>
+    <script type="text/javascript" src='js/sun.js'></script>
+</head>  
+<body>  
+    <div id='luckyDraw'>
+        <div class='height20'></div>
+        <div id='drawBox' class='wrap'>
+            <div class="circle-integral">
+            </div>
+            <hr/>
+            <div id='DOM_points' class='points tl'>
+                <p><h2>1500</h2>&nbsp;Points - right now</p>
+            </div>
+            <canvas id="circle" class='cms-luckyDraw' width="500" height="500">您的浏览器暂不支持Canvas</canvas>
+            <div id="DOM_times" class="points">
+                您现在一共可以抽奖&nbsp;<h2>1</h2>&nbsp;次。[注：一次抽奖需要20积分]
+            </div>
+            <div class='links tl'>
+                <a href='' >Terms & Conditions</a>
+            </div>
+            <div class='height20'></div>
+            <div class='height20'></div>
+            <div class='buttons tc fb'>
+                <button id='btnOpenReady' class='span04'>Click here</button>
+            </div>
+            <div class='height20'></div>
+            <div class='height20'></div>
+        </div>
+        <div class='height20'></div>
+        <div id='ready' class='winBox' style='display: none'>
+            <div class='readyBox'>
+                <div class='height20'></div>
+                <h4>600 points will be deduted</h4>
+                <div class='height20'></div>
+                <button id='btnStart' class='span06'>Start</button>
+                <p></p>
+                <button id='btnCancel' class='span06'>Cancel</button>
+            </div>
+        </div>
+        <div id='result' class='winBox' style='display: none'>
+            <div class='resultBox tc'>
+                <h4>恭喜你，获得1000积分!</h4>
+
+                <p>&nbsp;</p>
+                <p>
+                    <button id='btnCloseResult' class='span05'>OK</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>  
+<script type="text/javascript">
+
+    var OBJ_prizes = null;
+
+    function isEven(num)
+    {
+        return num % 2 == 0 ? true : false;
+    }
+
+    function isDecimals(num) {
+        var regu = /^[0-9]+\.[0-9]+$/;
+        
+        return regu.test(num);
+    }
+
+    // options = { count : int }
+    var yuan = function(_odata) {
+        var DOM_canvas = document.getElementById("circle");
+        
+        this.count = _odata.prizes.length|| 2;
+        this.width = DOM_canvas.width;
+        this.height = DOM_canvas.height;
+        this.ctx = DOM_canvas.getContext("2d");
+        this.data = _odata.prizes;
+        
+        this.ctx.clearRect(0, 0, this.width, this.height);
+    };
+    yuan.prototype.init = function() {
+        this.ctx.globalCompositeOperation="destination-over";
+
+        this.rotate(0);
+    };
+    yuan.prototype.setGrid = function (_anngel){
+        var startPoint = endPoint = 0;
+        var radius = 240.5;
+        var colors =  ['none', 'none']; //['#77D1F6', '#648ace'];
+        
+        this.ctx.translate(this.width/2, this.height/2);
+        this.ctx.rotate(-112.5*Math.PI/180);
+        this.ctx.translate(-this.width/2, -this.height/2);
+
+        this.ctx.save();
+        this.ctx.translate(this.width/2, this.height/2);
+
+        for (var i = 1; i <= this.count; i++) {
+            endPoint = 2 * Math.PI * i / this.count;
+            this.ctx.beginPath();
+            this.ctx.moveTo(0, 0);
+            this.ctx.fillStyle = !!isEven(i) ? colors[1] : colors[0];
+            this.ctx.strokeStyle = '#BF0000';//!!isEven(i) ? colors[1] : colors[0];
+            this.ctx.arc(0, 0, radius, startPoint, endPoint);
+            this.ctx.fill();
+            //this.ctx.stroke();
+
+            this._fillGrid(i, radius, this.count, _anngel);
+
+            startPoint = endPoint;
+        }
+        this.ctx.restore();
+    };
+    yuan.prototype._setGridBg = function(path, x, y, space, rotate){
+        var pic = new Image(),
+            me = this;
+
+        pic.src = path;
+        pic.onload = function() {
+            me.ctx.save();
+
+            me.ctx.translate(me.ctx.canvas.width/2, me.ctx.canvas.height/2);
+            me.ctx.rotate(rotate - 112.5*Math.PI/180);
+            me.ctx.drawImage(pic, -pic.width/2, pic.height/8 - space );
+            me.ctx.restore();
+        }
+    };
+    yuan.prototype._fillGrid = function(i, radius, count, _anngel) {
+        var x = Math.cos(180/count*Math.PI/180)*radius,
+            y = Math.sin(180/count*Math.PI/180)*radius,
+            nameSpace = radius*4/10,
+            descriptionSpace = radius*6/11,
+            driftRate = 180/count;
+
+        this.ctx.save();
+        
+        this.ctx.textAlign = 'center';
+        this.ctx.textBaseline = 'middle';
+        switch(i) {
+            case 1:
+                this.ctx.translate(x, y);
+                this.ctx.rotate((90 + driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#fff';
+                break;
+            case 2:
+                this.ctx.translate(y, x);
+                this.ctx.rotate((90 + 45 + driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#333';
+                break;
+            case 3:
+                this.ctx.translate(-y, x);
+                this.ctx.rotate(-(90 + 45 + driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#fff';
+                break;
+            case 4:
+                this.ctx.translate(-x, y);
+                this.ctx.rotate(-(90 + driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#333';
+                break;
+            case 5:
+                this.ctx.translate(-x, -y);
+                this.ctx.rotate(-(90 - driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#fff';
+                break;
+            case 6:
+                this.ctx.translate(-y, -x);
+                this.ctx.rotate(-(driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#333';
+                break;
+            case 7:
+                this.ctx.translate(y, -x);
+                this.ctx.rotate(driftRate*Math.PI/180);
+                this.ctx.fillStyle = '#fff';
+                break;
+            case 8:
+                this.ctx.translate(x, -y);
+                this.ctx.rotate((90 - driftRate)*Math.PI/180);
+                this.ctx.fillStyle = '#333';
+                break;
+        }
+
+        if (this.data[i -1 ].product === null) {
+            this.ctx.font = 'normal bold 24px/24px arial,sans-serif';
+            this.ctx.fillText('积分', 0, nameSpace);
+            this.ctx.font = 'normal bold 28px/28px arial,sans-serif';
+            this.ctx.fillText(this.data[i - 1].point, 0, descriptionSpace);
+        } else {
+            this.ctx.font = 'normal bold 24px/24px arial,sans-serif';
+            this.ctx.fillText(this.data[i -1 ].product.name, 0, nameSpace);
+            this._setGridBg(this.data[i - 1].product.icon, y, -x, descriptionSpace, driftRate*Math.PI/180 + _anngel);
+        }
+        this.ctx.restore();
+    };
+    yuan.prototype.setBg = function (_anngel) {
+        var pic = new Image(),
+            me = this;
+
+        pic.src ="images/disk.png";
+        pic.onload = function() {
+            me.ctx.save();
+            me.ctx.translate(me.ctx.canvas.width/2, me.ctx.canvas.height/2);
+            me.ctx.rotate(_anngel + 22.5*Math.PI/180);
+            me.ctx.drawImage(pic, -pic.width/2 , -pic.height/2);
+            me.ctx.restore();
+        }
+    };
+    yuan.prototype.rotate = function(step) {
+        var _pointer = new pointer();
+        _pointer.init();
+
+        var roAngel = step/2*360/this.count*Math.PI/180 ;
+        this.ctx.save();
+        this.ctx.translate(this.width/2, this.height/2);
+        this.ctx.rotate(roAngel);
+        this.ctx.translate(-this.width/2, -this.height/2);
+        this.setGrid(roAngel);
+        this.setBg(roAngel);
+        this.ctx.restore();
+
+        //this.ctx.clearRect(0, 0, this.width, this.height);
+    };
+
+    var pointer = function() {
+        var DOM_canvas = document.getElementById("circle");
+
+        this.width = DOM_canvas.width;
+        this.height = DOM_canvas.height;
+        this.ctx = DOM_canvas.getContext("2d");
+    };
+    pointer.prototype.init = function() {
+        var me = this;
+        var pic = new Image();
+
+        pic.src ="images/arrow.png";
+        pic.onload = function() {
+            me.ctx.save();
+            me.ctx.globalCompositeOperation="source-over";
+            me.ctx.translate(me.ctx.canvas.width/2, me.ctx.canvas.height/2);
+            me.ctx.drawImage(pic, -pic.width/2 , -pic.height + 8 );
+            me.ctx.restore();
+        }
+    };
+
+    var csm = csm || {};
+
+    csm.url = function() {
+        var modes = {
+            prod: {
+                prizes: '/lottery/draw/prizes?memberId={0}',
+                memberInfo : '/lottery/draw/memberinfo',
+                result: '/lottery/draw/draw',
+                winners: '/lottery/draw/winners'
+            },
+            dev: {
+                prizes: 'define/prizes.json?memberId={0}',
+                memberInfo : 'define/memberinfo.json',
+                result: 'define/result.json',
+                winners: 'define/winners.json'
+            }
+        },
+        domain = {
+            prod: 'http://lottery.mt-dev.augcloud.cn',
+            dev : 'http://192.168.222.177:8013/alex'
+        };
+
+        function parseDevMode(sMOde) {
+            var allURL = modes['dev'];
+
+            if (sMOde != 'dev') {
+                allURL = modes['prod'];
+
+                $.each(allURL, function(i, v) { 
+                    allURL[i] = domain[sMOde] + v;
+                })
+            }
+            return allURL;
+        };
+
+        var _state = 'dev',     // prod dev
+            _url = parseDevMode(_state);
+
+        return {
+            getPrizesURL: function (memberId) {
+                memberId = !!memberId ? memberId : 38;
+
+                return sun.util.stringFormat(_url.prizes, memberId);
+            },
+            getMemberInfo: function() {
+                return _url.memberInfo
+            },
+            getResult: function() {
+                return _url.result
+            },
+            getWinners: function() {
+                return _url.winners
+            }
+        }
+    }();
+
+    var memberInfo = { 
+        currentDrawNum : 0,
+        point : 0,
+        availableDrawTimes: 0,
+        unitPrice: 0
+    };
+    var initMemberInfo = function(obj_memberInfo) {
+        function __init(json) {
+            memberInfo.currentDrawNum = json.currentDrawNum;
+            memberInfo.point = json.point;
+            memberInfo.unitPrice = json.unitPrice;
+            memberInfo.availableDrawTimes = Math.floor(sun.util.parseToInt(memberInfo.point, 0) / sun.util.parseToInt(memberInfo.unitPrice, 1));
+
+            var jqDomRoot = $('#luckyDraw');
+            var _html = '<h2>天天乐透&nbsp;&nbsp;&nbsp;&nbsp;第' +  memberInfo.currentDrawNum + '期</h2>' +
+                        '<hr/>' +
+                        '<p><strong>' + sun.util.getCurrentTime('MM,dd,yyyy') + '</strong></p>';
+
+            $('#luckyDraw #drawBox .circle-integral').html(_html);
+
+            jqDomRoot.find('#DOM_points').html('<div>我的积分<h2>' + memberInfo.point + '</h2>&nbsp;点</div>');
+            jqDomRoot.find('#DOM_times').html('您现在一共可以抽奖&nbsp;<h2>' + memberInfo.availableDrawTimes + '</h2>&nbsp;次。[注：一次抽奖需要' + memberInfo.unitPrice + '积分]');
+            jqDomRoot.find('#ready h4').html( memberInfo.unitPrice + ' points will be deduted');
+        }
+
+        if (!!obj_memberInfo) {
+            __init(obj_memberInfo);
+        } else {
+            sun.ajax.getJSON(csm.url.getMemberInfo(), function(json) {
+                __init(json);
+            })
+        }
+    };
+    var initPrizesAndWinners = function(){
+        sun.ajax.getJSON(csm.url.getPrizesURL(), function(json) {
+            OBJ_prizes = json;
+
+            var yy = new yuan(OBJ_prizes);
+            yy.init();
+        });
+    };
+    var openResultWindow = function(txt) {
+        var DOM_result = $('#luckyDraw #result'),
+            DOM_title = DOM_result.find('.resultBox h4');
+
+        DOM_title.html(txt);
+        $('#luckyDraw #result').show();
+    };
+
+    var bindEvents = function() {
+        var tickSum = 0;
+        $('#btn_step').on('click', function() {
+            var yy = new yuan(oData2);
+            //console.log(tickSum);
+            //
+            console.log(tickSum)
+            if (tickSum > (yy.count - 1)*2) {
+                tickSum = 0;
+            } else {
+                tickSum ++;
+            }
+
+            yy.rotate(tickSum);
+        });
+
+        var $readyBox = $('#luckyDraw #ready');
+        // show start/cancel button box
+        $('#luckyDraw #btnOpenReady').on('click', function(evt){
+            if(typeof timer != 'number'){
+                if (memberInfo.availableDrawTimes < 1) {
+                    alert('您的积分不够，抱歉!');
+                    return;
+                } else {
+                    $readyBox.show();
+                }
+            } else {    // stop
+                
+            }
+        });
+
+        //start button
+        var timer = null;
+        $('#luckyDraw #ready').on('click', '#btnStart', function() {
+            // result
+            sun.ajax.getJSON(csm.url.getResult(), function(json) {
+                var assignNum = json.prizeId + 1,          // 1  -  8
+                    _counter = 0,
+                    _speed = 40,
+                    rev = 20 + _speed; //越小速度越快
+
+                function __interlval() {
+                    var yy = new yuan(OBJ_prizes);
+
+                    if (_counter > (yy.count - 1)*2) {
+                        _counter = 0;
+                    } else {
+                        _counter ++;
+                    }
+
+                    if ((_counter > (yy.count - 1)*2)||(_speed >= yy.count * rev)) {
+                        if (_speed >= yy.count * rev) {
+
+                            if (assignNum > yy.count) {
+                                assignNum = 0;
+                            } else if (assignNum < 1) {
+                                assignNum = 1;
+                            }
+
+                            var __chanslate = _counter/2;
+                            if (!isDecimals(__chanslate)){
+
+
+                                if ((__chanslate === 0)&&(assignNum === 1 )){
+                                    control(_speed, true);
+                                }
+                                console.log(__chanslate, _counter)
+                                if ( __chanslate  === 9 - assignNum ){
+                                    control(_speed, true);
+                                }
+                            }
+
+                            //if (!isDecimals(__chanslate)&&(__chanslate === assignNum)) {
+                            // if (_counter/2 === 2) {
+                            //     control(_speed, true);
+                            // }
+                        } else {
+                            control(_speed);
+                        }
+
+                        _speed = _speed + rev;
+                    }
+
+                    yy.rotate(_counter);
+                }
+
+                function showPrizes(odata, id){
+                    var prize = odata.prizes[id],
+                        txt = '';
+
+                    if (typeof prize.point === 'number') {
+                        if (prize.point > 0) {
+                            txt = '恭喜你，获得' + prize.point + '积分';
+                        } else {
+                            txt = '很可惜，再试试手气吧!';
+                        }
+                    } else {
+                        txt = '恭喜你，获得' + prize.product.category;
+                    }
+
+                    openResultWindow(txt);
+                }
+
+                function control(__speed, isStop) {
+                    clearInterval(timer);
+                    if (!!isStop) {
+                        clearInterval(timer);
+                        timer = null;
+
+                        //update the member data
+                        initMemberInfo();
+
+                        $('#luckyDraw #btnOpenReady').html('Click here');
+                        showPrizes(OBJ_prizes, json.prizeId);
+                    } else {
+                        timer = setInterval(__interlval, __speed);
+                    }
+                }
+
+                if (!!timer) {
+                    return
+                } else {
+                    timer = setInterval(__interlval, _speed);
+                }
+            })
+
+            memberInfo.point =  memberInfo.point - memberInfo.unitPrice;
+            initMemberInfo(memberInfo);
+            $('#luckyDraw #ready #btnCancel').trigger("click");
+
+            $('#luckyDraw #btnOpenReady').html('Stop');
+        });
+
+        //cancel button
+        $('#luckyDraw #ready').on('click', '#btnCancel', function() {
+            $readyBox.hide();
+        });
+
+        //close the result box
+        $('#luckyDraw #result').on('click', '#btnCloseResult', function() {
+            $('#luckyDraw #result').hide();
+        });
+    };
+
+    $(document).ready(function() {
+        var domeMeta = document.getElementsByName('viewport')[0];
+        domeMeta.content = sun.md.getViewPortContent();
+
+        //init member data
+        initMemberInfo();
+
+        //prizes and winners
+        initPrizesAndWinners();
+
+        //bind dom event
+        bindEvents();
+    })
+
+</script>
+</html>  

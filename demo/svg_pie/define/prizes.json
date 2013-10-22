@@ -1,0 +1,93 @@
+{
+    "status": "success",
+    "count": 7,
+    "prizes": [
+        {
+            "prize_id": 0,
+            "level": 2,
+            "lottery_id": 1,
+            "point": 0,
+            "product": null,
+            "weight": 1,
+            "created": "Thu Sep 26 08:50:13 +0800 2013",
+            "updated": "Thu Sep 26 08:50:13 +0800 2013"
+        },
+        {
+            "prize_id": 1,
+            "level": 1,
+            "lottery_id": 1,
+            "point": 0,
+            "product": {
+                "product_id": 174,
+                "name": "苹果5S",
+                "product_type": "coupon",
+                "icon": "http://ugc.mt-dev.augcloud.cn/images/11378979245.jpg",
+                "category": "数码家电",
+                "exp_datetime": "2013-09-30 23:59:59"
+            },
+            "weight": 0,
+            "created": "Thu Sep 26 08:49:52 +0800 2013",
+            "updated": "Thu Sep 26 09:21:20 +0800 2013"
+        },
+        {
+            "prize_id": 2,
+            "level": 2,
+            "lottery_id": 1,
+            "point": 500,
+            "product": null,
+            "weight": 1,
+            "created": "Thu Sep 26 08:50:13 +0800 2013",
+            "updated": "Thu Sep 26 08:50:13 +0800 2013"
+        },
+        {
+            "prize_id": 3,
+            "level": 3,
+            "lottery_id": 1,
+            "point": 100,
+            "product": null,
+            "weight": 5,
+            "created": "Thu Sep 26 08:50:34 +0800 2013",
+            "updated": "Thu Sep 26 08:50:34 +0800 2013"
+        },
+        {
+            "prize_id": 4,
+            "level": 4,
+            "lottery_id": 1,
+            "point": 50,
+            "product": null,
+            "weight": 10,
+            "created": "Thu Sep 26 08:51:01 +0800 2013",
+            "updated": "Thu Sep 26 08:51:01 +0800 2013"
+        },
+        {
+            "prize_id": 5,
+            "level": 5,
+            "lottery_id": 1,
+            "point": 15,
+            "product": null,
+            "weight": 50,
+            "created": "Thu Sep 26 08:51:38 +0800 2013",
+            "updated": "Thu Sep 26 09:22:07 +0800 2013"
+        },
+        {
+            "prize_id": 6,
+            "level": 6,
+            "lottery_id": 1,
+            "point": 10,
+            "product": null,
+            "weight": 100,
+            "created": "Thu Sep 26 08:52:32 +0800 2013",
+            "updated": "Thu Sep 26 09:21:57 +0800 2013"
+        },
+        {
+            "prize_id": 7,
+            "level": 7,
+            "lottery_id": 1,
+            "point": 5,
+            "product": null,
+            "weight": 120,
+            "created": "Thu Sep 26 09:02:51 +0800 2013",
+            "updated": "Thu Sep 26 09:02:51 +0800 2013"
+        }
+    ]
+}

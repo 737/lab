@@ -92,83 +92,33 @@ sun.md.deviceInfo = function(){
 }();
 
 // get the view port meta-content
-sun.md._parseViewPortContent = function(initWidth, initHeight, isUserScale, initScale, minScale, maxScale) {
+sun.md.getViewPortContent = function(initWidth, initHeight) {
     var w = !!initWidth ? initWidth : "device-width",
         h = !!initHeight ? initHeight : BOMHeight(),
-        isUserScale = !!isUserScale ? 1 : 0,
-        initScale = !!initScale ? initScale : null,
-        minScale = !!minScale ? minScale : 0.1,
-        maxScale = !!maxScale ? maxScale : 10,
         deviceType = sun.md.deviceInfo,
         domeMeta = '';
     
     if(deviceType.isAndroid()) {
-        if (typeof w === 'number') {
-            if (!initScale) {
-                initScale = (window.screen.width/w).toFixed(2);
-            }
-        } else {
-            initScale = 1;
-        }
-
-        domeMeta = 
-            'width=' + w + 
-            ', height=' + h + 
-            ', minimum-scale=' + minScale + 
-            ', maximum-scale=' + maxScale + 
-            ', initial-scale=' + initScale + 
-            ', user-scalable=' + isUserScale + 
-            ', target-densitydpi=' + androidScreenPixelRatio.getDpi();
+         if(androidScreenPixelRatio.isLdpi()) {
+             w = w / 0.7;
+         } else if(androidScreenPixelRatio.isHdpi()) {
+             w = w / 1.5;
+         }
+        domeMeta = 'width=' + w + ', user-scalable=0, minimum-scale=1, maximum-scale=1, initial-scale=1, target-densitydpi=' + androidScreenPixelRatio.getDpi();
     }
     else if(deviceType.isIOS()) {
         if (typeof w === 'number') {
-            if (!initScale) {
-                initScale = (window.screen.width/w).toFixed(2);
-            }
+            domeMeta = 'width=' + w + ', height=' + h + ', minimum-scale=0.1, maximum-scale=2, initial-scale=' + (320/w).toFixed(2) + ', user-scalable=0, target-densitydpi=device-dpi';
         } else {
-            initScale = 1;
+            domeMeta = 'width=' + w + ', height=' + h + ', minimum-scale=0.1, maximum-scale=2, initial-scale=0.5, user-scalable=0, target-densitydpi=device-dpi';
         }
 
-        domeMeta = 
-            'width=' + w + 
-            ', height=' + h + 
-            ', minimum-scale=' + minScale + 
-            ', maximum-scale=' + maxScale + 
-            ', initial-scale=' + initScale + 
-            ', user-scalable=' + isUserScale + 
-            ', target-densitydpi=device-dpi';
+        //alert(domeMeta);
     }
     else if (deviceType.isWinPhone() || deviceType.isWindows()) {
         domeMeta = 'width=640, user-scalable=0, minimum-scale=1, maximum-scale=1, initial-scale=1';
     }
 
-    return domeMeta.trim();
+    return domeMeta;
 };
 
-// var options = {
-//     initWidth: null, 
-//     initHeight: null, 
-//     isUserScale: null, 
-//     initScale: null, 
-//     minScale: null, 
-//     maxScale: null
-// }
-sun.md.setViewPortContent = function (options) {
-    var domeMeta = document.getElementsByName('viewport')[0],
-        _content = '';
-
-    if (typeof options === 'string'){
-        _content = _content;
-    } else if (typeof options === 'object') {
-        _content = sun.md._parseViewPortContent(options.initWidth, options.initHeight, options.isUserScale, options.initScale, options.minScale, options.maxScale)
-    } else {
-        _content = sun.md._parseViewPortContent();
-    }
-
-    domeMeta.content = _content;
-};
-sun.md.getViewPortContent = function() {
-    var domeMeta = document.getElementsByName('viewport')[0];
-
-    return domeMeta.content;
-};

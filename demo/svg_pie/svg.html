@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="UTF-8" />
+    <meta name='viewport' content='' />
+    <title>HTML5 Demo</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src='jquery-1.9.1.min.js'></script>
+    <script type="text/javascript" src='js/raphael.js'></script>
+    <script type="text/javascript" src='js/svg.js'></script>
+</head>  
+<body>  
+    <div id='luckyVote'>
+        <div id='holder'></div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        //sun.showSS();
+        var options = [
+            {
+                voteCount : 100,
+                votePercent: 0
+            },
+            {
+                voteCount : 30,
+                votePercent: 0,
+                imgUrl: 'images/milaoshu.jpg'
+            },
+            {
+                voteCount : 50,
+                votePercent: 0,
+                imgUrl: 'images/milaoshu.jpg'
+            }
+        ];
+        
+        var w = 600,
+            h = 500,
+            count = options.length,
+            totalVoteCount = 0,
+            x = y = 0;
+        var r = Raphael("holder", w, h);
+        
+        for (var i = options.length - 1; i >= 0; i--) {
+            totalVoteCount = totalVoteCount + options[i].voteCount;
+        };
+        for (var i = options.length - 1; i >= 0; i--) {
+            options[i].votePercent = parseFloat((options[i].voteCount/totalVoteCount).toFixed(2));
+        };
+        
+        var elmRect = {
+            _w : w*0.75/count,
+            _h : h*0.75,
+            _x : w*0.25/4,
+            _y : h * 0.1
+        };
+
+        for (var i = 0; i < count; i ++) {
+
+            r.rect( elmRect._x*(i + 1) + elmRect._w * i, elmRect._y, elmRect._w, elmRect._h).attr({
+                fill: '#4682B4',
+                stroke: 'none'
+            });
+            r.rect( elmRect._x*(i + 1) + elmRect._w * i, elmRect._y, elmRect._w, elmRect._h * (1 - options[i].votePercent)).attr({
+                fill: '#ddd',
+                stroke: 'none'
+            });
+
+            var imgW = imgH = elmRect._w*0.7,
+                imgX = elmRect._x*(i + 1)  + elmRect._w * i + (elmRect._w - imgW)/2,
+                imgY = elmRect._y + elmRect._h*1.1;
+
+            var _txt = r.text(imgX, imgY, '中国').attr({ 'font-size' : '24', 'cursor': 'pointer'});
+            _txt.node.attributes.x.value = imgX + (elmRect._w - _txt.node.offsetWidth)/2;
+            _txt.click(function (elm) {
+                alert(this.attrs.text);
+            });
+        }
+    })
+</script>
+</html>  
+
+
+
+
