@@ -82,6 +82,12 @@ sun.ajax = function() {
         var _data = oData,
             _isAsync = typeof isAsync === 'boolean' ? isAsync : true;
 
+        if (sUrl.indexOf('?') === -1){
+            sUrl = sUrl + '?t=' + Math.random();
+        }else {
+            sUrl = sUrl + '&t=' + Math.random();
+        }
+
         $.ajax({
             async: _isAsync,
             type: sType,
