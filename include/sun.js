@@ -40,7 +40,7 @@
         var out = mi + Math.round( Math.random() * range) ;
         return parseInt(out);
     }
-})()
+})
 
 
 var sun = sun || {};

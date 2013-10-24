@@ -157,9 +157,10 @@ sun.md.setViewPortContent = function (options) {
     var DOM_meta = document.getElementsByName('viewport')[0],
         _content = '';
 
-    if (!!DOM_meta) {
+    if (!DOM_meta) {
+        DOM_meta = document.createElement('meta');
         DOM_meta.name = 'viewport';
-        document.body.appendChild(DOM_meta);
+        document.head.appendChild(DOM_meta);
     }
 
     if (typeof options === 'string'){
