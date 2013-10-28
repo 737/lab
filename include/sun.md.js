@@ -18,7 +18,47 @@ var BOMHeight = function() {
     }
     return pageHeight;
 };
-
+var androidScreenPixelRatio = {
+    pr : null,
+    screenHeight : null,
+    getScreenHeight : function() {
+        var that = this;
+        if (null == that.screenHeight) {
+            that.screenHeight = (screen.width < screen.height) ? screen.height : screen.width;
+        }
+        return that.screenHeight;
+    },
+    getDpi : function() {
+        var that = this, dpi = 320;
+        if (1200 <= that.getScreenHeight()) {
+            dpi = "device-dpi";
+        }
+        return dpi;
+    },
+    getPixelRatio : function() {
+        var that = this;
+        if (null == that.pr) {
+            that.pr = window.devicePixelRatio;
+        }
+        return that.pr;
+    },
+    judgePixelRatio : function(pr) {
+        var that = this;
+        return (pr === that.getPixelRatio());
+    },
+    isLdpi : function() {
+        var that = this;
+        return that.judgePixelRatio(0.75);
+    },
+    isMdpi : function() {
+        var that = this;
+        return that.judgePixelRatio(1);
+    },
+    isHdpi : function() {
+        var that = this;
+        return that.judgePixelRatio(1.5);
+    }
+};
 
 sun.md.deviceInfo = function(){
     var _userAgent = navigator.userAgent,
@@ -96,50 +136,45 @@ sun.md._parseViewPortContent = function(initWidth, initHeight, isUserScale, init
     var w = !!initWidth ? initWidth : "device-width",
         h = !!initHeight ? initHeight : BOMHeight(),
         isUserScale = !!isUserScale ? 1 : 0,
-        initScale = !!initScale ? initScale : null,
+        initScale = !!initScale ? initScale : null,     //最大极限是 1.69
         minScale = !!minScale ? minScale : 0.1,
         maxScale = !!maxScale ? maxScale : 10,
         deviceType = sun.md.deviceInfo,
         domeMeta = '';
-    
+
+    //document.documentElement.clientWidth
+    //window.screen.availWidth
+
+
+    if ((typeof w === 'number')&&(!initScale)) {
+        var maxWidth = Math.max(w, document.documentElement.clientWidth);
+
+        w = maxWidth;
+        initScale = (window.screen.availWidth/maxWidth).toFixed(4);
+    }
+    if ((typeof w === 'string')&&(!initScale)) {
+        if (w === '100%') {
+            w = "device-width";
+            initScale = 1;
+        } else {
+            initScale = (window.screen.availWidth/document.documentElement.clientWidth).toFixed(4);
+        }
+    }
+
+    domeMeta = 
+        'width=' + w + 
+        ', height=' + h + 
+        ', minimum-scale=' + minScale + 
+        ', maximum-scale=' + maxScale + 
+        ', initial-scale=' + initScale + 
+        ', user-scalable=' + isUserScale;
+
     if(deviceType.isAndroid()) {
-        if (typeof w === 'number') {
-            if (!initScale) {
-                initScale = (window.screen.width/w).toFixed(2);
-            }
-        } else {
-            initScale = 1;
-        }
-
-        domeMeta = 
-            'width=' + w + 
-            ', height=' + h + 
-            ', minimum-scale=' + minScale + 
-            ', maximum-scale=' + maxScale + 
-            ', initial-scale=' + initScale + 
-            ', user-scalable=' + isUserScale + 
-            ', target-densitydpi=' + androidScreenPixelRatio.getDpi();
-    }
-    else if(deviceType.isIOS()) {
-        if (typeof w === 'number') {
-            if (!initScale) {
-                initScale = (window.screen.width/w).toFixed(2);
-            }
-        } else {
-            initScale = 1;
-        }
-
-        domeMeta = 
-            'width=' + w + 
-            ', height=' + h + 
-            ', minimum-scale=' + minScale + 
-            ', maximum-scale=' + maxScale + 
-            ', initial-scale=' + initScale + 
-            ', user-scalable=' + isUserScale + 
-            ', target-densitydpi=device-dpi';
-    }
-    else if (deviceType.isWinPhone() || deviceType.isWindows()) {
-        domeMeta = 'width=640, user-scalable=0, minimum-scale=1, maximum-scale=1, initial-scale=1';
+        domeMeta = domeMeta + ', target-densitydpi=' + androidScreenPixelRatio.getDpi()/2;
+    } else if(deviceType.isIOS()) {
+        domeMeta = domeMeta + ', target-densitydpi=device-dpi';
+    } else {
+        domeMeta = domeMeta + ', target-densitydpi=device-dpi';
     }
 
     return domeMeta.trim();
@@ -166,7 +201,7 @@ sun.md.setViewPortContent = function (options) {
     if (typeof options === 'string'){
         _content = _content;
     } else if (typeof options === 'object') {
-        _content = sun.md._parseViewPortContent(options.initWidth, options.initHeight, options.isUserScale, options.initScale, options.minScale, options.maxScale)
+        _content = sun.md._parseViewPortContent(options.initWidth, options.initHeight, options.isUserScale, options.initScale, options.minScale, options.maxScale);
     } else {
         _content = sun.md._parseViewPortContent();
     }
