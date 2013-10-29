@@ -158,4 +158,38 @@ sun.context.getQueryStringByName = function(name) {
     }
 
     return result[1];
-}
+};
+
+sun.context.cookie = sun.context.cookie || {};
+// article detail http://www.cnblogs.com/Darren_code/archive/2011/11/24/Cookie.html
+sun.context.cookie.setCookieAndExpires = function (name,value,expiresValue){
+    var Days = expiresValue; 
+    var exp  = new Date();    //new Date("December 31, 9998");
+    
+    exp.setTime(exp.getTime() + Days*24*60*60*1000);
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+};
+sun.context.cookie.setCookie = function (name,value){
+    var Days = 30; //此 cookie 将被保存 30 天
+    var exp  = new Date();    //new Date("December 31, 9998");
+    exp.setTime(exp.getTime() + Days*24*60*60*1000);
+
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+};
+sun.context.cookie.getCookie = function (name){
+    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+
+    if(arr != null) {
+        return unescape(arr[2]);
+    }
+    return null;
+};
+sun.context.cookie.delCookie = function (name){
+    var exp = new Date();
+    var cval= this.getCookie(name);
+
+    exp.setTime(exp.getTime() - 1);
+    if(cval!=null) {
+        document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+    }
+};
