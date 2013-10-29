@@ -39,8 +39,8 @@
     <hr> -->
 </body>
     <script type="text/javascript">
-        var domP = document.getElementsByTagName('p')
-            _viewPortContent = domP[0]
+        var domP = document.getElementsByTagName('p'),
+            _viewPortContent = domP[0],
             _screen = domP[1],
             _viewPortText = '',
             _nav = document.getElementById('nav'),
@@ -132,9 +132,7 @@
         .script('/include/sun.js')
         .script('/include/sun.md.js')
         .script('/include/sun.util.js').wait(function() {
-            sun.md.setViewPortContent({
-                initWidth : '100%'
-            });
+            sun.md.setViewPortContent({initWidth : '100%'});
             
             main();
         });

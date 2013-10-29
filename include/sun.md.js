@@ -160,7 +160,7 @@ sun.md._parseViewPortContent = function(initWidth, initHeight, isUserScale, init
             initScale = (window.screen.availWidth/document.documentElement.clientWidth).toFixed(4);
         }
     }
-
+initScale = 0.5;
     domeMeta = 
         'width=' + w + 
         ', height=' + h + 
