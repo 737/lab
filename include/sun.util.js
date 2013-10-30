@@ -148,6 +148,8 @@ sun.util.parseToInt = function(obj, defaultNum, radix){
 };
 
 /**
+ * @param => ('I am a boy', 'boy', 'girl')
+ * return 'I am a girl'
  * enhance replace
  * @param oString string
  * @param AFindText string
