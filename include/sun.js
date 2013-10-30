@@ -193,3 +193,5 @@ sun.context.cookie.delCookie = function (name){
         document.cookie= name + "="+cval+";expires="+exp.toGMTString();
     }
 };
+
+

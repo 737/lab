@@ -123,6 +123,16 @@ sun.util.getCurrentTime = function(format) {
     return format;
 };
 
+sun.util.htmlDecode = function( html ) {
+    var a = document.createElement( 'a' ); a.innerHTML = html;
+    return a.textContent;
+};
+
+sun.util.htmlEncode = function ( html ) {
+    return document.createElement( 'a' ).appendChild( 
+        document.createTextNode( html ) ).parentNode.innerHTML;
+};
+
 sun.util.parseToInt = function(obj, defaultNum, radix){
     var _t = 0;
     if (typeof radix != 'number'){
@@ -191,4 +201,4 @@ sun.util.transforTime = function (time) {
     result += ":";
     result += new Date(date).getMinutes();
     return result;
-}
+};
