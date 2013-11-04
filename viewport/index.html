@@ -48,7 +48,7 @@
 
 
         function getScreenToWeb() {
-            var html = sun.md.deviceInfo.screen();
+            var html = sun.md.screen;
 
             html = sun.util.replaceAll(html, '\n', '</br>');
 
@@ -133,8 +133,10 @@
         .script('/include/sun.md.js')
         .script('/include/sun.util.js').wait(function() {
             sun.md.setViewPortContent({initWidth : '100%'});
-            
-            main();
+        }).wait(function() {
+            $(document).ready(function() {
+                main();
+            })
         });
 
 
