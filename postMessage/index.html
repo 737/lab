@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta name="viewport" content=""> 
+        <meta charset="utf-8">
+        <title>view port</title>
+        <script type="text/javascript" src='/include/lib/LAB.src.js'></script>
+    </head>
+
+<body>
+    <h1>POST MESSAGE</h1>
+
+    <iframe id='ffone' src="http://192.168.222.177:31001/daily-luck/" width='300px' height='300px'></iframe>
+
+
+</body>
+    <script type="text/javascript">
+        $LAB
+        .script('/include/lib/jquery.min.js')
+        .script('/include/lib/underscore.js')
+        .script('/include/sun.js')
+        .script('/include/sun.md.js')
+        .script('/include/sun.util.js').wait(function() {
+            $(document).ready(function() {
+                
+                postmsg.init();
+
+            })
+        });
+
+
+//对应文件需要加入的监听code
+////addListener
+// var onmsg = function(e){
+//     debugger;
+// };
+// if (typeof window.addEventListener != 'undefined') {
+//     window.addEventListener('message', onmsg, false)
+// } else if(typeof window.attachEvent != 'undefined'){
+//     window.attachevent('onmessage', onmsg);
+// }
+
+
+        var postmsg = (function(global) {
+            var self = {};
+
+            var url = {
+                prizes : 'http://192.168.222.177:31001/wp-content/themes/twentythirteen/define/prizes.json?t=0.22137233661487699',
+            };
+
+            self.init = function () {
+                var msg = 'hello，RIA之家！&nbsp;&nbsp; ' + (new Date().getTime());
+                window.parent.frames[0].postMessage(msg, '*');
+            };
+
+            return self;
+        })(this);
+
+
+
+    </script>
+
+</html>

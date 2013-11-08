@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta name="viewport" content=""> 
+        <meta charset="utf-8">
+        <title>酒店订店步骤如下</title>
+        
+    </head>
+
+<body>
+
+    <h5>酒店订店步骤如下:</h5>
+    <ul>
+        <li>1.请选择你要的优惠套票。</li>
+        <li>2.请选择你要的房型。</li>
+        <li>3.请填写您的联系方式。</li>
+        <li>4.提交</li>
+    </ul>
+
+    <input type = 'button' onclick='sendTo()' value='OK' />
+
+</body>
+    <script type="text/javascript">
+    var sun = sun || {};
+    sun.context = sun.context || {};
+    sun.context.getQueryStringByName = function(name) {
+        var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+
+        if (result == null || result.length < 1) {
+            return "";
+        }
+
+        return result[1];
+    };
+
+
+    var fm = document.createElement('iframe'),
+        url = sun.context.getQueryStringByName('refer');
+
+    function sendTo(){
+        window.location.href = url;
+    }
+
+    fm.src = url;
+    fm.style.display = 'none';
+
+    document.body.appendChild(fm)
+
+    </script>
+
+</html>

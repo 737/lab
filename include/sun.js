@@ -147,6 +147,26 @@ sun.ajax = function() {
     }
 }();
 
+sun.$ = function(query) {
+    return document.querySelectorAll(query);
+};
+
+
+// var __readyFuns = [];   
+// function DOMReady(){   
+//     for(var i=0,l=readyFuns.length;i&lt;l;i++){   
+//       readyFun();   
+//     }   
+//     readyFuns = null;   
+//     document.removeEventListener('DOMContentLoaded',DOMReady,false);   
+// };
+// sun.ready = function(fn){
+//     if(readyFuns.length == 0){   
+//        document.addEventListener('DOMContentLoaded',DOMReady,false);   
+//     }   
+//     readyFuns.push(fn);   
+// }  
+
 
 sun.context = sun.context || {};
 
