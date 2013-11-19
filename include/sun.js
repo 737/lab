@@ -191,10 +191,8 @@ sun.context.cookie.setCookieAndExpires = function (name,value,expiresValue){
 };
 sun.context.cookie.setCookie = function (name,value){
     var Days = 30; //此 cookie 将被保存 30 天
-    var exp  = new Date();    //new Date("December 31, 9998");
-    exp.setTime(exp.getTime() + Days*24*60*60*1000);
-
-    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+    
+    this.setCookieAndExpires(name, value, Days);
 };
 sun.context.cookie.getCookie = function (name){
     var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
@@ -214,4 +212,21 @@ sun.context.cookie.delCookie = function (name){
     }
 };
 
+sun.context.localStorage = sun.context.localStorage || {};
+sun.context.localStorage._ls = window.localStorage;
+sun.context.localStorage.setls = function(name, value) {
+    this._ls.setItem(name,value.toString())
+};
+sun.context.localStorage.getls  = function() {
+    return this._ls.getItem(name);
+};
+sun.context.localStorage.dells = function(name) {
+    var val = this.getls(name);
 
+    if (!!val) {
+        this.__ls.removeItem("c");
+    }
+};
+sun.context.localStorage.clearAll = function() {
+    window.localStorage.clear()
+};

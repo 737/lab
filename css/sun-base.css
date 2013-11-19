@@ -1,0 +1,33 @@
+/*!
+ */
+
+/*! normalize.css v1.0.0  */
+
+/*-------*-------*------- Miscellaneous - pretty : start -------*-------*-------*/
+
+body .hide { display: none; }
+body input.error { color: #b94a48; border-color: #b94a48; }
+body span.error { color: #b94a48; border-color: #b94a48; }
+
+/************************** pretty **************************/
+/* text-align */
+.sun-tc { text-align: center; }
+.sun-tl { text-align: left; }
+.sun-tr { text-align: right; }
+
+.sun-mc { margin: 0 auto; }
+
+/* clear */
+.sun-cf { *zoom: 1; }
+.sun-cf:before,
+.sun-cf:after { display: table; line-height: 0; content: ""; }
+.sun-cf:after { clear: both; }
+/*----------------*/
+.sun-cf:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.sun-cf { display: inline-block; }
+/* Hides from IE-mac \*/
+* html .sun-cf { height: 1%; }
+.sun-cf { display: block; }
+/* End hide from IE-mac */
+
+/************************** /pretty **************************/
