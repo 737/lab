@@ -71,7 +71,7 @@ sun.md = (function(global){
             minScale = !!minScale ? minScale : 0.1,
             maxScale = !!maxScale ? maxScale : 10,
             domeMeta = '',
-            targetDensitydpi = '',      // [dpi_value(70 - 400) | device-dpi | high-dpi | medium-dpi | low-dpi]
+            targetDensitydpi = 'device-dpi',      // [dpi_value(70 - 400) | device-dpi | high-dpi | medium-dpi | low-dpi]
             clientW = document.documentElement.clientWidth,
             screenW = window.screen.width;
 

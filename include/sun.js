@@ -55,6 +55,14 @@ var sun = sun || {};
     log = function (){
         console.log(arguments)
     };
+    write = function(txt){
+        var p = document.createElement('p');
+        var hr = document.createElement('hr');
+
+        p.innerHTML = txt;
+        document.body.appendChild(hr);
+        document.body.appendChild(p);
+    };
 })()
 
 sun.ajax = function() {
@@ -230,3 +238,23 @@ sun.context.localStorage.dells = function(name) {
 sun.context.localStorage.clearAll = function() {
     window.localStorage.clear()
 };
+
+//-----------------------------  undealed  -----------------------------------
+function addEvent (type, element, fun) {
+    if (element.addEventListener) {
+        addEvent = function (type, element, fun) {
+            element.addEventListener(type, fun, false);
+        }
+    }
+    else if(element.attachEvent){
+        addEvent = function (type, element, fun) {
+            element.attachEvent('on' + type, fun);
+        }
+    }
+    else{
+        addEvent = function (type, element, fun) {
+            element['on' + type] = fun;
+        }
+    }
+    return addEvent(type, element, fun);
+}
