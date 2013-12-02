@@ -120,7 +120,9 @@ sun.md = (function(global){
 
     _getScreen =  function(){
         // detail information to  http://www.cnblogs.com/tearer/archive/2010/09/06/1819471.html
-        
+        // window.devicePixelRatio = 物理像素 / dips
+        // window.screen.width = Android设备返回的是物理像素宽，IOS =》 dips宽
+
         var s = "网页可见区域宽：" +       document.body.clientWidth + "\n";
             s += " 网页可见区域高：" +     document.body.clientHeight + "\n";
             s += " 网页可见区域宽：" +     document.body.offsetWidth + " (包括边线和滚动条的宽)" + "\n";
@@ -137,7 +139,7 @@ sun.md = (function(global){
             s += " 屏幕可用工作区高度：" + window.screen.availHeight + "\n";
             s += " 屏幕可用工作区宽度：" + window.screen.availWidth + "\n";
             s += " 你的屏幕设置是 " +      window.screen.colorDepth + " 位彩色" + "\n";
-            s += " 设备像素比: " +          window.devicePixelRatio + " 像素/英寸" + "\n";
+            s += " 物理像素/独立像素比: " +         window.devicePixelRatio + " 像素/英寸" + "\n";
             s += " 你的屏幕设置 " +        window.screen.deviceXDPI + " 像素/英寸" + "\n";
         
         return s;
