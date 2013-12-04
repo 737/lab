@@ -190,19 +190,19 @@ sun.context.getQueryStringByName = function(name) {
 
 sun.context.cookie = sun.context.cookie || {};
 // article detail http://www.cnblogs.com/Darren_code/archive/2011/11/24/Cookie.html
-sun.context.cookie.setCookieAndExpires = function (name,value,expiresValue){
+sun.context.cookie.setExpires = function (name,value,expiresValue){
     var Days = expiresValue; 
     var exp  = new Date();    //new Date("December 31, 9998");
     
     exp.setTime(exp.getTime() + Days*24*60*60*1000);
     document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
 };
-sun.context.cookie.setCookie = function (name,value){
+sun.context.cookie.set = function (name,value){
     var Days = 30; //此 cookie 将被保存 30 天
     
-    this.setCookieAndExpires(name, value, Days);
+    this.setExpires(name, value, Days);
 };
-sun.context.cookie.getCookie = function (name){
+sun.context.cookie.get = function (name){
     var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
 
     if(arr != null) {
@@ -210,9 +210,9 @@ sun.context.cookie.getCookie = function (name){
     }
     return null;
 };
-sun.context.cookie.delCookie = function (name){
+sun.context.cookie.del = function (name){
     var exp = new Date();
-    var cval= this.getCookie(name);
+    var cval= this.get(name);
 
     exp.setTime(exp.getTime() - 1);
     if(cval!=null) {
@@ -222,14 +222,14 @@ sun.context.cookie.delCookie = function (name){
 
 sun.context.localStorage = sun.context.localStorage || {};
 sun.context.localStorage._ls = window.localStorage;
-sun.context.localStorage.setls = function(name, value) {
+sun.context.localStorage.set = function(name, value) {
     this._ls.setItem(name,value.toString())
 };
-sun.context.localStorage.getls  = function() {
+sun.context.localStorage.get  = function() {
     return this._ls.getItem(name);
 };
-sun.context.localStorage.dells = function(name) {
-    var val = this.getls(name);
+sun.context.localStorage.del = function(name) {
+    var val = this.get(name);
 
     if (!!val) {
         this.__ls.removeItem("c");
