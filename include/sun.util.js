@@ -1,6 +1,65 @@
 var sun = sun || {};
 sun.util = sun.util || {};
 
+sun.util.array = sun.util.array || {};
+/**
+ * @param => ([1,2,32,4])
+ * return [1, 2, 4, 32]
+ *
+ * @param => ([1,2,32,4], false)
+ * return [32, 4, 2, 1]
+ * 
+ */
+sun.util.array.sort = function(arrayList, isAsc) {
+    if (typeof isAsc != 'boolean') {
+        isAsc = true;
+    }
+
+    function sortNumber(a, b)
+    {
+        if (!!isAsc) {
+            return a - b
+        } else {
+            return b - a
+        }
+    }
+
+    return arrayList.sort(sortNumber);
+};
+
+/**
+ * @param => ([0,1,2,3,4,5,6,7,8,9], 6)
+ * return [0, 1, 2, 3, 4, 5, 7, 8, 9]
+ * 
+ * @param => ([0,1,2,3,4,5,6,7,8,9], [2,6,8])
+ * return [0, 1, 3, 4, 5, 7, 9]
+ * 
+ */
+sun.util.array.remove = function(arrayList, n) {
+    //prototype为对象原型，注意这里为对象增加自定义方法的方法。
+    if ( n < 0 || typeof n === 'undefined') {
+    　　return arrayList;
+    } else if (sun.util.isArray(n)) {
+        var _tmp = null;
+
+        n = this.sort(n, false);
+
+        for(index in n) {
+            arrayList = this.remove(arrayList, n[index]);
+        }
+
+        return arrayList;
+    } else {
+        return arrayList.slice(0,n).concat(arrayList.slice(n+1,arrayList.length));
+    }
+　　/*
+　　　concat方法：返回一个新数组，这个新数组是由两个或更多数组组合而成的。
+　　　　　　　　　这里就是返回arrayList.slice(0,n)/arrayList.slice(n+1,arrayList.length)
+　　 　　　　　　组成的新数组，这中间，刚好少了第n项。
+　　　slice方法： 返回一个数组的一段，两个参数，分别指定开始和结束的位置。
+　　*/
+};
+
 /**
  * format number
  * e.g. 12000 => 1,2000
@@ -91,6 +150,22 @@ sun.util.formatFloat = function (amtStr, isCurrency) {
 
 sun.util.isEven = function(num) {
     return num % 2 == 0 ? true : false;
+};
+
+/**
+ * @param => ([])
+ * return true
+ *
+ * * @param => ({})
+ * return false
+ * 
+ */
+sun.util.isArray = function(arg) {
+    // first way:
+    return Object.prototype.toString.call(arg) === '[object Array]';
+
+    // second way:
+    //return (arr instanceof Array);
 };
 
 /**

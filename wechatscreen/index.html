@@ -1,0 +1,696 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>恭祝微信大屏幕全新官网及星空风格上线 - 小烧烧测试机 - 微信大屏幕 - 微信墙</title>
+  <link rel="stylesheet" href="css/v6_common.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/v6_space.css" type="text/css" />
+
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.soChange.js"></script>
+<script type="text/javascript" src="js/jquery.transit.min.js"></script>
+
+  <script type="text/javascript" src="js/wxscreen.min.js?v=v708"></script>
+<script type="text/javascript">
+var sysConfig = {
+    isAdmin: 0,
+    template: "v6_space",
+    visibleNum: 3,
+    // 10 s
+    autoTime: 5,
+    // 10 ms
+    stepTime: 25,
+    // domain 
+    domain: "demo",
+    siteUrl: "http://192.168.222.177:31000/wechatscreen/",
+    companyId: 100033,
+    timerColorMap: [ '#83e9ff', '#399eff' ],
+    
+    lotteryPlug:  1 ,
+    ddpPlug:  1 ,
+    votePlug:  1 ,
+    isDemo:  1 ,
+    maxMessageNum: 9000,
+    isV6: 1,
+    messageVisibleTime: {"latest_hour":"","start_date":"2013-11-25","start_hour":"00","end_date":"","end_hour":"00","start_time":"2013-11-25 00:00:00","end_time":""},
+    lotteryVisibleTime: {"latest_hour":"","start_date":"","start_hour":"00","end_date":"","end_hour":"00","start_time":"","end_time":""},
+    ddpVisibleTime: {"latest_hour":"","start_date":"","start_hour":"00","end_date":"","end_hour":"00","start_time":"","end_time":""},
+    isCycleScroll:  1 };
+    
+wxscreen.init(sysConfig);
+</script>
+</head>
+<body>
+
+<div id="wrap" class="wrapbg" >
+  <div id="whole">
+  
+    <div id="header" class="clearfix">
+    
+              <a href="http://wxscreen.com" target="_blank">
+                      <span class="logo-t left"><img class="logoScreenLeft" src="images/common/logo_v6.png" /></span>
+                  </a>
+            
+      <div class="word-scroll left">
+        <div class="clearfix">
+          <div class="scrollbox left">
+            <ul class="word-list wordList">
+                                                        <li class="themeBox">恭祝微信大屏幕<br>全新官网及星空风格上线</li>
+              <li style="display:none;">微信号：xiaosscsj<br/>关注后发送内容即可上墙</li>
+            </ul>
+          </div>
+          <div class="num-t left">
+            <p><em class="messageTotal"></em><span>条信息</span></p>
+          </div>
+        </div>
+      </div>
+      
+      <span class="reserved right showIntroBtn">
+                  <img src="http://s1.wxscreen.com/wxscreen/20131129233159000000_1_56513_7976.png" style="max-width:126px;max-height:96px;">
+              </span>
+    </div>
+    
+    <div id="container">
+      <div class="con-inner scrollBox">
+        <ul class="user-list">
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div id="footer" class="clearfix">
+      
+      
+      <div class="left-bottom left">
+                  <span class="logo-b left"></span>
+              </div>
+      
+      <div class="prodres-box">
+        <canvas id="cirProgress" width="50" height="50"></canvas>
+      </div>
+      <div class="btns right">
+        <a href="javascript:void(0);" class="btnNetwork btn-icon btn-wifi btn-wifi-disable" style="display:none;" title="网络已断开，请检查您的网络连接">信号</a>
+        
+        <a href="javascript:void(0);" class="btnStar      btn-icon btn-tag " title="点击查看星标消息">加星消息</a>
+                  <a href="javascript:void(0);" class="btnLottery btn-icon btn-lottery " title="抽奖">抽奖</a>
+          <a href="javascript:void(0);" class="btnDdp     btn-icon btn-pair " title="对对碰">对对碰</a>
+          <a href="javascript:void(0);" class="btnVote    btn-icon btn-vote ">投票</a>
+                
+                <a href="javascript:void(0);" class="btnFullScreen btn-icon btn-full" title="全屏">全屏</a>
+        <a href="javascript:void(0);" class="btnOldest     btn-func btn-old" title="最旧一屏">最旧</a>
+        <a href="javascript:void(0);" class="btnPrev       btn-func btn-prev" title="上一屏">上一条</a>
+        <a href="javascript:void(0);" class="btnPause      btn-func btn-begin" title="暂停">暂停</a>
+        <a href="javascript:void(0);" class="btnNext       btn-func btn-next" title="下一屏">下一条</a>
+        <a href="javascript:void(0);" class="btnNewest     btn-func btn-new" title="最新一屏">最新</a>
+      </div>
+    </div>
+    
+    
+<!--单条详情-->
+<div class="detail-box messageDetailBox hidden">
+  <div class="msg-detail-list messageDetailList">
+    
+  </div>
+  <a href="javascript:void(0);" class="flbtn-close messageDetailCloseBtn" style="display:none;"></a>
+</div>
+<!--end 详情-->
+
+  <script type="text/javascript" src="js/messageDetail.min.js"></script>
+<script>
+$(function(){
+  wxscreen.messageDetail.init();
+});
+</script>  <!--抽奖-->
+<div class="fl-lottery lotteryLayer" style="display:none;">
+  <div class="fl-inner fl-bg">
+    <div class="inner-cont clearfix">
+      <div class="prize-box right">
+        <span class="props props-color"></span>
+        <div class="outer-prize">
+          <div class="wrap-prize">
+            <div class="list-top clearfix">
+              <p class="pro-num right">获奖人数<em class="winUserNum"><img src="images/loading.gif" /></em></p>
+              <span>获奖名单</span>
+            </div>
+            <div class="list-box">
+              <p class="list-tit">
+                <span>获奖序号</span>
+                <span>微信昵称</span>
+              </p>
+              <div class="priname-box">
+                <ul class="prize-list winUserList">
+                </ul>
+              </div>
+            </div><!--end .list-box-->
+            <div class="und-btn"><a href="javascript:void(0);" class="resetLotteryBtn"><span style="display:none;">重新抽奖</span><img src="images/loading.gif" /></a></div>
+          </div><!--end .wrap-prize-->
+        </div><!--end .outer-prize-->
+      </div><!--end .prize-box-->
+      <div class="lottery-box">
+        <div class="box-ltop">
+          <span class="lott-wt">现场抽奖</span>
+          <p class="lott-w"><span>参加抽奖人数</span><em class="join-num lotteryUserNum"><img src="images/loading.gif" /></em></p>
+        </div>
+        <div class="rock-box">
+          <span class="rock-head"><img data-default_src="images/v6_space/lottery-default.jpg" src="images/v6_space/lottery-default.jpg" class="lotteryImg" width="178" height="178" alt=""></span>
+          <span class="rock-name lotteryName">... ...</span>
+        </div>
+        <p class="btn-rock"><a href="javascript:void(0);" class="btn-start startLotteryBtn"><span>正在准备数据...</span><img style="display:none;" src="images/loading.gif" /></a></p>
+      </div><!--end .lottery-box-->
+    </div>
+  </div>
+</div><!--end 抽奖-->
+  <script type="text/javascript" src="js/lottery.min.js?v=v708"></script>
+
+  <!-- 对对碰 start -->
+<div class="fl-pair" style=" display:none" id="ddp_layer">
+  <div class="fl-inner fl-bg">
+    <div class="inner-cont clearfix">
+      <div class="prize-box right">
+        <span class="props props-color"></span>
+        <div class="outer-prize">
+          <div class="wrap-prize">
+            <div class="list-top clearfix">
+              <p class="pro-num right">配对组数<em id="ddp_matchedGroupNum">0</em></p>
+              <span>配对名单</span>
+            </div>
+            <div class="list-box">
+              <p class="list-tit">
+                <span>配对序号</span>
+                <span>配对的微信昵称</span>
+              </p>
+              <div class="priname-box priname-box-pair">
+                <ul class="pair-list" id="ddp_matchedUserBox">
+                  
+                </ul>
+              </div>
+            </div><!--end .list-box-->
+            <div class="wrap-btn">
+              <a href="javascript:void(0);" class="btn-color btn-reset" id="ddp_resetBtn">
+                <span style="display:none;">重新配对</span>
+                <img src="images/loading.gif" />
+              </a>
+            </div>
+          </div><!--end .wrap-prize-->
+        </div><!--end .outer-prize-->
+      </div><!--end .prize-box-->
+      <div class="lottery-box">
+        <div class="box-ltop">
+          <span class="pair-wt">缘分对对碰</span>
+          <p class="lott-w"><span>参加配对人数</span><em class="join-num" id="ddp_userCount"><img src="images/loading.gif" /></em></p>
+        </div>
+        <div class="bubble">
+          <div class="bubble-big" id="ddp_bubble3" style="display:none;">
+            <span class="w1" style="padding-top: 28px;padding-left: 26px;">恭喜两位！</span>
+            <span class="w2">&nbsp;</span>
+          </div>
+          <span class="bubble-mini" id="ddp_bubble1" style="display:none;"></span>
+          <span class="bubble-mini2" id="ddp_bubble2" style="display:none;"></span>
+        </div>
+        <span class="icon-heart"></span>
+        <div class="rock-box clearfix" id="ddp_box">
+          <div class="pair-one">
+            <span class="rock-head"><img id="ddp_userAvatar" data-default_src="images/v6_space/pair-default.png" src="images/v6_space/pair-default.png" width="178" height="178" alt=""></span>
+            <span class="rock-name" id="ddp_userName">……</span>
+          </div>
+          <div class="pair-one">
+            <span class="rock-head"><img id="ddp_toUserAvatar" data-default_src="images/v6_space/pair-default.png" src="images/v6_space/pair-default.png" width="178" height="178" alt=""></span>
+            <span class="rock-name" id="ddp_toUserName">……</span>
+          </div>
+        </div>
+        <p class="btn-rock">
+          <a href="javascript:void(0);" class="btn-start" id="ddp_startBtn">
+            <span>正在准备数据...</span>
+            <img style="display:none;" src="images/loading.gif" />
+          </a>
+        </p>
+      </div><!--end .lottery-box-->
+    </div>
+  </div>
+</div>
+<!-- 对对碰 end -->
+  <script type="text/javascript" src="js/ddp.min.js?v=v708"></script>
+
+  <!--投票-->
+<div class="fl-layer" style="display:none" id="vote_layer">
+  <div class="fl-inner voteClosedBox" style="display:none;">
+    <p class="tips2" style="color:black;">正在等待投票开启…</p>
+    <p class="btn-wrap"><a href="demo/user/vote" class="btn-color" target="_blank">开启投票</a></p>
+    <p></p>
+  </div>
+  <div class="fl-inner voteOpendBox">
+    <a href="javascript:void(0);" class="flbtn-close voteCloseBtn" style="z-index: 99;"></a>
+    <div class="votewrap">
+      <h2 class="vote-tit voteTitle"></h2>
+      <p class="tips voteIntro">参与方式：<span></span></p>
+      <p class="vote-join-num">共 <em class="voteJoinNum"></em> 人参与</p>
+      <!-- one-row two-row three-row -->
+      <div class="votebox one-row clearfix voteOptionBox">
+        <div class="vote-row optionRow">
+          <ul class="vote-list">
+           
+          </ul>
+        </div>
+        <div class="vote-row  optionRow">
+          <ul class="vote-list">
+            
+          </ul>
+        </div>
+        <div class="vote-row  optionRow">
+          <ul class="vote-list">
+            
+          </ul>
+        </div>
+      </div><!--end .votebox-->
+      <div class="tipsbox clearfix">
+        <dl class="tips-list right">
+          <dt>注：</dt>
+          <dd><i class="tipfirst"></i>票数第一</dd>
+          <dd><i class="tipsecond"></i>票数第二</dd>
+          <dd><i class="tipthird"></i>票数第三</dd>
+        </dl>
+      </div>
+    </div><!--end .votewrap-->
+  </div>
+</div><!--end 投票-->
+  <script type="text/javascript" src="js/vote.min.js?v=v708"></script>
+<script>
+$(function(){
+  wxscreen.vote.init({"id":"10","res_id":"100033","title":"\u4f60\u6700\u559c\u6b22\u4ee5\u53ca\u6700\u671f\u5f85\u5927\u5c4f\u5e55\u7684\u54ea\u4e2a\u529f\u80fd\uff1f","intro":"\u5fae\u4fe1\u5173\u6ce8\u201c\u5c0f\u70e7\u70e7\u6d4b\u8bd5\u673a\u201d\u53d1\u9001\u201c\u6295\u7968\u201d\u5373\u53ef\u53c2\u4e0e\u4e92\u52a8","desc":"\u9009\u51fa\u4f60\u6700\u559c\u6b22\u7684\u548c\u6700\u671f\u5f85\u7684\u5927\u5c4f\u5e55\u529f\u80fd~","option_type":"2","start_time":"0000-00-00 00:00:00","end_time":"0000-00-00 00:00:00","add_time":"2013-11-26 19:10:01","vote_type":"3","allow_vote_num":"15","privacy":"1","is_anonymous":"0","ip":"","is_open":"1","status":"1","vote_count":"125","join_count":"42","ext":"GMHR2","option_list":[{"id":"62","vote_id":"10","option_content":"\u62bd\u5956","option_image":"","option_count":29,"start_count":"0","rank":1,"option_count_r":"29"},{"id":"63","vote_id":"10","option_content":"\u5bf9\u5bf9\u78b0","option_image":"","option_count":13,"start_count":"0","rank":4,"option_count_r":"13"},{"id":"64","vote_id":"10","option_content":"\u6295\u7968","option_image":"","option_count":21,"start_count":"0","rank":2,"option_count_r":"21"},{"id":"65","vote_id":"10","option_content":"\u81ea\u5b9a\u4e49\u80cc\u666f","option_image":"","option_count":10,"start_count":"0","rank":6,"option_count_r":"10"},{"id":"66","vote_id":"10","option_content":"\u81ea\u5b9a\u4e49logo","option_image":"","option_count":9,"start_count":"0","rank":7,"option_count_r":"9"},{"id":"67","vote_id":"10","option_content":"\u77ed\u4fe1\u4e0a\u5899","option_image":"","option_count":10,"start_count":"0","rank":5,"option_count_r":"10"},{"id":"68","vote_id":"10","option_content":"\u81ea\u52a8\u4e0a\u5899","option_image":"","option_count":14,"start_count":"0","rank":3,"option_count_r":"14"},{"id":"69","vote_id":"10","option_content":"\u7b7e\u5230","option_image":"","option_count":8,"start_count":"0","rank":9,"option_count_r":"8"},{"id":"70","vote_id":"10","option_content":"\u6f02\u6d41\u74f6","option_image":"","option_count":9,"start_count":"0","rank":8,"option_count_r":"9"},{"id":"124","vote_id":"10","option_content":"\u85cf\u5b9d","option_image":"","option_count":2,"start_count":"0","rank":10,"option_count_r":"2"}]});
+});
+</script>
+<!--二维码弹层-->
+<div class="fl-layer floatLayer introBox" style="display:none;">
+  <div class="fl-inner">
+          <a href="javascript:void(0);" class="flbtn-close layerCloseBtn"></a>
+      <p class="notice1">使用微信扫描以下任意二维码，关注后发送内容即有机会上墙</p>
+      <ul class="img-list">
+          <li class="img-b"><img src="http://s1.wxscreen.com/wxscreen/20131129233200000000_3_61528_9015.png" alt=""></li>
+          <li class="img-d"><img src="http://s1.wxscreen.com/wxscreen/20131129233200000000_2_71501_3317.png" alt=""></li>
+          <li class="img-s"><img src="http://s1.wxscreen.com/wxscreen/20131129233159000000_1_56513_7976.png" alt=""></li>
+      </ul>
+      <p class="notice2">无法扫描二维码的用户，请关注微信号:
+        <span class="js_weixinAccountName">
+          xiaosscsj        </span>
+      </p>
+      </div>
+</div>
+<!--end 二维码弹层-->
+<script>
+$(function(){
+  // 展示浮层
+  $('.showIntroBtn').click(function(){
+    if(!$('.introBox:visible').length) {
+      wxscreen.message.pause();
+      $('.introBox').slideDown();
+    } else {
+      wxscreen.message.resume();
+      $('.introBox').slideUp();
+    }
+    
+  });
+  
+  // 监听按键e/2（轮换二维码）
+  wxscreen.sub('key.50.down', function(){
+    $('.showIntroBtn:eq(0)').trigger('click');
+  });
+});
+</script>  <!--设置弹层-->
+<div class="fl-layer settingBox floatLayer" style="display:none;">
+  <div class="fl-inner">
+    <a href="javascript:void(0);" class="flbtn-close layerCloseBtn"></a>
+    <div class="select-box">
+      <form action="demo/company/setting/save" method="post" id="settingForm" enctype="multipart/form-data">
+        <div class="select-one clearfix">
+          <span class="sel-w left">风格选择</span>
+          <div class="selectright">
+                                                      <label><input checked="checked" value="v6_space" type="radio" name="template">星空</label>
+                                                        <label><input  value="v6_single" type="radio" name="template">Single趴</label>
+                                                        <label><input  value="v6_blue" type="radio" name="template">经典蓝</label>
+                                                        <label><input  value="v6_green" type="radio" name="template">清新绿</label>
+                                                        <label><input  value="bo2" type="radio" name="template">bo2专版</label>
+                                                        <label><input  value="18qiang" type="radio" name="template">十八腔</label>
+                                                        <label><input  value="family" type="radio" name="template">功夫龙</label>
+                                                        <label><input  value="wedding_nh" type="radio" name="template">婚礼nh</label>
+                                                        <label><input  value="wedding_sl" type="radio" name="template">婚礼sl</label>
+                                                        <label><input  value="office_media" type="radio" name="template">定制专版</label>
+                                                        <label><input  value="yangzhou" type="radio" name="template">扬州站</label>
+                                                        <label><input  value="yangzhou_art" type="radio" name="template">艺术画展</label>
+                                                        <label><input  value="yangzhou_art2" type="radio" name="template">艺术画展2</label>
+                                                        <label><input  value="hundred" type="radio" name="template">百日宴</label>
+                                                        <label><input  value="FlMobile" type="radio" name="template">英雄汇</label>
+                                    </div>
+        </div>
+        <div class="select-one clearfix">
+            <span class="sel-w left">翻页间隔</span>
+            <div class="selectright">
+                              <label><input checked="checked" value="5" type="radio" name="auto_scroll_time">5秒</label>
+                              <label><input  value="10" type="radio" name="auto_scroll_time">10秒</label>
+                              <label><input  value="15" type="radio" name="auto_scroll_time">15秒</label>
+                              <label><input  value="30" type="radio" name="auto_scroll_time">30秒</label>
+                              <label><input  value="45" type="radio" name="auto_scroll_time">45秒</label>
+                              <label><input  value="60" type="radio" name="auto_scroll_time">60秒</label>
+                          </div>
+        </div>
+        <div class="select-one clearfix">
+            <span class="sel-w left">循环滚动</span>
+            <div class="selectright">
+              <label><input value="1" type="radio" name="is_cycle_scroll" checked="checked">是</label>
+              <label><input value="0" type="radio" name="is_cycle_scroll" >否</label>
+            </div>
+        </div>
+        <div class="select-one clearfix">
+            <span class="sel-w left">消息条数</span>
+            <div class="selectright">
+                              <label><input  value="2" name="visible_message_num" type="radio">2条</label>
+                              <label><input checked="checked" value="3" name="visible_message_num" type="radio">3条</label>
+                          </div>
+        </div>
+        <div class="select-one clearfix">
+            <span class="sel-w left">活动主题</span>
+            <div class="selectright">
+                            <input type="text" value="恭祝微信大屏幕<br>全新官网及星空风格上线" name="theme" style="width:300px;" />（小提示：输入“&lt;br&gt;” 可换行）
+            </div>
+        </div>
+        
+                
+                
+                <div class="select-one clearfix">
+          <span class="sel-w left">消息时段</span>
+          <div class="selectright">
+            <div class="select-date selectDate">
+              <label><input type="radio" name="message_time_type" value="1" >最近时间内</label>
+              <span>只显示最近 </span>
+              <input type="text" class="hour" name="latest_hour" value="">
+              <span> 小时</span>
+            </div>
+            <div class="select-date selectDate">
+              <label><input type="radio" name="message_time_type" value="2" checked="checked">指定时间段</label>
+              <span>只显示</span>
+              <input type="date" name="start_date" value="2013-11-25" class="date">
+              <select class="second" name="start_hour">
+                                                    <option value="00" selected="selected">00</option>
+                                                    <option value="01" >01</option>
+                                                    <option value="02" >02</option>
+                                                    <option value="03" >03</option>
+                                                    <option value="04" >04</option>
+                                                    <option value="05" >05</option>
+                                                    <option value="06" >06</option>
+                                                    <option value="07" >07</option>
+                                                    <option value="08" >08</option>
+                                                    <option value="09" >09</option>
+                                                    <option value="10" >10</option>
+                                                    <option value="11" >11</option>
+                                                    <option value="12" >12</option>
+                                                    <option value="13" >13</option>
+                                                    <option value="14" >14</option>
+                                                    <option value="15" >15</option>
+                                                    <option value="16" >16</option>
+                                                    <option value="17" >17</option>
+                                                    <option value="18" >18</option>
+                                                    <option value="19" >19</option>
+                                                    <option value="20" >20</option>
+                                                    <option value="21" >21</option>
+                                                    <option value="22" >22</option>
+                                                    <option value="23" >23</option>
+                              </select>
+              <span>~</span>
+              <input type="date" class="date" name="end_date" value="">
+              <select class="second" name="end_hour">
+                                                    <option value="00" selected="selected">00</option>
+                                                    <option value="01" >01</option>
+                                                    <option value="02" >02</option>
+                                                    <option value="03" >03</option>
+                                                    <option value="04" >04</option>
+                                                    <option value="05" >05</option>
+                                                    <option value="06" >06</option>
+                                                    <option value="07" >07</option>
+                                                    <option value="08" >08</option>
+                                                    <option value="09" >09</option>
+                                                    <option value="10" >10</option>
+                                                    <option value="11" >11</option>
+                                                    <option value="12" >12</option>
+                                                    <option value="13" >13</option>
+                                                    <option value="14" >14</option>
+                                                    <option value="15" >15</option>
+                                                    <option value="16" >16</option>
+                                                    <option value="17" >17</option>
+                                                    <option value="18" >18</option>
+                                                    <option value="19" >19</option>
+                                                    <option value="20" >20</option>
+                                                    <option value="21" >21</option>
+                                                    <option value="22" >22</option>
+                                                    <option value="23" >23</option>
+                              </select>
+              <span>内的消息</span>
+            </div>
+          </div>
+        </div>
+        
+                            <div class="select-one clearfix">
+            <span class="sel-w left">抽奖时段</span>
+            <div class="selectright">
+              <div class="select-date selectDate">
+                <label><input type="radio" name="lottery_time_type" value="1" >最近时间内</label>
+                <span>限制最近 </span>
+                <input type="text" class="hour" name="lottery_latest_hour" value="">
+                <span> 小时内上墙的用户参与</span>
+              </div>
+              <div class="select-date selectDate">
+                <label><input type="radio" name="lottery_time_type" value="2" >指定时间段</label>
+                <span>限制</span>
+                <input type="date" name="lottery_start_date" value="" class="date">
+                <select class="second" name="lottery_start_hour">
+                                                          <option value="00" selected="selected">00</option>
+                                                          <option value="01" >01</option>
+                                                          <option value="02" >02</option>
+                                                          <option value="03" >03</option>
+                                                          <option value="04" >04</option>
+                                                          <option value="05" >05</option>
+                                                          <option value="06" >06</option>
+                                                          <option value="07" >07</option>
+                                                          <option value="08" >08</option>
+                                                          <option value="09" >09</option>
+                                                          <option value="10" >10</option>
+                                                          <option value="11" >11</option>
+                                                          <option value="12" >12</option>
+                                                          <option value="13" >13</option>
+                                                          <option value="14" >14</option>
+                                                          <option value="15" >15</option>
+                                                          <option value="16" >16</option>
+                                                          <option value="17" >17</option>
+                                                          <option value="18" >18</option>
+                                                          <option value="19" >19</option>
+                                                          <option value="20" >20</option>
+                                                          <option value="21" >21</option>
+                                                          <option value="22" >22</option>
+                                                          <option value="23" >23</option>
+                                  </select>
+                <span>~</span>
+                <input type="date" class="date" name="lottery_end_date" value="">
+                <select class="second" name="lottery_end_hour">
+                                                          <option value="00" selected="selected">00</option>
+                                                          <option value="01" >01</option>
+                                                          <option value="02" >02</option>
+                                                          <option value="03" >03</option>
+                                                          <option value="04" >04</option>
+                                                          <option value="05" >05</option>
+                                                          <option value="06" >06</option>
+                                                          <option value="07" >07</option>
+                                                          <option value="08" >08</option>
+                                                          <option value="09" >09</option>
+                                                          <option value="10" >10</option>
+                                                          <option value="11" >11</option>
+                                                          <option value="12" >12</option>
+                                                          <option value="13" >13</option>
+                                                          <option value="14" >14</option>
+                                                          <option value="15" >15</option>
+                                                          <option value="16" >16</option>
+                                                          <option value="17" >17</option>
+                                                          <option value="18" >18</option>
+                                                          <option value="19" >19</option>
+                                                          <option value="20" >20</option>
+                                                          <option value="21" >21</option>
+                                                          <option value="22" >22</option>
+                                                          <option value="23" >23</option>
+                                  </select>
+                <span>内上墙的用户参与</span>
+              </div>
+            </div>
+          </div>
+                
+        
+                            <div class="select-one clearfix">
+            <span class="sel-w left">对对碰时段</span>
+            <div class="selectright">
+              <div class="select-date selectDate">
+                <label><input type="radio" name="ddp_time_type" value="1" >最近时间内</label>
+                <span>限制最近 </span>
+                <input type="text" class="hour" name="ddp_latest_hour" value="">
+                <span> 小时内上墙的用户参与</span>
+              </div>
+              <div class="select-date selectDate">
+                <label><input type="radio" name="ddp_time_type" value="2" >指定时间段</label>
+                <span>限制</span>
+                <input type="date" name="ddp_start_date" value="" class="date">
+                <select class="second" name="ddp_start_hour">
+                                                          <option value="00" selected="selected">00</option>
+                                                          <option value="01" >01</option>
+                                                          <option value="02" >02</option>
+                                                          <option value="03" >03</option>
+                                                          <option value="04" >04</option>
+                                                          <option value="05" >05</option>
+                                                          <option value="06" >06</option>
+                                                          <option value="07" >07</option>
+                                                          <option value="08" >08</option>
+                                                          <option value="09" >09</option>
+                                                          <option value="10" >10</option>
+                                                          <option value="11" >11</option>
+                                                          <option value="12" >12</option>
+                                                          <option value="13" >13</option>
+                                                          <option value="14" >14</option>
+                                                          <option value="15" >15</option>
+                                                          <option value="16" >16</option>
+                                                          <option value="17" >17</option>
+                                                          <option value="18" >18</option>
+                                                          <option value="19" >19</option>
+                                                          <option value="20" >20</option>
+                                                          <option value="21" >21</option>
+                                                          <option value="22" >22</option>
+                                                          <option value="23" >23</option>
+                                  </select>
+                <span>~</span>
+                <input type="date" class="date" name="ddp_end_date" value="">
+                <select class="second" name="ddp_end_hour">
+                                                          <option value="00" selected="selected">00</option>
+                                                          <option value="01" >01</option>
+                                                          <option value="02" >02</option>
+                                                          <option value="03" >03</option>
+                                                          <option value="04" >04</option>
+                                                          <option value="05" >05</option>
+                                                          <option value="06" >06</option>
+                                                          <option value="07" >07</option>
+                                                          <option value="08" >08</option>
+                                                          <option value="09" >09</option>
+                                                          <option value="10" >10</option>
+                                                          <option value="11" >11</option>
+                                                          <option value="12" >12</option>
+                                                          <option value="13" >13</option>
+                                                          <option value="14" >14</option>
+                                                          <option value="15" >15</option>
+                                                          <option value="16" >16</option>
+                                                          <option value="17" >17</option>
+                                                          <option value="18" >18</option>
+                                                          <option value="19" >19</option>
+                                                          <option value="20" >20</option>
+                                                          <option value="21" >21</option>
+                                                          <option value="22" >22</option>
+                                                          <option value="23" >23</option>
+                                  </select>
+                <span>内上墙的用户参与</span>
+              </div>
+            </div>
+          </div>
+              </form>
+      <p class="select-one"><a href="javascript:void(0);" class="btn-save btn-color settingSaveBtn">保存</a></p>
+    </div>
+  </div>
+</div><!--end 设置弹层-->
+<script>
+
+  if($('input[name="recover_bg"]').length) {
+    $('input[name="recover_bg"]').click(function(){
+      if ($(this).attr('checked')) {
+        $('input[name="bg_cover"]').val('');
+      }
+    });
+  }
+  if($('input[name="recover_logo"]').length) {
+    $('input[name="recover_logo"]').click(function(){
+      if ($(this).attr('checked')) {
+        $('input[name="logo_cover"]').val('');
+      }
+    });
+  }
+
+  //提交表单
+  $('.settingSaveBtn').click(function(){
+    $('#settingForm').submit();
+  });
+  //设置浮层
+  $('.btnSetting').click(function(){
+    if(!$('.settingBox:visible').length){
+      wxscreen.message.pause();
+      $('.settingBox').show();
+    } else {
+      wxscreen.message.resume();
+      $('.settingBox').hide();
+    }
+    
+  });
+  // 监听事件 ,键
+  wxscreen.sub('key.188.down', function(name, evt){
+    if(!evt.altKey && !evt.ctrlKey && !evt.shiftKey) {
+      $('.btnSetting:eq(0)').trigger('click');
+    }
+  });
+  
+  $('.selectDate input[type="date"], .selectDate input[type="text"], .selectDate select').click(function(){
+    $(this).closest('.selectDate').find('input[type="radio"]').attr('checked', 'checked');
+  });
+</script>
+    
+  </div>
+</div>
+
+<!-- </body></html> -->
+<script>
+//$(function(){
+  
+  
+  // 绑定key
+  wxscreen.btnKeys.init();
+  //用户初始化
+  wxscreen.user.init();
+  // 初始化
+  wxscreen.message.init(
+    // 新消息列表
+    [],
+    // 消息列表
+    [{"id":"113326","mp_message_id":"100009017","company_id":"100033","user_id":"106","msg_type":"text","content":"\u606d\u559c\u5927\u5c4f\u5e55V7\u661f\u7a7a\u7248\u4e0a\u7ebf\uff0c\u65b0\u5b98\u7f51\u771f\u597d\u770b\uff01<img src=\"https:\/\/res.wx.qq.com\/mpres\/htmledition\/images\/icon\/emotion\/13.gif\" width=\"24\" height=\"24\">","photo":"","is_on_wall":"1","update_time_ms":"138547195636265302","on_wall_time":"2013-11-26 21:19:16","mp_add_time":"2013-11-26 21:18:00","add_time":"2013-11-26 21:19:16","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131129170419000000_1_29935_9706.png","username":"\u675c\u7075\u71d5"},{"id":"113327","mp_message_id":"100009019","company_id":"100033","user_id":"1","msg_type":"text","content":"\u5fae\u4fe1\u5927\u5c4f\u5e55\u5168\u65b0\u5b98\u7f51\u4e0a\u7ebf\uff01\u5f88\u8d5e<img src=\"https:\/\/res.wx.qq.com\/mpres\/htmledition\/images\/icon\/emotion\/79.gif\" width=\"24\" height=\"24\">","photo":"","is_on_wall":"1","update_time_ms":"138547232469339101","on_wall_time":"2013-11-26 21:25:24","mp_add_time":"2013-11-26 21:25:00","add_time":"2013-11-26 21:25:24","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201014440000000_1_42396_2513.png","username":"\u9ad8\u7ade\u7ade-\u4e92\u52a8\u9633\u5149"},{"id":"113328","mp_message_id":"100009021","company_id":"100033","user_id":"53","msg_type":"text","content":"\u606d\u559c\u5927\u5c4f\u5e55\u5b98\u7f51\u5168\u65b0\u4e0a\u7ebf","photo":"","is_on_wall":"1","update_time_ms":"138547232639491901","on_wall_time":"2013-11-26 21:25:26","mp_add_time":"2013-11-26 21:25:00","add_time":"2013-11-26 21:25:26","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131129170637000000_1_37123_1503.png","username":"m"},{"id":"113329","mp_message_id":"100009023","company_id":"100033","user_id":"107","msg_type":"text","content":"V7\u5f88\u7ed9\u529b\u54e6\uff0c\u7ba1\u7406\u66f4\u65b9\u4fbf\u5566\uff01","photo":"","is_on_wall":"1","update_time_ms":"138547238425804501","on_wall_time":"2013-11-26 21:26:24","mp_add_time":"2013-11-26 21:25:00","add_time":"2013-11-26 21:26:24","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001649000000_1_34364_2227.png","username":"\u674e\u5b63"},{"id":"113330","mp_message_id":"100009026","company_id":"100033","user_id":"314","msg_type":"image","content":"<a href=\"javascript:void(0);\"><img src=\"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126212905000000_2_279156_78.png\" style=\"height:160px;max-height:160px;max-width:600px;\" data-ori_url=\"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126212905000000_2_279156_78.png\" \/><\/a>","photo":"\/wxscreen4\/20131126212905000000_2_279156_78.png","is_on_wall":"1","update_time_ms":"138547331132923901","on_wall_time":"2013-11-26 21:41:51","mp_add_time":"2013-11-26 21:28:00","add_time":"2013-11-26 21:29:06","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131129153444000000_1_33348_7629.png","username":"\u674e\u4e1c","photo_small":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126212905000000_2_279156_78.png","photo_ori":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126212905000000_2_279156_78.png"},{"id":"113338","mp_message_id":"100009030","company_id":"100033","user_id":"336","msg_type":"text","content":"\u606d\u559c\u65b0\u7248\u4e0a\u7ebf\u54c8\u54c8<img src=\"https:\/\/res.wx.qq.com\/mpres\/htmledition\/images\/icon\/emotion\/42.gif\" width=\"24\" height=\"24\"><img src=\"https:\/\/res.wx.qq.com\/mpres\/htmledition\/images\/icon\/emotion\/42.gif\" width=\"24\" height=\"24\"><img src=\"https:\/\/res.wx.qq.com\/mpres\/htmledition\/images\/icon\/emotion\/42.gif\" width=\"24\" height=\"24\">","photo":"","is_on_wall":"1","update_time_ms":"138547351289320401","on_wall_time":"2013-11-26 21:45:12","mp_add_time":"2013-11-26 21:44:00","add_time":"2013-11-26 21:45:12","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126215003000000_1_29213_5991.png","username":"\u9773\u6615"},{"id":"113348","mp_message_id":"100009031","company_id":"100033","user_id":"288","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138547380346105801","on_wall_time":"2013-11-26 21:50:03","mp_add_time":"2013-11-26 21:47:00","add_time":"2013-11-26 21:50:03","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111515000000_1_21378_4779.png","username":"y"},{"id":"113349","mp_message_id":"100009033","company_id":"100033","user_id":"336","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138547380437721001","on_wall_time":"2013-11-26 21:50:04","mp_add_time":"2013-11-26 21:48:00","add_time":"2013-11-26 21:50:04","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126215003000000_1_29213_5991.png","username":"\u9773\u6615"},{"id":"113362","mp_message_id":"100009037","company_id":"100033","user_id":"1","msg_type":"image","content":"<a href=\"javascript:void(0);\"><img src=\"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126220215000000_2_422772_2839.png\" style=\"height:160px;max-height:160px;max-width:600px;\" data-ori_url=\"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126220215000000_2_422772_2839.png\" \/><\/a>","photo":"\/wxscreen4\/20131126220215000000_2_422772_2839.png","is_on_wall":"1","update_time_ms":"138547453725270901","on_wall_time":"2013-11-26 22:02:17","mp_add_time":"2013-11-26 22:01:00","add_time":"2013-11-26 22:02:17","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201014440000000_1_42396_2513.png","username":"\u9ad8\u7ade\u7ade-\u4e92\u52a8\u9633\u5149","photo_small":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126220215000000_2_422772_2839.png","photo_ori":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126220215000000_2_422772_2839.png"},{"id":"113363","mp_message_id":"100009035","company_id":"100033","user_id":"288","msg_type":"text","content":"\u8d85\u8d5e\u7684\u4ea7\u54c1\uff01","photo":"","is_on_wall":"1","update_time_ms":"138547453819009701","on_wall_time":"2013-11-26 22:02:18","mp_add_time":"2013-11-26 22:00:00","add_time":"2013-11-26 22:02:18","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111515000000_1_21378_4779.png","username":"y"},{"id":"113364","mp_message_id":"100009038","company_id":"100033","user_id":"104","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138547455226950701","on_wall_time":"2013-11-26 22:02:32","mp_add_time":"2013-11-26 22:01:00","add_time":"2013-11-26 22:02:32","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131203101353000000_1_28798_8962.png","username":"\u5b81\u6d77\u65b0"},{"id":"113392","mp_message_id":"100009040","company_id":"100033","user_id":"304","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138547606176361201","on_wall_time":"2013-11-26 22:27:41","mp_add_time":"2013-11-26 22:22:00","add_time":"2013-11-26 22:27:41","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126222836000000_1_24531_1578.png","username":"\u5b8b\u745e\u4e1c"},{"id":"113396","mp_message_id":"100009042","company_id":"100033","user_id":"304","msg_type":"text","content":"\u8d85\u8d5e<img src=\"https:\/\/res.wx.qq.com\/mpres\/htmledition\/images\/icon\/emotion\/79.gif\" width=\"24\" height=\"24\">","photo":"","is_on_wall":"1","update_time_ms":"138547611712938301","on_wall_time":"2013-11-26 22:28:37","mp_add_time":"2013-11-26 22:28:00","add_time":"2013-11-26 22:28:37","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131126222836000000_1_24531_1578.png","username":"\u5b8b\u745e\u4e1c"},{"id":"115844","mp_message_id":"100009075","company_id":"100033","user_id":"21491","msg_type":"text","content":"\u771f\u4e0d\u9519","photo":"","is_on_wall":"1","update_time_ms":"138554815063514102","on_wall_time":"2013-11-27 18:29:10","mp_add_time":"2013-11-27 12:14:00","add_time":"2013-11-27 18:29:10","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130234937000000_1_18292_8940.png","username":"\u5434\u65b0\u52c7\u3002"},{"id":"115847","mp_message_id":"100009050","company_id":"100033","user_id":"105","msg_type":"text","content":"\u661f\u7a7a\u84dd\u7ecf\u5178\u3001\u6df1\u9083\u5440<img src=\"https:\/\/res.wx.qq.com\/mpres\/htmledition\/images\/icon\/emotion\/66.gif\" width=\"24\" height=\"24\">","photo":"","is_on_wall":"1","update_time_ms":"138554816252086101","on_wall_time":"2013-11-27 18:29:22","mp_add_time":"2013-11-27 10:11:00","add_time":"2013-11-27 18:29:22","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130161303000000_1_40794_6703.png","username":"\u718a\u4f22"},{"id":"115849","mp_message_id":"100009047","company_id":"100033","user_id":"21199","msg_type":"text","content":"\u63a8\u8350\u665a\u4f1a\u5e74\u4f1a\u4e0a\u4f7f\u7528\u6bd4\u8f83\u597d","photo":"","is_on_wall":"1","update_time_ms":"138554816535110802","on_wall_time":"2013-11-27 18:29:25","mp_add_time":"2013-11-27 09:56:00","add_time":"2013-11-27 18:29:25","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127182924000000_1_23340_9758.png","username":"\u54e8\u5b50"},{"id":"115854","mp_message_id":"100009072","company_id":"100033","user_id":"21492","msg_type":"text","content":"\u623f","photo":"","is_on_wall":"1","update_time_ms":"138554818085802302","on_wall_time":"2013-11-27 18:29:40","mp_add_time":"2013-11-27 12:11:00","add_time":"2013-11-27 18:29:40","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127182940000000_1_36911_2084.png","username":"\u96e8\u58a8"},{"id":"115867","mp_message_id":"100009078","company_id":"100033","user_id":"21494","msg_type":"text","content":"\u8bd5\u8bd5\u6548\u679c\u770b\u5565\u6837","photo":"","is_on_wall":"1","update_time_ms":"138554822082325502","on_wall_time":"2013-11-27 18:30:20","mp_add_time":"2013-11-27 13:31:00","add_time":"2013-11-27 18:30:20","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127183020000000_1_37169_7530.png","username":"\u65f6\u5149\u6709\u58f0"},{"id":"115868","mp_message_id":"100009081","company_id":"100033","user_id":"21495","msg_type":"text","content":"\u4f60\u597d\uff0c\u6211\u662f\u5f20\u529b","photo":"","is_on_wall":"1","update_time_ms":"138554822180048302","on_wall_time":"2013-11-27 18:30:21","mp_add_time":"2013-11-27 14:37:00","add_time":"2013-11-27 18:30:21","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127183021000000_1_34964_2874.png","username":"\u5f20\u529b"},{"id":"115870","mp_message_id":"100009084","company_id":"100033","user_id":"21496","msg_type":"text","content":"\u8bd5\u8bd5","photo":"","is_on_wall":"1","update_time_ms":"138554822359955802","on_wall_time":"2013-11-27 18:30:23","mp_add_time":"2013-11-27 14:50:00","add_time":"2013-11-27 18:30:23","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127183023000000_1_16468_1698.png","username":"\u660e\u91ce\u76db\u8f89"},{"id":"115874","mp_message_id":"100009089","company_id":"100033","user_id":"21497","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138554822827454102","on_wall_time":"2013-11-27 18:30:28","mp_add_time":"2013-11-27 15:02:00","add_time":"2013-11-27 18:30:28","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001814000000_1_25337_8324.png","username":"\u5fe7\u90c1"},{"id":"115878","mp_message_id":"100009096","company_id":"100033","user_id":"53","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138554823024331401","on_wall_time":"2013-11-27 18:30:30","mp_add_time":"2013-11-27 16:09:00","add_time":"2013-11-27 18:30:30","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131129170637000000_1_37123_1503.png","username":"m"},{"id":"115880","mp_message_id":"100009098","company_id":"100033","user_id":"16546","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138554823119186501","on_wall_time":"2013-11-27 18:30:31","mp_add_time":"2013-11-27 16:22:00","add_time":"2013-11-27 18:30:31","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127183030000000_1_21563_117.png","username":"Se7en"},{"id":"115881","mp_message_id":"100009101","company_id":"100033","user_id":"21499","msg_type":"text","content":"\u554a\u554a","photo":"","is_on_wall":"1","update_time_ms":"138554823264123502","on_wall_time":"2013-11-27 18:30:32","mp_add_time":"2013-11-27 16:47:00","add_time":"2013-11-27 18:30:32","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001809000000_1_40353_5363.png","username":"\u5f20\u6eaa\u683cAbigale Zhang"},{"id":"115883","mp_message_id":"100009106","company_id":"100033","user_id":"21500","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138554823420764502","on_wall_time":"2013-11-27 18:30:34","mp_add_time":"2013-11-27 17:10:00","add_time":"2013-11-27 18:30:34","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130083527000000_1_38576_9309.png","username":"Jing\u266a"},{"id":"115887","mp_message_id":"100009112","company_id":"100033","user_id":"21501","msg_type":"text","content":"\u6211\u8981\u4e0a\u5899","photo":"","is_on_wall":"1","update_time_ms":"138554823861254902","on_wall_time":"2013-11-27 18:30:38","mp_add_time":"2013-11-27 17:24:00","add_time":"2013-11-27 18:30:38","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127183038000000_1_40465_4903.png","username":"\u5f20\u9707"},{"id":"115892","mp_message_id":"100009120","company_id":"100033","user_id":"14385","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138554824265740102","on_wall_time":"2013-11-27 18:30:42","mp_add_time":"2013-11-27 17:46:00","add_time":"2013-11-27 18:30:42","avatar":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131128191825000000_1_30384_2912.png","username":"\u8d24\u5f1f"},{"id":"126155","mp_message_id":"100009131","company_id":"100033","user_id":"23299","msg_type":"text","content":"\u5728\u7ebf\u9884\u7ea6","photo":"","is_on_wall":"1","update_time_ms":"138565646498386702","on_wall_time":"2013-11-29 00:34:24","mp_add_time":"2013-11-28 11:17:00","add_time":"2013-11-29 00:34:24","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001719000000_1_26392_9187.png","username":"\u5f3a\u5c3c"},{"id":"126156","mp_message_id":"100009136","company_id":"100033","user_id":"23300","msg_type":"text","content":"\u4f60\u597d","photo":"","is_on_wall":"1","update_time_ms":"138565646923451702","on_wall_time":"2013-11-29 00:34:29","mp_add_time":"2013-11-28 14:23:00","add_time":"2013-11-29 00:34:29","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001820000000_1_26717_6698.png","username":"\u674e\u5f00\u6770"},{"id":"135172","mp_message_id":"100009186","company_id":"100033","user_id":"107","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138574180995699401","on_wall_time":"2013-11-30 00:16:49","mp_add_time":"2013-11-29 20:11:57","add_time":"2013-11-30 00:16:49","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001649000000_1_34364_2227.png","username":"\u674e\u5b63"},{"id":"135173","mp_message_id":"100009184","company_id":"100033","user_id":"288","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138574181494315801","on_wall_time":"2013-11-30 00:16:54","mp_add_time":"2013-11-29 20:11:29","add_time":"2013-11-30 00:16:54","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111515000000_1_21378_4779.png","username":"y"},{"id":"126641","mp_message_id":"100009182","company_id":"100033","user_id":"23519","msg_type":"text","content":"\u54c8\u54c8\u54c8","photo":"","is_on_wall":"1","update_time_ms":"138574182003958401","on_wall_time":"2013-11-30 00:17:00","mp_add_time":"2013-11-29 14:58:00","add_time":"2013-11-29 15:16:08","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001659000000_1_40057_4573.png","username":"Sophie"},{"id":"126642","mp_message_id":"100009179","company_id":"100033","user_id":"23520","msg_type":"text","content":"\u4f60\u597d","photo":"","is_on_wall":"1","update_time_ms":"138574182505351101","on_wall_time":"2013-11-30 00:17:05","mp_add_time":"2013-11-29 14:22:00","add_time":"2013-11-29 15:16:09","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001704000000_1_26310_5801.png","username":"I can"},{"id":"126638","mp_message_id":"100009176","company_id":"100033","user_id":"23517","msg_type":"text","content":"\u4e0a\u5899 \u6854\u5b50\u6444\u5f71","photo":"","is_on_wall":"1","update_time_ms":"138574182981287001","on_wall_time":"2013-11-30 00:17:09","mp_add_time":"2013-11-29 13:19:00","add_time":"2013-11-29 15:15:53","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001709000000_1_20720_5674.png","username":"\u989c\u7d20"},{"id":"126644","mp_message_id":"100009173","company_id":"100033","user_id":"23521","msg_type":"text","content":"Gdddd","photo":"","is_on_wall":"1","update_time_ms":"138574183498805301","on_wall_time":"2013-11-30 00:17:14","mp_add_time":"2013-11-29 11:57:00","add_time":"2013-11-29 15:16:50","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001714000000_1_32538_6250.png","username":"\u4e2d\u5929\u5b98\u6cb3\u9526\u5ead\u5c0f\u84b2"},{"id":"126637","mp_message_id":"100009170","company_id":"100033","user_id":"23299","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138574184026155301","on_wall_time":"2013-11-30 00:17:20","mp_add_time":"2013-11-29 11:23:00","add_time":"2013-11-29 15:15:53","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001719000000_1_26392_9187.png","username":"\u5f3a\u5c3c"},{"id":"126633","mp_message_id":"100009168","company_id":"100033","user_id":"12488","msg_type":"text","content":"\u56e7\u56e7\u56e7","photo":"","is_on_wall":"1","update_time_ms":"138574184507648001","on_wall_time":"2013-11-30 00:17:25","mp_add_time":"2013-11-29 08:39:00","add_time":"2013-11-29 15:15:36","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001724000000_1_29303_8536.png","username":"Qf"},{"id":"135174","mp_message_id":"100009166","company_id":"100033","user_id":"288","msg_type":"text","content":"\u5b87\u5b99\u5b87\u5b99","photo":"","is_on_wall":"1","update_time_ms":"138574184993010701","on_wall_time":"2013-11-30 00:17:29","mp_add_time":"2013-11-28 22:40:30","add_time":"2013-11-30 00:17:29","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111515000000_1_21378_4779.png","username":"y"},{"id":"135175","mp_message_id":"100009164","company_id":"100033","user_id":"288","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138574185478981701","on_wall_time":"2013-11-30 00:17:34","mp_add_time":"2013-11-28 22:39:24","add_time":"2013-11-30 00:17:34","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111515000000_1_21378_4779.png","username":"y"},{"id":"126159","mp_message_id":"100009162","company_id":"100033","user_id":"23302","msg_type":"text","content":"\u4e0a\u5899 \u4f60\u597d","photo":"","is_on_wall":"1","update_time_ms":"138574185993216601","on_wall_time":"2013-11-30 00:17:39","mp_add_time":"2013-11-28 20:32:00","add_time":"2013-11-29 00:34:38","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202105444000000_1_16503_8833.png","username":"\u73ca\u73ca"},{"id":"126158","mp_message_id":"100009159","company_id":"100033","user_id":"23301","msg_type":"text","content":"\u8bd5\u8bd5\u5457","photo":"","is_on_wall":"1","update_time_ms":"138574186489985901","on_wall_time":"2013-11-30 00:17:44","mp_add_time":"2013-11-28 17:45:00","add_time":"2013-11-29 00:34:36","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001744000000_1_15845_3218.png","username":"\u5b59\u5ca9"},{"id":"126157","mp_message_id":"100009156","company_id":"100033","user_id":"9371","msg_type":"text","content":"\u6f02\u4eae\uff01","photo":"","is_on_wall":"1","update_time_ms":"138574186999122501","on_wall_time":"2013-11-30 00:17:49","mp_add_time":"2013-11-28 17:38:00","add_time":"2013-11-29 00:34:35","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001749000000_1_40978_6365.png","username":"yangjiao"},{"id":"135176","mp_message_id":"100009153","company_id":"100033","user_id":"21497","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138574187542255801","on_wall_time":"2013-11-30 00:17:55","mp_add_time":"2013-11-28 17:08:00","add_time":"2013-11-30 00:17:55","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001814000000_1_25337_8324.png","username":"\u5fe7\u90c1"},{"id":"135177","mp_message_id":"100009151","company_id":"100033","user_id":"24896","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138574188016163702","on_wall_time":"2013-11-30 00:18:00","mp_add_time":"2013-11-28 17:07:41","add_time":"2013-11-30 00:18:00","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001804000000_1_38127_8818.png","username":"\u7eb3\u5c3c"},{"id":"135179","mp_message_id":"100009146","company_id":"100033","user_id":"21499","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138574189038743701","on_wall_time":"2013-11-30 00:18:10","mp_add_time":"2013-11-28 16:23:01","add_time":"2013-11-30 00:18:10","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001809000000_1_40353_5363.png","username":"\u5f20\u6eaa\u683cAbigale Zhang"},{"id":"135180","mp_message_id":"100009143","company_id":"100033","user_id":"21497","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138574189505630901","on_wall_time":"2013-11-30 00:18:15","mp_add_time":"2013-11-28 15:37:27","add_time":"2013-11-30 00:18:15","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001814000000_1_25337_8324.png","username":"\u5fe7\u90c1"},{"id":"135181","mp_message_id":"100009142","company_id":"100033","user_id":"23300","msg_type":"text","content":"\u4eba\u4e86","photo":"","is_on_wall":"1","update_time_ms":"138574190129231101","on_wall_time":"2013-11-30 00:18:21","mp_add_time":"2013-11-28 14:32:40","add_time":"2013-11-30 00:18:21","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130001820000000_1_26717_6698.png","username":"\u674e\u5f00\u6770"},{"id":"135182","mp_message_id":"100009189","company_id":"100033","user_id":"24898","msg_type":"text","content":"\u597d","photo":"","is_on_wall":"1","update_time_ms":"138574271814677702","on_wall_time":"2013-11-30 00:31:58","mp_add_time":"2013-11-30 00:31:53","add_time":"2013-11-30 00:31:58","avatar":"http:\/\/s1.wxscreen.com\/wxscreen\/20131130003157000000_1_27032_9029.png","username":"\u6df1\u84dd"},{"id":"115890","mp_message_id":"100009108","company_id":"100033","user_id":"21500","msg_type":"image","content":"<a href=\"javascript:void(0);\"><img src=\"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127183040000000_2_478477_6445.png\" style=\"height:160px;max-height:160px;max-width:600px;\" data-ori_url=\"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127183040000000_2_478477_6445.png\" \/><\/a>","photo":"\/wxscreen4\/20131127183040000000_2_478477_6445.png","is_on_wall":"1","update_time_ms":"138577173042638701","on_wall_time":"2013-11-30 08:35:30","mp_add_time":"2013-11-27 17:10:00","add_time":"2013-11-27 18:30:41","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130083527000000_1_38576_9309.png","username":"Jing\u266a","photo_small":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127183040000000_2_478477_6445.png","photo_ori":"http:\/\/wxscreen-wxscreen4.stor.sinaapp.com\/20131127183040000000_2_478477_6445.png"},{"id":"135212","mp_message_id":"100009208","company_id":"100033","user_id":"1","msg_type":"text","content":"\u611f\u8c22\u60a8\u5173\u6ce8\u5fae\u4fe1\u5927\u5c4f\u5e55\u5b98\u65b9\u6f14\u793a\u6d3b\u52a8\uff0c\u4efb\u610f\u53d1\u9001\u6d88\u606f\uff0c\u5ba1\u6838\u901a\u8fc7\u540e\u5373\u53ef\u4e0a\u5899\u663e\u793a\u3002","photo":"","is_on_wall":"1","update_time_ms":"138577749735393201","on_wall_time":"2013-11-30 10:11:37","mp_add_time":"2013-11-30 10:10:00","add_time":"2013-11-30 10:11:37","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201014440000000_1_42396_2513.png","username":"\u9ad8\u7ade\u7ade-\u4e92\u52a8\u9633\u5149"},{"id":"135214","mp_message_id":"100009212","company_id":"100033","user_id":"1","msg_type":"text","content":"\u5fae\u4fe1\u5927\u5c4f\u5e55\u76ee\u524d\u5df2\u6210\u529f\u5b9e\u65bd500\u591a\u573a\uff0c\u6b22\u8fce\u8fdb\u5165\u5b98\u7f51\u63d0\u4ea4\u7533\u8bf7\uff0c1\u4e2a\u5de5\u4f5c\u65e5\u5185\u5373\u53ef\u5ba1\u6838\u901a\u8fc7\u3002<br\/>\u540c\u65f6\u6b22\u8fce\u52a0\u5165QQ\u7fa4\uff1a221853879 \u53c2\u4e0e\u8ba8\u8bba<img src=\"https:\/\/res.wx.qq.com\/mpres\/htmledition\/images\/icon\/emotion\/13.gif\" width=\"24\" height=\"24\">","photo":"","is_on_wall":"1","update_time_ms":"138577750065113701","on_wall_time":"2013-11-30 10:11:40","mp_add_time":"2013-11-30 10:10:00","add_time":"2013-11-30 10:11:40","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201014440000000_1_42396_2513.png","username":"\u9ad8\u7ade\u7ade-\u4e92\u52a8\u9633\u5149"},{"id":"139019","mp_message_id":"100009242","company_id":"100033","user_id":"3088","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138582618389545201","on_wall_time":"2013-11-30 23:43:03","mp_add_time":"2013-11-30 19:45:02","add_time":"2013-11-30 23:43:03","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130234313000000_1_43491_5639.png","username":"\u9648\u667a\u5143"},{"id":"139020","mp_message_id":"100009240","company_id":"100033","user_id":"3088","msg_type":"text","content":"\u8fd8\u53ef\u4ee5\u4e0a\u5899\u554a","photo":"","is_on_wall":"1","update_time_ms":"138582618913646001","on_wall_time":"2013-11-30 23:43:09","mp_add_time":"2013-11-30 19:44:34","add_time":"2013-11-30 23:43:09","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130234313000000_1_43491_5639.png","username":"\u9648\u667a\u5143"},{"id":"139021","mp_message_id":"100009238","company_id":"100033","user_id":"3088","msg_type":"text","content":"\u6295\u7968\u554a","photo":"","is_on_wall":"1","update_time_ms":"138582619390898201","on_wall_time":"2013-11-30 23:43:13","mp_add_time":"2013-11-30 19:43:38","add_time":"2013-11-30 23:43:13","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130234313000000_1_43491_5639.png","username":"\u9648\u667a\u5143"},{"id":"139022","mp_message_id":"100009236","company_id":"100033","user_id":"25764","msg_type":"text","content":"\u8985","photo":"","is_on_wall":"1","update_time_ms":"138582619893997902","on_wall_time":"2013-11-30 23:43:18","mp_add_time":"2013-11-30 19:19:42","add_time":"2013-11-30 23:43:18","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130234323000000_1_18790_6122.png","username":"\u8521\u4eae"},{"id":"139023","mp_message_id":"100009234","company_id":"100033","user_id":"25764","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138582620396750401","on_wall_time":"2013-11-30 23:43:23","mp_add_time":"2013-11-30 19:19:04","add_time":"2013-11-30 23:43:23","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130234323000000_1_18790_6122.png","username":"\u8521\u4eae"},{"id":"139024","mp_message_id":"100009231","company_id":"100033","user_id":"25765","msg_type":"text","content":"\u4f60\u597d\uff01","photo":"","is_on_wall":"1","update_time_ms":"138582620906256502","on_wall_time":"2013-11-30 23:43:29","mp_add_time":"2013-11-30 17:02:04","add_time":"2013-11-30 23:43:29","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130234333000000_1_21608_2854.png","username":"\u5e9e\u4f1f"},{"id":"139025","mp_message_id":"100009229","company_id":"100033","user_id":"25765","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138582621381685901","on_wall_time":"2013-11-30 23:43:33","mp_add_time":"2013-11-30 16:59:54","add_time":"2013-11-30 23:43:33","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130234333000000_1_21608_2854.png","username":"\u5e9e\u4f1f"},{"id":"139026","mp_message_id":"100009226","company_id":"100033","user_id":"25766","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138582621896068902","on_wall_time":"2013-11-30 23:43:38","mp_add_time":"2013-11-30 16:06:18","add_time":"2013-11-30 23:43:38","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131130234338000000_1_33989_3139.png","username":"\u5c0f\u767d"},{"id":"139032","mp_message_id":"100009244","company_id":"100033","user_id":"50","msg_type":"text","content":"\u4e0a\u5899","photo":"","is_on_wall":"1","update_time_ms":"138582668446152201","on_wall_time":"2013-11-30 23:51:24","mp_add_time":"2013-11-30 23:51:19","add_time":"2013-11-30 23:51:24","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131204103704000000_1_34649_8090.png","username":"\u674e\u7ef4"},{"id":"139033","mp_message_id":"100009246","company_id":"100033","user_id":"50","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138582682957694801","on_wall_time":"2013-11-30 23:53:49","mp_add_time":"2013-11-30 23:53:40","add_time":"2013-11-30 23:53:49","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131204103704000000_1_34649_8090.png","username":"\u674e\u7ef4"},{"id":"139036","mp_message_id":"100009248","company_id":"100033","user_id":"25768","msg_type":"text","content":"\u505a\u7684\u633a\u597d  \u80fd\u4e0a\u5899\u4e48","photo":"","is_on_wall":"1","update_time_ms":"138582932874412102","on_wall_time":"2013-12-01 00:35:28","mp_add_time":"2013-12-01 00:35:16","add_time":"2013-12-01 00:35:28","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202224734000000_1_20946_2354.png","username":"Leon"},{"id":"139037","mp_message_id":"100009250","company_id":"100033","user_id":"25768","msg_type":"text","content":"\u771f\u80fd\u4e0a\u5899   \u60f3\u8bd5\u7528","photo":"","is_on_wall":"1","update_time_ms":"138582957899768501","on_wall_time":"2013-12-01 00:39:38","mp_add_time":"2013-12-01 00:39:29","add_time":"2013-12-01 00:39:38","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202224734000000_1_20946_2354.png","username":"Leon"},{"id":"135213","mp_message_id":"100009210","company_id":"100033","user_id":"1","msg_type":"text","content":"\u60a8\u4e5f\u53ef\u4ee5\u8f93\u5165\u201c\u6295\u7968\u201d\u8fdb\u5165\u6295\u7968\u9875\u9762\uff0c\u6295\u7968\u7ed3\u679c\u5c06\u5728\u5927\u5c4f\u5e55\u4e0a\u5b9e\u65f6\u5c55\u793a<br\/>\uff08\u9700\u8981\u5728\u5927\u5c4f\u5e55\u4e0a\u70b9\u51fb\u4e0b\u65b9\u7684\u6295\u7968\u56fe\u6807\u5f00\u542f\u6295\u7968\u5c55\u793a\u65b9\u53ef\u5c55\u793a\u6295\u7968\u7ed3\u679c\uff09","photo":"","is_on_wall":"1","update_time_ms":"138583348072099101","on_wall_time":"2013-12-01 01:44:40","mp_add_time":"2013-11-30 10:10:00","add_time":"2013-11-30 10:11:39","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201014440000000_1_42396_2513.png","username":"\u9ad8\u7ade\u7ade-\u4e92\u52a8\u9633\u5149"},{"id":"139082","mp_message_id":"100009252","company_id":"100033","user_id":"25799","msg_type":"text","content":"\u53ef\u4ee5","photo":"","is_on_wall":"1","update_time_ms":"138586847125389702","on_wall_time":"2013-12-01 11:27:51","mp_add_time":"2013-12-01 11:27:35","add_time":"2013-12-01 11:27:51","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201112919000000_1_32966_1136.png","username":"\u5c0f\u7edd\u5bf9\u534d"},{"id":"139083","mp_message_id":"100009254","company_id":"100033","user_id":"25799","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138586848733615101","on_wall_time":"2013-12-01 11:28:07","mp_add_time":"2013-12-01 11:27:55","add_time":"2013-12-01 11:28:07","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201112919000000_1_32966_1136.png","username":"\u5c0f\u7edd\u5bf9\u534d"},{"id":"139084","mp_message_id":"100009256","company_id":"100033","user_id":"25799","msg_type":"text","content":"5","photo":"","is_on_wall":"1","update_time_ms":"138586855967500001","on_wall_time":"2013-12-01 11:29:19","mp_add_time":"2013-12-01 11:29:03","add_time":"2013-12-01 11:29:19","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201112919000000_1_32966_1136.png","username":"\u5c0f\u7edd\u5bf9\u534d"},{"id":"139117","mp_message_id":"100009257","company_id":"100033","user_id":"288","msg_type":"text","content":"\u4e2d\u5348\u5403\u591a\u4e86","photo":"","is_on_wall":"1","update_time_ms":"138588478732713201","on_wall_time":"2013-12-01 15:59:47","mp_add_time":"2013-12-01 15:59:22","add_time":"2013-12-01 15:59:47","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111515000000_1_21378_4779.png","username":"y"},{"id":"139118","mp_message_id":"100009259","company_id":"100033","user_id":"288","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138588481891415901","on_wall_time":"2013-12-01 16:00:18","mp_add_time":"2013-12-01 16:00:03","add_time":"2013-12-01 16:00:18","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111515000000_1_21378_4779.png","username":"y"},{"id":"139120","mp_message_id":"100009261","company_id":"100033","user_id":"288","msg_type":"image","content":"<a href=\"javascript:void(0);\"><img src=\"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201160504000000_2_460989_1024.png\" style=\"height:160px;max-height:160px;max-width:600px;\" data-ori_url=\"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201160504000000_2_460989_1024.png\" \/><\/a>","photo":"\/wxscreen5\/20131201160504000000_2_460989_1024.png","is_on_wall":"1","update_time_ms":"138588510556597601","on_wall_time":"2013-12-01 16:05:05","mp_add_time":"2013-12-01 16:04:42","add_time":"2013-12-01 16:05:05","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111515000000_1_21378_4779.png","username":"y","photo_small":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201160504000000_2_460989_1024.png","photo_ori":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201160504000000_2_460989_1024.png"},{"id":"143127","mp_message_id":"100009262","company_id":"100033","user_id":"26413","msg_type":"text","content":"\u97e9\u57ce\u7f51\u6d4b\u8bd5","photo":"","is_on_wall":"1","update_time_ms":"138590469865117902","on_wall_time":"2013-12-01 21:31:38","mp_add_time":"2013-12-01 21:31:01","add_time":"2013-12-01 21:31:38","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201213145000000_1_27060_1828.png","username":"\u6c34\u6e05\u4e0d\u517b\u9c7c"},{"id":"143128","mp_message_id":"100009264","company_id":"100033","user_id":"26413","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138590470660317201","on_wall_time":"2013-12-01 21:31:46","mp_add_time":"2013-12-01 21:31:22","add_time":"2013-12-01 21:31:46","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201213145000000_1_27060_1828.png","username":"\u6c34\u6e05\u4e0d\u517b\u9c7c"},{"id":"143188","mp_message_id":"100009267","company_id":"100033","user_id":"26425","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138591004413599002","on_wall_time":"2013-12-01 23:00:44","mp_add_time":"2013-12-01 23:00:12","add_time":"2013-12-01 23:00:44","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201230538000000_1_18461_3883.png","username":"\u5f90\u9707\u8f9b\u2014\u6781\u901f\u8717\u725b"},{"id":"143189","mp_message_id":"100009269","company_id":"100033","user_id":"26425","msg_type":"text","content":"\u4f60\u5403\u996d","photo":"","is_on_wall":"1","update_time_ms":"138591029555689501","on_wall_time":"2013-12-01 23:04:55","mp_add_time":"2013-12-01 23:04:19","add_time":"2013-12-01 23:04:55","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201230538000000_1_18461_3883.png","username":"\u5f90\u9707\u8f9b\u2014\u6781\u901f\u8717\u725b"},{"id":"143190","mp_message_id":"100009271","company_id":"100033","user_id":"26425","msg_type":"text","content":"\u5e72\u561b\u554a","photo":"","is_on_wall":"1","update_time_ms":"138591033878414601","on_wall_time":"2013-12-01 23:05:38","mp_add_time":"2013-12-01 23:05:11","add_time":"2013-12-01 23:05:38","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131201230538000000_1_18461_3883.png","username":"\u5f90\u9707\u8f9b\u2014\u6781\u901f\u8717\u725b"},{"id":"143193","mp_message_id":"100009273","company_id":"100033","user_id":"26428","msg_type":"text","content":"Thug","photo":"","is_on_wall":"1","update_time_ms":"138591619074980702","on_wall_time":"2013-12-02 00:43:10","mp_add_time":"2013-12-02 00:42:29","add_time":"2013-12-02 00:43:10","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202004319000000_1_37202_6838.png","username":"\u6e56\u5357360\u641c\u7d22\u670d\u52a1"},{"id":"143194","mp_message_id":"100009275","company_id":"100033","user_id":"26428","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138591619993482701","on_wall_time":"2013-12-02 00:43:19","mp_add_time":"2013-12-02 00:42:48","add_time":"2013-12-02 00:43:19","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202004319000000_1_37202_6838.png","username":"\u6e56\u5357360\u641c\u7d22\u670d\u52a1"},{"id":"143197","mp_message_id":"100009278","company_id":"100033","user_id":"26434","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138594972070051902","on_wall_time":"2013-12-02 10:02:00","mp_add_time":"2013-12-02 10:01:15","add_time":"2013-12-02 10:02:00","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202100356000000_1_27279_9165.png","username":"\u7504\u771f"},{"id":"143198","mp_message_id":"100009280","company_id":"100033","user_id":"26434","msg_type":"text","content":"\u5fae\u4fe1\u5927\u5c4f\u5e55\u4f01\u4e1a\u5e74\u4f1a\u5229\u5668","photo":"","is_on_wall":"1","update_time_ms":"138594983775898101","on_wall_time":"2013-12-02 10:03:57","mp_add_time":"2013-12-02 10:03:10","add_time":"2013-12-02 10:03:57","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202100356000000_1_27279_9165.png","username":"\u7504\u771f"},{"id":"143203","mp_message_id":"100009282","company_id":"100033","user_id":"50","msg_type":"text","content":"\u6211\u8981\u4e0a\u5899\uff0c\u522b\u770b\u7740\u6211","photo":"","is_on_wall":"1","update_time_ms":"138595123581168001","on_wall_time":"2013-12-02 10:27:15","mp_add_time":"2013-12-02 10:26:34","add_time":"2013-12-02 10:27:15","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131204103704000000_1_34649_8090.png","username":"\u674e\u7ef4"},{"id":"143208","mp_message_id":"100009285","company_id":"100033","user_id":"50","msg_type":"text","content":"\u771f\u7684","photo":"","is_on_wall":"1","update_time_ms":"138595136221572401","on_wall_time":"2013-12-02 10:29:22","mp_add_time":"2013-12-02 10:28:44","add_time":"2013-12-02 10:29:22","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131204103704000000_1_34649_8090.png","username":"\u674e\u7ef4"},{"id":"143209","mp_message_id":"100009284","company_id":"100033","user_id":"50","msg_type":"text","content":"\u6211\u8981\u4e0a\u5899\uff0c\u522b\u770b\u7740\u6211","photo":"","is_on_wall":"1","update_time_ms":"138595138322159401","on_wall_time":"2013-12-02 10:29:43","mp_add_time":"2013-12-02 10:28:37","add_time":"2013-12-02 10:29:43","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131204103704000000_1_34649_8090.png","username":"\u674e\u7ef4"},{"id":"143210","mp_message_id":"100009287","company_id":"100033","user_id":"26437","msg_type":"text","content":"\u6d4b\u8bd5\u4e0b","photo":"","is_on_wall":"1","update_time_ms":"138595221408396602","on_wall_time":"2013-12-02 10:43:34","mp_add_time":"2013-12-02 10:42:38","add_time":"2013-12-02 10:43:34","avatar":"http:\/\/s1.wxscreen.com\/wxscreen1\/20131202104930000000_1_16651_9727.png","username":"rk"},{"id":"143211","mp_message_id":"100009289","company_id":"100033","user_id":"26437","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138595257149291001","on_wall_time":"2013-12-02 10:49:31","mp_add_time":"2013-12-02 10:43:14","add_time":"2013-12-02 10:44:09","avatar":"http:\/\/s1.wxscreen.com\/wxscreen1\/20131202104930000000_1_16651_9727.png","username":"rk"},{"id":"143221","mp_message_id":"100009299","company_id":"100033","user_id":"26444","msg_type":"text","content":"hello","photo":"","is_on_wall":"1","update_time_ms":"138595393088263901","on_wall_time":"2013-12-02 11:12:10","mp_add_time":"2013-12-02 11:11:00","add_time":"2013-12-02 11:11:59","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202194130000000_1_29762_7646.png","username":"\u738b\u7acb\u6c11"},{"id":"143222","mp_message_id":"100009298","company_id":"100033","user_id":"26445","msg_type":"text","content":"\u5b89\u603b\u8bf7\u5ba2","photo":"","is_on_wall":"1","update_time_ms":"138595395219299401","on_wall_time":"2013-12-02 11:12:32","mp_add_time":"2013-12-02 11:11:00","add_time":"2013-12-02 11:12:00","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111650000000_1_42145_828.png","username":"\u9c81\u5a1c"},{"id":"143220","mp_message_id":"100009306","company_id":"100033","user_id":"26443","msg_type":"text","content":"\u91d1\u4e09\u80d6\u4e0a\u5c4f","photo":"","is_on_wall":"1","update_time_ms":"138595397381484401","on_wall_time":"2013-12-02 11:12:53","mp_add_time":"2013-12-02 11:11:00","add_time":"2013-12-02 11:11:58","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202194137000000_1_28878_8569.png","username":"L"},{"id":"143224","mp_message_id":"100009304","company_id":"100033","user_id":"26445","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138595398727157101","on_wall_time":"2013-12-02 11:13:07","mp_add_time":"2013-12-02 11:11:00","add_time":"2013-12-02 11:12:02","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111650000000_1_42145_828.png","username":"\u9c81\u5a1c"},{"id":"143223","mp_message_id":"100009302","company_id":"100033","user_id":"26446","msg_type":"text","content":"<span class=\"emoji emoji1f47b\"><\/span>","photo":"","is_on_wall":"1","update_time_ms":"138595401653460101","on_wall_time":"2013-12-02 11:13:36","mp_add_time":"2013-12-02 11:11:00","add_time":"2013-12-02 11:12:01","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202194101000000_1_30539_8221.png","username":"\u5927Z"},{"id":"143225","mp_message_id":"100009309","company_id":"100033","user_id":"16228","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138595403808512501","on_wall_time":"2013-12-02 11:13:58","mp_add_time":"2013-12-02 11:11:00","add_time":"2013-12-02 11:12:41","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131203101344000000_1_39058_5794.png","username":"Becky"},{"id":"143230","mp_message_id":"100009320","company_id":"100033","user_id":"26446","msg_type":"text","content":"<span class=\"emoji emoji1f47f\"><\/span>","photo":"","is_on_wall":"1","update_time_ms":"138595405232354801","on_wall_time":"2013-12-02 11:14:12","mp_add_time":"2013-12-02 11:12:00","add_time":"2013-12-02 11:13:11","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202194101000000_1_30539_8221.png","username":"\u5927Z"},{"id":"143229","mp_message_id":"100009318","company_id":"100033","user_id":"26449","msg_type":"text","content":"\u6295\u7968","photo":"","is_on_wall":"1","update_time_ms":"138595405977458901","on_wall_time":"2013-12-02 11:14:19","mp_add_time":"2013-12-02 11:12:00","add_time":"2013-12-02 11:13:10","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111419000000_1_26356_399.png","username":"\u6a58\u5b50"},{"id":"143228","mp_message_id":"100009316","company_id":"100033","user_id":"26448","msg_type":"text","content":"\u4e0a\u5899","photo":"","is_on_wall":"1","update_time_ms":"138595410262535401","on_wall_time":"2013-12-02 11:15:02","mp_add_time":"2013-12-02 11:12:00","add_time":"2013-12-02 11:13:09","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202194119000000_1_27568_4413.png","username":"\u5929\u6167"},{"id":"143227","mp_message_id":"100009314","company_id":"100033","user_id":"288","msg_type":"text","content":"\u4e0a\u4e2a\u5899","photo":"","is_on_wall":"1","update_time_ms":"138595411621272201","on_wall_time":"2013-12-02 11:15:16","mp_add_time":"2013-12-02 11:12:00","add_time":"2013-12-02 11:13:07","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111515000000_1_21378_4779.png","username":"y"},{"id":"143226","mp_message_id":"100009312","company_id":"100033","user_id":"26447","msg_type":"text","content":"\u725b\u903c\u7684\u6280\u672f","photo":"","is_on_wall":"1","update_time_ms":"138595414555772801","on_wall_time":"2013-12-02 11:15:45","mp_add_time":"2013-12-02 11:12:00","add_time":"2013-12-02 11:13:05","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202194054000000_1_28084_6619.png","username":"\u5218\u8def"},{"id":"143233","mp_message_id":"100009321","company_id":"100033","user_id":"16228","msg_type":"image","content":"<a href=\"javascript:void(0);\"><img src=\"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111425000000_2_400473_7168.png\" style=\"height:160px;max-height:160px;max-width:600px;\" data-ori_url=\"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111425000000_2_400473_7168.png\" \/><\/a>","photo":"\/wxscreen5\/20131202111425000000_2_400473_7168.png","is_on_wall":"1","update_time_ms":"138595416882394901","on_wall_time":"2013-12-02 11:16:08","mp_add_time":"2013-12-02 11:13:00","add_time":"2013-12-02 11:14:26","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131203101344000000_1_39058_5794.png","username":"Becky","photo_small":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111425000000_2_400473_7168.png","photo_ori":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111425000000_2_400473_7168.png"},{"id":"143231","mp_message_id":"100009324","company_id":"100033","user_id":"26443","msg_type":"text","content":"\u54c8\u5229\u8def\u4e9a","photo":"","is_on_wall":"1","update_time_ms":"138595418117773201","on_wall_time":"2013-12-02 11:16:21","mp_add_time":"2013-12-02 11:13:00","add_time":"2013-12-02 11:14:16","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202194137000000_1_28878_8569.png","username":"L"},{"id":"143232","mp_message_id":"100009323","company_id":"100033","user_id":"26445","msg_type":"image","content":"<a href=\"javascript:void(0);\"><img src=\"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111422000000_2_812650_7813.png\" style=\"height:160px;max-height:160px;max-width:600px;\" data-ori_url=\"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111422000000_2_812650_7813.png\" \/><\/a>","photo":"\/wxscreen5\/20131202111422000000_2_812650_7813.png","is_on_wall":"1","update_time_ms":"138595421225678301","on_wall_time":"2013-12-02 11:16:52","mp_add_time":"2013-12-02 11:13:00","add_time":"2013-12-02 11:14:24","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111650000000_1_42145_828.png","username":"\u9c81\u5a1c","photo_small":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111422000000_2_812650_7813.png","photo_ori":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202111422000000_2_812650_7813.png"},{"id":"143759","mp_message_id":"100009363","company_id":"100033","user_id":"104","msg_type":"text","content":"\u5fae\u4fe1\u5927\u5c4f\u5e55","photo":"","is_on_wall":"1","update_time_ms":"138598438374183901","on_wall_time":"2013-12-02 19:39:43","mp_add_time":"2013-12-02 19:38:15","add_time":"2013-12-02 19:39:21","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131203101353000000_1_28798_8962.png","username":"\u5b81\u6d77\u65b0"},{"id":"143410","mp_message_id":"100009362","company_id":"100033","user_id":"26553","msg_type":"text","content":"\u600e\u4e48\u6ca1\u6709","photo":"","is_on_wall":"1","update_time_ms":"138598438959046201","on_wall_time":"2013-12-02 19:39:49","mp_add_time":"2013-12-02 18:20:14","add_time":"2013-12-02 18:21:05","avatar":"http:\/\/wxscreen-wxscreen5.stor.sinaapp.com\/20131202194018000000_1_20705_6329.png","username":"\u261e\u2663\u559c\u7b11\u6012\u9a82"}],
+    // 消息总数
+    184,
+    0  );
+  // 开启倒计时
+  wxscreen.progress.init().start();
+  // v6主题自适应
+  wxscreen.autoSizeTheme();
+  // logo自适应
+  wxscreen.autoCenterLogo();
+  // 监听网络
+  wxscreen.initNetworkState();
+  //hashtrigger
+  wxscreen.hashTrigger();
+  
+  //头部文字切换
+  $(".wordList li").soChange({
+    slideTime:500,
+    changeTime:10000
+  });
+  //关闭浮层
+  $('.layerCloseBtn').click(function(){
+    $(this).closest('.floatLayer').hide();
+    if($(this).closest('.introBox').length || $(this).closest('.settingBox').length) {
+      wxscreen.message.resume();
+    }
+  });
+//});
+</script>
+<script type="text/javascript">
+  var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+  document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fcbc479ac4119d55c0b8a663cd1ccbdec' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>
