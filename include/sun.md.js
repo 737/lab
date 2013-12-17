@@ -64,10 +64,10 @@ sun.md = (function(global){
     };
 
     _parseViewPortContent = function(initWidth, initHeight, isUserScale, initScale, minScale, maxScale, isIntelligence) {
-        var w = !!initWidth ? initWidth : "device-width",
+        var w = !!initWidth ? initWidth : "100%",
             h = !!initHeight ? initHeight : BOMHeight(),
             isUserScale = !!isUserScale ? 1 : 0,
-            initScale = !!initScale ? initScale : null,     //最大极限是 1.69
+            initScale = !!initScale ? initScale : 1.0,     //最大极限是 1.69
             minScale = !!minScale ? minScale : 0.1,
             maxScale = !!maxScale ? maxScale : 10,
             domeMeta = '',
@@ -75,9 +75,9 @@ sun.md = (function(global){
             clientW = document.documentElement.clientWidth,
             screenW = window.screen.width;
 
-        if ((w === -1)||(w === '100%')) {
+        if (w === '100%') {
             w = "device-width";
-            initScale = 1;
+            initScale = 1.0;
             targetDensitydpi = 'device-dpi';
 
             if (!!isIntelligence) {
@@ -87,7 +87,9 @@ sun.md = (function(global){
                     targetDensitydpi = 'device-dpi';
                 }
             }
-        } else if ((typeof w === 'number')&&(!initScale)) {
+        }
+
+        if (typeof w === 'number') {
             if (!!isIntelligence) {
                 w = Math.max(w, screenW);
             }
@@ -108,7 +110,7 @@ sun.md = (function(global){
 
         domeMeta = 
             'width=' + w + 
-            ', height=' + h + 
+            //', height=' + h + 
             ', minimum-scale=' + minScale + 
             ', maximum-scale=' + maxScale + 
             ', initial-scale=' + initScale + 
