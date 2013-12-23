@@ -48,14 +48,14 @@ var sun = sun || {};
  * it is for alex to shortcut method
  * delete before online
  */
-(function shortCut() {
-    tojs = function(vmodel) {
+(function shortCut(__sun) {
+    __sun.tojs = function(vmodel) {
         return ko.mapping.toJS(vmodel)
     };
-    log = function (){
+    __sun.log = function (){
         console.log(arguments)
     };
-    write = function(txt){
+    __sun.write = function(txt){
         var p = document.createElement('p');
         var hr = document.createElement('hr');
 
@@ -63,7 +63,7 @@ var sun = sun || {};
         document.body.appendChild(hr);
         document.body.appendChild(p);
     };
-})()
+})(sun)
 
 sun.ajax = function() {
     var mime = {

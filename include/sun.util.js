@@ -2,13 +2,12 @@ var sun = sun || {};
 sun.util = sun.util || {};
 
 sun.util.array = sun.util.array || {};
+
 /**
- * @param => ([1,2,32,4])
- * return [1, 2, 4, 32]
- *
- * @param => ([1,2,32,4], false)
- * return [32, 4, 2, 1]
- * 
+ * >> ([1,2,32,4])
+ * => [1, 2, 4, 32]
+ * >> ([1,2,32,4], false)
+ * => [32, 4, 2, 1]
  */
 sun.util.array.sort = function(arrayList, isAsc) {
     if (typeof isAsc != 'boolean') {
@@ -28,17 +27,19 @@ sun.util.array.sort = function(arrayList, isAsc) {
 };
 
 /**
- * @param => ([0,1,2,3,4,5,6,7,8,9], 6)
- * return [0, 1, 2, 3, 4, 5, 7, 8, 9]
- * 
- * @param => ([0,1,2,3,4,5,6,7,8,9], [2,6,8])
- * return [0, 1, 3, 4, 5, 7, 9]
- * 
+ * >> ([0,1,2,3,4,5,6,7,8,9], 6)
+ * => [0, 1, 2, 3, 4, 5, 7, 8, 9]
+ * >> ([0,1,2,3,4,5,6,7,8,9], [2,6,8])
+ * => [0, 1, 3, 4, 5, 7, 9]
  */
 sun.util.array.remove = function(arrayList, n) {
     //prototype为对象原型，注意这里为对象增加自定义方法的方法。
+    //concat方法：返回一个新数组，这个新数组是由两个或更多数组组合而成的。
+    //这里就是返回arrayList.slice(0,n)/arrayList.slice(n+1,arrayList.length)
+    //组成的新数组，这中间，刚好少了第n项。
+    //slice方法： 返回一个数组的一段，两个参数，分别指定开始和结束的位置。
     if ( n < 0 || typeof n === 'undefined') {
-    　　return arrayList;
+        return arrayList;
     } else if (sun.util.isArray(n)) {
         var _tmp = null;
 
@@ -52,18 +53,12 @@ sun.util.array.remove = function(arrayList, n) {
     } else {
         return arrayList.slice(0,n).concat(arrayList.slice(n+1,arrayList.length));
     }
-　　/*
-　　　concat方法：返回一个新数组，这个新数组是由两个或更多数组组合而成的。
-　　　　　　　　　这里就是返回arrayList.slice(0,n)/arrayList.slice(n+1,arrayList.length)
-　　 　　　　　　组成的新数组，这中间，刚好少了第n项。
-　　　slice方法： 返回一个数组的一段，两个参数，分别指定开始和结束的位置。
-　　*/
 };
 
 /**
  * format number
  * e.g. 12000 => 1,2000
- * @param amtStr number
+ * >> amtStr number
  * @return string
  */
 sun.util.formatIntNum = function (amtStr) {
@@ -106,9 +101,8 @@ sun.util.formatIntNum = function (amtStr) {
 
 /**
  * format number of money.
- * e.g. 12000.235 => 12,000.24
- * @param amtStr number
- * @return string
+ * >> (12000.235, 3)  * // TODO  有错误
+ * => 12,000.24
  */
 sun.util.formatFloat = function (amtStr, isCurrency) {
     var isInt = function (num) {
@@ -148,17 +142,21 @@ sun.util.formatFloat = function (amtStr, isCurrency) {
     return renum;
 }
 
+/**
+ * >> (4)
+ * => true
+ * >> (3)
+ * => false
+ */
 sun.util.isEven = function(num) {
     return num % 2 == 0 ? true : false;
 };
 
 /**
- * @param => ([])
- * return true
- *
- * * @param => ({})
- * return false
- * 
+ * >> ([])
+ * => true
+ * >> ({})
+ * => false
  */
 sun.util.isArray = function(arg) {
     // first way:
@@ -169,12 +167,30 @@ sun.util.isArray = function(arg) {
 };
 
 /**
- * 
- * eg. format = 'yyyy-MM-dd hh:mm:ss'
- * 
+ * >> ()
+ * => "2013-12-04 10:49:25"
+ * >> ('hh:mm:ss yy/MM/dd');
+ * => "10:51:19 13/12/04"
  */
-sun.util.getCurrentTime = function(format) {
+sun.util.getCurrentTime = function(sStyle) {
+    return this.formatTime(sStyle, null);
+};
+
+/**
+ * >> ('yy-MM-dd hh:mm')
+ * => "2013-12-04 10:49:25"
+ * >> ('yy-MM-dd hh:mm', '2013-12-23 18:33:22')
+ * => 13-12-23 18:33
+ */
+sun.util.formatTime = function (format, sTime) {
     var _this = new Date();
+
+    if (!!sTime) {
+        sTime = this.replaceAll(sTime, '-', '/');  // IOS 7.1不支持 2012-12-11 00:00:00 这种格式的 new Date()方法
+        
+        _this = new Date(sTime);
+    }
+
     var o = {
         "M+": _this.getMonth() + 1, //month
         "d+": _this.getDate(), //day
@@ -183,7 +199,7 @@ sun.util.getCurrentTime = function(format) {
         "s+": _this.getSeconds(), //second
         "q+": Math.floor((_this.getMonth() + 3) / 3), //quarter
         "S": _this.getMilliseconds() //millisecond
-    }
+    };
 
     if(!format) {
         format = "yyyy-MM-dd hh:mm:ss";
@@ -200,23 +216,28 @@ sun.util.getCurrentTime = function(format) {
 
 /**
  * 
- * @param  '&lt;span&gt;I am Hero!&lt;/span&gt;'
- * @return '<span>I am Hero!</span>'
+ * >> ('&lt;span&gt;I am Hero!&lt;/span&gt;')
+ * => '<span>I am Hero!</span>'
  */
 sun.util.htmlDecode = function(html) {
     var a = document.createElement( 'a' ); a.innerHTML = html;
     return a.textContent;
 };
+
 /**
  * 
- * @param  '<span>I am Hero!</span>'
- * @return '&lt;span&gt;I am Hero!&lt;/span&gt;'
+ * >> ('<span>I am Hero!</span>')
+ * => '&lt;span&gt;I am Hero!&lt;/span&gt;'
  */
 sun.util.htmlEncode = function ( html ) {
     return document.createElement( 'a' ).appendChild( 
         document.createTextNode( html ) ).parentNode.innerHTML;
 };
 
+/**
+ * >> ("3333", 33)
+ * => 333
+ */
 sun.util.parseToInt = function(obj, defaultNum, radix){
     var _t = 0;
     if (typeof radix != 'number'){
@@ -232,13 +253,8 @@ sun.util.parseToInt = function(obj, defaultNum, radix){
 };
 
 /**
- * @param => ('I am a boy', 'boy', 'girl')
- * return 'I am a girl'
- * enhance replace
- * @param oString string
- * @param AFindText string
- * @param ARepText string
- * @return string
+ * >> ('I am a boy', 'boy', 'girl')
+ * => "I am a girl" 
  */
 sun.util.replaceAll = function (oString, AFindText, ARepText) {
     var raRegExp = new RegExp(AFindText.replace(/([\(\)\[\]\{\}\^\$\+\-\*\?\.\"\'\|\/\\])/g, "\\$1"), "ig");
@@ -246,8 +262,8 @@ sun.util.replaceAll = function (oString, AFindText, ARepText) {
 };
 
 /**
- * @param => ('best {0} for {1}', 'wish', 'you')
- * return 'best wish for you'
+ * >> ('best {0} for {1}', 'wish', 'you')
+ * => "best wish for you"
  */
 sun.util.stringFormat = function(txt) {
     var arg = arguments,
@@ -270,6 +286,10 @@ sun.util.stringFormat = function(txt) {
     return str;
 };
 
+/**
+ * >> (12341234)
+ * => "Thur Jan 1 1970 11:25"
+ */
 sun.util.transforTime = function (time) {
     var date = parseInt(time);
     var weekdays = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];

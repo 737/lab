@@ -114,9 +114,28 @@
         }
 
 
+        function js_getDPI() {
+            var arrDPI = new Array();
+            if (window.screen.deviceXDPI != undefined) {
+                arrDPI[0] = window.screen.deviceXDPI;
+                arrDPI[1] = window.screen.deviceYDPI;
+            }
+            else {
+                var tmpNode = document.createElement("DIV");
+                tmpNode.style.cssText = "width:1in;height:1in;position:absolute;left:0px;top:0px;z-index:99;visibility:hidden";
+                document.body.appendChild(tmpNode);
+                arrDPI[0] = parseInt(tmpNode.offsetWidth);
+                arrDPI[1] = parseInt(tmpNode.offsetHeight);
+                tmpNode.parentNode.removeChild(tmpNode);    
+            }
+            return arrDPI;
+        }
+
+
         function main(){
             //document.getElementsByTagName('body')[0].style.width = '100%';
             _viewPortText = sun.md.getViewPortContent(516 ,null, false);
+
             _viewPortContent.innerHTML = _viewPortText;
             _screen.innerHTML = getScreenToWeb();
             _nav.innerHTML = "width:" + _nav.offsetWidth + '<br/>height:' + _nav.offsetHeight;
@@ -135,6 +154,7 @@
             sun.md.setViewPortContent({initWidth : '100%'});
         }).wait(function() {
             $(document).ready(function() {
+                //_viewPortContent.innerHTML = js_getDPI();
                 main();
             })
         });

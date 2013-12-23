@@ -66,10 +66,10 @@ sun.md = (function(global){
     _parseViewPortContent = function(initWidth, initHeight, isUserScale, initScale, minScale, maxScale, isIntelligence) {
         var w = !!initWidth ? initWidth : "100%",
             h = !!initHeight ? initHeight : BOMHeight(),
-            isUserScale = !!isUserScale ? 1 : 0,
+            isUserScale = !!isUserScale ? 'yes' : 'no',
             initScale = !!initScale ? initScale : 1.0,     //最大极限是 1.69
-            minScale = !!minScale ? minScale : 0.1,
-            maxScale = !!maxScale ? maxScale : 10,
+            minScale = !!minScale ? minScale : 1.0,
+            maxScale = !!maxScale ? maxScale : 1.0,
             domeMeta = '',
             targetDensitydpi = 'device-dpi',      // [dpi_value(70 - 400) | device-dpi | high-dpi | medium-dpi | low-dpi]
             clientW = document.documentElement.clientWidth,
@@ -121,8 +121,11 @@ sun.md = (function(global){
     };
 
     _getScreen =  function(){
+        // dips: 设备独立像素(device-independent pixels)
+        // dp = dip: Density-independent Pixels
         // detail information to  http://www.cnblogs.com/tearer/archive/2010/09/06/1819471.html
         // window.devicePixelRatio = 物理像素 / dips
+        // http://www.zhangxinxu.com/wordpress/2012/08/window-devicepixelratio/
         // window.screen.width = Android设备返回的是物理像素宽，IOS =》 dips宽
 
         var s = "网页可见区域宽：" +       document.body.clientWidth + "\n";
@@ -141,7 +144,7 @@ sun.md = (function(global){
             s += " 屏幕可用工作区高度：" + window.screen.availHeight + "\n";
             s += " 屏幕可用工作区宽度：" + window.screen.availWidth + "\n";
             s += " 你的屏幕设置是 " +      window.screen.colorDepth + " 位彩色" + "\n";
-            s += " 物理像素/独立像素比: " +         window.devicePixelRatio + " 像素/英寸" + "\n";
+            s += " 物理像素/独立像素比: " +window.devicePixelRatio + " 像素/英寸" + "\n";
             s += " 你的屏幕设置 " +        window.screen.deviceXDPI + " 像素/英寸" + "\n";
         
         return s;
@@ -169,6 +172,7 @@ sun.md = (function(global){
     //     isIntelligence: bool    /default null
     // }
     // default options likes: { initWidth : '100%' } or { initWidth : 540 }
+    // <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
     self.setViewPortContent = function (options) {
         var DOM_meta = document.getElementsByName('viewport')[0],
             _content = '';
@@ -205,7 +209,6 @@ sun.md = (function(global){
         }
         return result;
     };
-
     self.isWindows = function () {
         var me = this,
             result = false;
@@ -215,7 +218,6 @@ sun.md = (function(global){
         }
         return result;
     };
-
     self.isWinPhone = function () {
         var me = this,
             result = false;
@@ -225,7 +227,6 @@ sun.md = (function(global){
         }
         return result;
     };
-
     self.isIOS = function () {
         var me = this,
             result = false;

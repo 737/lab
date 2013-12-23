@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+
+        <script type="text/javascript" src="firework.js"></script>
+
+        <script type="text/javascript">
+
+            function test(){
+
+                var fireworks=[];
+
+                var total=15;
+
+                window.setInterval(function(){
+
+                    for (var i = 0; i < total; i++) {
+
+                        if (!fireworks[i] || !fireworks[i].parentElement) {
+
+                            var x=Utils.getIntervalRandom(50,document.body.offsetWidth-50);
+
+                            var shotHeight=Utils.getIntervalRandom(100,450);
+
+                            var radius=Utils.getIntervalRandom(50,200);
+
+                            var particleCount=Utils.getIntervalRandom(40,80);
+
+                            var speed=Utils.getIntervalRandom(10,20);
+
+                            var color="#"+Utils.getIntervalRandom(0,16777215).toString(16).padLeft(6,"f");
+
+                            fireworks[i] = new Firework(x, shotHeight, radius, particleCount, color, speed);
+
+                        }
+
+                    }
+
+                },100);
+
+                
+
+                window.setInterval(function(){
+
+                    var currentIndex=Utils.getIntervalRandom(0,total);
+
+                    if(fireworks[currentIndex] && fireworks[currentIndex].parentElement && !fireworks[currentIndex].isShoted){
+
+                        fireworks[currentIndex].shot();
+
+                    }
+
+                },500);
+
+            }
+
+        </script>
+
+    </head>
+
+    <body bgColor="#000000" onload="test();">
+
+        <div style="width:100%;text-align:center;font:100px 'Comic Sans MS',Arial,sans-serif;color:yellow;">Happy New Year</div>
+
+        <div style="width:100%;text-align:center;font:100px 'Comic Sans MS',Arial,sans-serif;color:red;">2009</div>
+
+        <a href="http://random.cnblogs.com" target="newWindow"><div style="width:100%;font-size:12px;text-align:center;color:#fff">Copyright by Random 2009 All Rights Reserved</div></a>
+
+    </body>
+
+</html>
