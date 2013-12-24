@@ -186,8 +186,9 @@ sun.util.formatTime = function (format, sTime) {
     var _this = new Date();
 
     if (!!sTime) {
-        sTime = this.replaceAll(sTime, '-', '/');  // IOS 7.1不支持 2012-12-11 00:00:00 这种格式的 new Date()方法
-        
+        if (typeof sTime === 'string') {
+            sTime = this.replaceAll(sTime, '-', '/');  // IOS 7.1不支持 2012-12-11 00:00:00 这种格式的 new Date()方法
+        }
         _this = new Date(sTime);
     }
 

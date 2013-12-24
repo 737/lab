@@ -98,8 +98,8 @@ sun.ajax = function() {
             async: _isAsync,
             type: sType,
             url: sUrl,
-            data: _stringifyData(sType, oData),
-            contentType: 'application/json',
+            data: oData,//_stringifyData(sType, oData),
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             dataType: sDataType,
             beforeSend: function(XMLHttpRequest) {
                 if (!!isShlowLoading) {
