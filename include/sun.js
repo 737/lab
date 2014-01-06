@@ -1,61 +1,17 @@
-﻿(function(){
-    var console = window.console || {
-            log : function(){}
-        },
-        n = '\n' ,
-        words = [
-
-            n +'            ┏┓．°． ┏┓            【恭喜您！你得到节操：50克 ！】     '+ n
-                +'            ┃┗━━━┛┃'+ n
-                +'            ┃ ⌒   ⌒ ┃'+ n
-                +'            ┃  ●   ●  ┃                   '+ n
-                +'            ┃  ” ω ”  ┃               '+ n
-                +'            ┗○━━━━○┛'+ n
-            ,
-
-
-            n +'   ┏┓       ┏┓'+ n
-                +' ┏┛┻━━━━┛┻┓'+ n
-                +' ┃              ┃                              【神兽在此守护】'+ n
-                +' ┃      ━      ┃'+ n
-                +' ┃  ┳┛  ┗┳   ┃'+ n
-                +' ┃              ┃'+ n
-                +' ┃      ┻      ┃'+ n
-                +' ┃              ┃'+ n
-                +' ┗━━┓   ┏━━┛'+ n
-                +'      ┃   ┃'+ n
-                +'      ┃   ┃'+ n
-                +'      ┃   ┗━━━━-━┓'+ n
-                +'      ┃              ┣┓                   '+ n
-                +'      ┃              ┏┛'+ n
-                +'      ┗┓┓┏━┳┓┏━┛'+ n
-                +'        ┃┫┫  ┃┫┫                      '+ n
-                +'        ┗┻┛  ┗┻┛'
-        ];
-    console.log( words[rand(0, words.length - 1 )] );
-
-    //取区间随机整数
-    function rand(mi,ma){
-        var range = ma - mi;
-        var out = mi + Math.round( Math.random() * range) ;
-        return parseInt(out);
-    }
-})
-
-var sun = sun || {};
+﻿var sun = sun || {};
 
 /**
  * it is for alex to shortcut method
  * delete before online
  */
-(function shortCut(__sun) {
-    __sun.tojs = function(vmodel) {
+(function shortCut(_sun) {
+    _sun.tojs = function(vmodel) {
         return ko.mapping.toJS(vmodel)
     };
-    __sun.log = function (){
+    _sun.log = function (){
         console.log(arguments)
     };
-    __sun.write = function(txt){
+    _sun.write = function(txt){
         var p = document.createElement('p');
         var hr = document.createElement('hr');
 
@@ -65,14 +21,159 @@ var sun = sun || {};
     };
 })(sun)
 
+/**
+ * Providing you to load Javascript, css files then execute your code.
+ *
+ * [depend on : jquery.each()]
+ */
+sun.load = function() {
+    var self = {},
+        __loadedUrls = {};
+
+    function _poll(node, callback) {
+        var isLoaded = false,
+            reg = /webkit/i;
+
+        if (reg.test(navigator.userAgent)) { //webkit
+            if (node['sheet']) {
+                isLoaded = true;
+            }
+        } else if (node['sheet']) { //FF
+            try 
+            {
+                if (node['sheet'].cssRules) {
+                    isLoaded = true;
+                }
+            } catch (ex) {
+                if (ex.code === 1000) {
+                    isLoaded = true;
+                }
+            }
+        }
+
+        if (isLoaded) {
+            setTimeout(function() {
+                callback();
+            }, 1);
+        } else {
+            setTimeout(function() {
+                _poll(node, callback);
+            }, 1);
+        }
+    };
+    function _styleOnload(node, callback) {
+        if (node.attachEvent) {
+            node.attachEvent('onload', callback);
+        } else {
+            setTimeout(function() {
+                _poll(node, callback);
+            }, 0);
+        }
+    };
+    function _loadcss(url, callback){
+        var node = document.createElement("link");
+
+        node.setAttribute("rel","stylesheet");
+        node.setAttribute("type","text/css");
+        node.setAttribute('href', url);
+
+        document.getElementsByTagName('head')[0].appendChild(node);
+
+        _styleOnload(node, function(){
+            _registerUrl(url);
+            callback();
+        });
+    };
+    function _isUrlLoaded(url) {
+        return __loadedUrls[url] === true;
+    };
+    function _unregisterUrl(url) {
+        __loadedUrls[url] = false;
+    };
+    function _registerUrl(url) {
+        __loadedUrls[url] = true;
+    };
+
+    /**
+     * >> sun.load.css(_url, function() {
+     * >>     // do something
+     * >> })
+     * => undefined
+     * => false  // is url is loaded
+     */
+    self.css = function(src, callback) {
+        if (!_isUrlLoaded(src)) {
+            _loadcss.apply(this, arguments);
+        } else {
+            if (typeof callback === 'function') {
+                callback();
+            }
+            return false;
+        }
+    };
+    /**
+     * >> sun.load.js(_url, function() {
+     * >>     // do something
+     * >> })
+     * => undefined
+     * => false  // is url is loaded
+     */
+    self.js = function(src, callback) {
+        if (!!_isUrlLoaded(src)) {
+            if (typeof callback === 'function') {
+                callback();
+            }
+            return false;
+        }
+
+        var script = document.createElement('script'),
+            loaded;
+
+        script.setAttribute('src', src);
+
+        if (!!callback) {
+            script.onreadystatechange = script.onload = function() {
+                if (!loaded) {
+                    _registerUrl(src);
+                    callback();
+                }
+                loaded = true;
+            };
+        }
+        document.getElementsByTagName('head')[0].appendChild(script);
+    };
+    /**
+     * >> sun.load.getUrlLoaded();
+     * => { http://xx.xx/sun.js : true, 
+     * =>   http://xx.xx/sun.css: true }
+     *
+     * .tg true  => loaded
+     *     false => removed
+     */
+    self.getUrlLoaded = function() {
+        var links  = document.getElementsByTagName('link');
+
+        for (var i = 0, max = links.length; i < max; i++) {
+            if (!_isUrlLoaded(links[i].href)) {
+                _registerUrl(links[i].href);
+            }
+        };
+
+        return __loadedUrls;
+    };
+
+    return self;
+}();
+
 sun.ajax = function() {
     var mime = {
-        html: 'html',
-        js: 'script',
-        json: 'json',
-        xml: 'xml',
-        txt: 'text'
-    }
+            html: 'html',
+            js: 'script',
+            json: 'json',
+            xml: 'xml',
+            txt: 'text'
+        },
+        __XMLHttpRequest;
 
     var _stringifyData = function(sType, oData) {
         var _data = oData;
@@ -84,73 +185,182 @@ sun.ajax = function() {
         return _data;
     };
 
-    base = function(sUrl, sType, sDataType, oData, fnCallBack, isShlowLoading, isAsync) {
-        var _data = oData,
-            _isAsync = typeof isAsync === 'boolean' ? isAsync : true;
+    var defaults = {
+        replaceURL: false,
+        target: "#loadingbar-frame",
+        
+        /* Deafult Ajax Parameters  */
+        async: true,
+        type: "",
+        url: "",
+        data: "",
+        dataType: "",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        cache: true,
+        global: true,
+        headers: {},
+        timeout: 60000,
+        statusCode: {},
+        beforeSend: function(XMLHttpRequest) {
+            /* loading */
+            if ((!!sun.loading)&&(!!sun.loading.config.isWorking)) {
+                var _type = sun.loading.config['type'];
 
-        if (sUrl.indexOf('?') === -1){
-            sUrl = sUrl + '?t=' + Math.random();
-        }else {
-            sUrl = sUrl + '&t=' + Math.random();
+                sun.loading[_type].start();
+            }
+        },
+        success: function(data, textStatus, XMLHttpRequest) {},
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status !== 200) return;
+            // => [Object, "parsererror", SyntaxError]
+            var _txt = '---------------- sun.ajax error -------------------'
+                     + '\n\rstatus ---> ' + textStatus
+                     + '\n\rdetail ---> ' + errorThrown.message
+                     + '\n\r       ---> ' + errorThrown.stack
+                     + '\n\r---------------- /sun.ajax error -------------------';
+
+            console.error(_txt);
+        },
+        complete: function(XMLHttpRequest, textStatus) {
+            if (textStatus !== 'success') {
+                var _txt = '---------------- sun.ajax complete -------------------'
+                     + '\n\rstatus ---> ' + textStatus
+                     + '\n\rdetail ---> ' + XMLHttpRequest.status + '  (' + XMLHttpRequest.statusText + ')'
+                     + '\n\rXMLHttpRequest ---> ' + sun.ajax.lastXMLHttpRequest()
+                     + '\n\r---------------- /sun.ajax complete -------------------';
+
+                __XMLHttpRequest = XMLHttpRequest;
+
+                console.error(_txt);
+            }
         }
+    };
+    var base = function(settings) {
+        var _data = null;
+
+        /* restore default config */
+        __XMLHttpRequest = null;
+
+        if (settings.url.indexOf('?') === -1){
+            settings.url = settings.url + '?t=' + Math.random();
+        }else {
+            settings.url = settings.url + '&t=' + Math.random();
+        };
 
         $.ajax({
-            async: _isAsync,
-            type: sType,
-            url: sUrl,
-            data: oData,//_stringifyData(sType, oData),
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            dataType: sDataType,
-            beforeSend: function(XMLHttpRequest) {
-                if (!!isShlowLoading) {
-                    
-                }
-            },
-            success: function(data, textStatus) {
-                if (!!isShlowLoading) {
-                    
-                }
-                if(!_isAsync && (typeof fnCallBack === 'function')){
-                    fnCallBack(data, textStatus);
-                };
-                _data = data;
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                if (!!isShlowLoading) {
-                    
-                }
-                
-                _data = errorThrown;
-            }
-        }).done(function(data, textStatus, _self) {
-            if (!!isShlowLoading) {
-                    
-            }
+            type: settings.type,
+            url: settings.url,
+            data: settings.data,
+            async: settings.async,
+            cache: settings.cache,
+            global: settings.global,
+            headers: settings.headers,
+            statusCode: settings.statusCode,
+            dataType : settings.dataType,
+            timeout: settings.timeout,
+            /* Deafult Ajax Event */
+            beforeSend: settings.beforeSend,
+            success: settings.success,        //请求成功后调用
+            error: settings.error,
+            complete: settings.complete,         //请求完成后调用
+        }).always(function() {
+            /* loading */
+            if ((!!sun.loading)&&(!!sun.loading.config.isWorking)) {
+                var _type = sun.loading.config['type'];
 
-            if (!!_isAsync && (typeof fnCallBack === 'function')) {
-                fnCallBack(data, textStatus);
+                sun.loading[_type].end();
             }
-        });;
+        }).done(function(data, textStatus, XMLHttpRequest) {     //请求成功后调用(deferred对象的方法)
+            if (typeof settings.done === 'function') {
+                settings.done(data, textStatus, XMLHttpRequest);
+            }
+        });
 
         return _data;
     };
+    var parseOptions = function(typeName, sUrl, sType, sDataType, oData, fnCallBack, isShlowLoading, isAsync) {
+        var _setting = {};
+
+        if (typeName === 'object'){
+            _setting = $.extend({}, defaults, sUrl);
+
+            if (!!sUrl['done'] && typeof sUrl.done === 'function') {
+                _setting.done = sUrl.done;
+            }
+        } else {
+            _setting.url = sUrl;
+            _setting.type = sType;
+            _setting.dataType = sDataType;
+            _setting.data = oData;
+            _setting.isShlowLoading = isShlowLoading;
+            _setting.isAsync = isAsync;
+            _setting.done = fnCallBack;
+
+            _setting = $.extend({}, defaults, _setting);
+        }
+        
+        return _setting;
+    };
 
     return {
+        // >> sun.ajax.post('url', function (json) {
+        // >>     console.log(json);
+        // >> });
+        // => { "name" : "sun.js" }
+        // ****** or this way : ******
+        // >> sun.ajax.post({
+        // >>   url : 'url',
+        // >>   done : function (json) {
+        // >>      console.log(json);
+        // >>   }
+        // >> });
+        // => { "name" : "sun.js" }
         post: function(sPageUrl, oData, fnCallBack, isAsync) {
-            if ((typeof oData === 'function') && (!fnCallBack)) {
-                fnCallBack = oData;
-                oData = null;
-            }
+            if (typeof sPageUrl === 'object') {
+                sPageUrl.type = 'POST';
+                sPageUrl.dataType = mime.json;
+                _options = parseOptions('object', sPageUrl);
+            } else {
+                if ((typeof oData === 'function') && (!fnCallBack)) {
+                    fnCallBack = oData;
+                    oData = null;
+                };
 
-            return base(sPageUrl, 'POST', mime.json, oData, fnCallBack, false, isAsync);
+                _options = parseOptions('!object', sPageUrl, 'POST', mime.json, oData, fnCallBack, false, isAsync);
+            }
+            
+            return base(_options);
         },
+        // >> sun.ajax.getJSON('url', function (json) {
+        // >>     console.log(json);
+        // >> });
+        // => { "name" : "sun.js" }
+        // ****** or this way : ******
+        // >> sun.ajax.getJSON({
+        // >>   url : 'url',
+        // >>   done : function (json) {
+        // >>      console.log(json);
+        // >>   }
+        // >> });
+        // => { "name" : "sun.js" }
         getJSON: function(sPageUrl, oData, fnCallBack, isAsync) {
-            if ((typeof oData === 'function') && (!fnCallBack)) {
-                fnCallBack = oData;
-                oData = null;
-            }
+            if (typeof sPageUrl === 'object') {
+                sPageUrl.type = 'get';
+                sPageUrl.dataType = mime.json;
+                _options = parseOptions('object', sPageUrl);
+            } else {
+                if ((typeof oData === 'function') && (!fnCallBack)) {
+                    fnCallBack = oData;
+                    oData = null;
+                };
 
-            return base(sPageUrl, 'get', mime.json, oData, fnCallBack, false, isAsync);
+                _options = parseOptions('!object', sPageUrl, 'get', mime.json, oData, fnCallBack, false, isAsync);
+            }
+            
+            return base(_options);
+        },
+        lastXMLHttpRequest: function() {
+            return __XMLHttpRequest
         }
     }
 }();
@@ -188,59 +398,84 @@ sun.context.getQueryStringByName = function(name) {
     return result[1];
 };
 
-sun.context.cookie = sun.context.cookie || {};
-// article detail http://www.cnblogs.com/Darren_code/archive/2011/11/24/Cookie.html
-sun.context.cookie.setExpires = function (name,value,expiresValue){
-    var Days = expiresValue; 
-    var exp  = new Date();    //new Date("December 31, 9998");
+sun.context.cookie = (function(){
+    // .eg article detail http://www.cnblogs.com/Darren_code/archive/2011/11/24/Cookie.html
+    var self  = {};
+
+    self.setExpires = function (name,value,expiresValue){
+        var Days = expiresValue; 
+        var exp  = new Date();    //new Date("December 31, 9998");
+        
+        exp.setTime(exp.getTime() + Days*24*60*60*1000);
+        document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+    };
+
+    self.set = function (name,value){
+        var Days = 30; //此 cookie 将被保存 30 天
+        
+        this.setExpires(name, value, Days);
+    };
+
+    self.get = function (name){
+        var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+
+        if(arr != null) {
+            return unescape(arr[2]);
+        }
+        return null;
+    };
+
+    self.getAll = function() {
+        return document.cookie;
+    };
+
+    self.del = function (name){
+        var exp = new Date();
+        var cval= this.get(name);
+
+        exp.setTime(exp.getTime() - 1);
+        if(cval!=null) {
+            document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+        }
+    };
+
+    return self;
+})();
+
+sun.context.localStorage = (function(global) {
     
-    exp.setTime(exp.getTime() + Days*24*60*60*1000);
-    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
-};
-sun.context.cookie.set = function (name,value){
-    var Days = 30; //此 cookie 将被保存 30 天
-    
-    this.setExpires(name, value, Days);
-};
-sun.context.cookie.get = function (name){
-    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+    var self = {
+        _ls : global.localStorage
+    };
 
-    if(arr != null) {
-        return unescape(arr[2]);
-    }
-    return null;
-};
-sun.context.cookie.del = function (name){
-    var exp = new Date();
-    var cval= this.get(name);
+    self.set = function(name, value) {
+        this._ls.setItem(name,value.toString())
+    };
 
-    exp.setTime(exp.getTime() - 1);
-    if(cval!=null) {
-        document.cookie= name + "="+cval+";expires="+exp.toGMTString();
-    }
-};
+    self.get = function(name) {
+        return this._ls.getItem(name);
+    };
+    self.getAll = function() {
+        return this._ls;
+    };
 
-sun.context.localStorage = sun.context.localStorage || {};
-sun.context.localStorage._ls = window.localStorage;
-sun.context.localStorage.set = function(name, value) {
-    this._ls.setItem(name,value.toString())
-};
-sun.context.localStorage.get  = function() {
-    return this._ls.getItem(name);
-};
-sun.context.localStorage.del = function(name) {
-    var val = this.get(name);
+    self.del = function(name) {
+        var val = this.get(name);
 
-    if (!!val) {
-        this.__ls.removeItem("c");
-    }
-};
-sun.context.localStorage.clearAll = function() {
-    window.localStorage.clear()
-};
+        if (!!val) {
+            this.__ls.removeItem("c");
+        }
+    };
+
+    self.clearAll = function() {
+        global.localStorage.clear()
+    };
+
+    return self;
+})(window);
 
 //-----------------------------  undealed  -----------------------------------
-function addEvent (type, element, fun) {
+function ___addEvent (type, element, fun) {
     if (element.addEventListener) {
         addEvent = function (type, element, fun) {
             element.addEventListener(type, fun, false);

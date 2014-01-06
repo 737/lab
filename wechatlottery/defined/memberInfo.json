@@ -1,0 +1,24 @@
+{
+    "code": 200,
+    "message": "OK",
+    "data": {
+        "id": "YT00149",
+        "ch_name": "董佩剑",
+        "en_name": "Simon Dong",
+        "report_manager": "Eva Wang",
+        "avatar": "http://www.placehold.it/150x150/EFEFEF/AAAAAA&text=YT00149",
+        "left_ops": 3,
+        "lotteryHistory" : [
+            {
+                "id": 2,
+                "name": "Jabra 捷波朗蓝牙耳机",
+                "icon": null
+            },
+            {
+                "id": 3,
+                "name": "谢谢关注",
+                "icon": null
+            }
+        ]
+    }
+}

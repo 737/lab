@@ -1,0 +1,155 @@
+
+
+body {  
+    width: 100%;
+    margin: 0px 0px 0px 0px; text-align: center;
+    background: url(../images/ws_bg.jpg) center 0 no-repeat;
+    background-size: 100% 100%;
+    font-family: "Arial", "微软雅黑", "宋体", "新宋体", simsun, sans-serif;
+}
+
+body,div,td,th {
+	font-size:14px;
+	color: #fff;
+	line-height: 150%;
+	background-repeat: repeat;
+}
+
+
+div,form,img { padding: 0px; border: 0px; margin: 0px; }
+dl,dt,dd,ul,ol,li { list-style-type: none; list-style-position: outside; padding: 0px; border: 0px; margin: 0px; }
+dl,ul { clear: left; text-align: left; }
+dt,dd,li { display: block; }
+h1,h2,h3,h4,h5 { margin: 0px; }
+select,input { font-size: 9pt; }
+td,p { text-align: left; }
+
+a { text-decoration: none; }
+a:link {
+	color: #666666;
+}
+a:visited { color: #666666; }
+a:hover { color: #F30; text-decoration: underline; }
+a:active { color: #F30;	}
+
+.center { margin: 0px auto 0px auto; }
+.left { float: left; }
+.right { float: right; }
+
+.font_1 { color: #d31212; font-weight: bold; }
+.font_2 { color: #333; font-size:14px; }
+
+
+.foot{ background:#f6f6f6; color:##db1313; padding:20px; text-align:left;}
+
+.foot_1{ padding:20px; text-align:left; color:#333;}
+
+
+* {
+	padding: 0;
+	margin: 0
+}
+
+body {
+	text-align: center;
+}
+
+
+/************************** pretty **************************/
+/* text-align */
+.sun-tc { text-align: center; }
+.sun-tl { text-align: left; }
+.sun-tr { text-align: right; }
+
+.sun-mc { margin: 0 auto; }
+
+/* clear */
+.sun-cf { *zoom: 1; }
+.sun-cf:before,
+.sun-cf:after { display: table; line-height: 0; content: ""; }
+.sun-cf:after { clear: both; }
+/*----------------*/
+.sun-cf:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.sun-cf { display: inline-block; }
+/* Hides from IE-mac \*/
+* html .sun-cf { height: 1%; }
+.sun-cf { display: block; }
+/* End hide from IE-mac */
+
+/************************** /pretty **************************/
+
+#ag_turnBox {
+    width: 350px;
+    margin: 0 auto;
+}
+
+#ag_turnBox .turn-title {
+    margin: 20px 0;
+}
+
+.turn-box {
+    position: relative;
+    width: 350px;
+    height: 379px;
+    overflow: hidden;
+    background: url(../images/ws_shadow.png) center bottom no-repeat;
+}
+
+.turn-box #turn-pointer {
+    position: absolute;
+    left: 72.5px;
+    top: 66.5px;
+    cursor: pointer;
+}
+
+.turn-user {
+    font-size: 25px;
+    color: #fff;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+}
+
+.turn-result {
+    width: 260px;
+    height: 62px;
+    overflow: hidden;
+    margin: 0 auto;
+    font-size: 25px;
+    
+    font-family: 'Regular';
+    background: url(../images/ws_result.png) center center no-repeat;
+}
+
+.turn-result .turn-result-fillbox {
+    height: 62px;
+    line-height: 68px;
+    overflow: hidden;
+    font-weight: bold;
+    color: #690700;
+    padding: 0 12px;
+    white-space: nowrap;
+}
+
+.turn-times {
+    margin: 20px 0;
+    font-family: 'Regular';
+    font-size: 20px;
+    color: #b7b7b7;
+}
+
+.turn-story {
+    padding: 10px 0 10px 20px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+.turn-story dd {
+    text-indent: 20px;
+}
+
+.turn-info {
+    padding: 40px 0 40px 20px;
+    color: #aeaeae;
+}
+.turn-info dd {
+    text-indent: 20px;
+}

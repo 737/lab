@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src='js/lib/LAB.src.js'></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=10, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>幸运大转盘--让幸运“赚”起来!</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id='ag_turnBox' class='sun-cf sun-mc'>
+        <section class='turn-title'>
+            <img src='images/ws_title.png' />
+        </section>
+        <!-- turn -->
+        <div class='turn-box sun-cf sun-mc'>
+            <img id='turn-desk' src='images/ws_trunDesk.png' />
+            <img id='turn-pointer' src='images/ws_pointer.png' />
+        </div>
+        <!-- /turn -->
+        
+        <section class='turn-user'>
+            <strong></strong>
+        </section>
+        
+        <section class='turn-result'>
+            <div class='turn-result-fillbox sun-cf'>
+                <span><span>
+            </div>
+        </section>
+
+        <section class='turn-times'>
+            您目前有<span id="drawNum">0</span>次抽奖机会！
+        </section>
+
+        <section class='turn-story'>
+            <dl>
+                <dt>抽奖记录：</dt>
+            </dl>
+        </section>
+
+        <section class='turn-info'>
+            <dl>
+                <dt>[友情提示]：</dt>
+                <dd style='color: red'>·2013-12-27 17:00以后,抽奖结果正式有效。</dd>
+                <dd>·网络或有颠簸，万一转盘被卡、指针与弹出框结果不一致时，中奖结果以“抽奖记录”所示为准。</dd>
+            </dl>
+        </section>
+    </div>
+</body>
+<script type="text/javascript">
+    $LAB
+    .script('js/lib/jquery-1.8.3.min.js')
+    .script('js/lib/jquery.textfill.min.js')
+    .script('js/lib/jquery.transit.js')
+    .script('js/lib/hammer.min.js')
+    .script('js/lib/underscore.min.js')
+    .script('js/lib/sun.js')
+    .script('js/lib/sun.md.js')
+    .script('js/lib/sun.util.js')
+    .script('js/main.js').wait(function() {
+        $(function() {
+            ws.base.init();
+
+            sun.md.setViewPortContent( { initWidth : 400 } );
+
+            ws.turnLottery.init();
+        })
+    });
+</script>
+</html>
