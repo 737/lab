@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>css3一些好玩的效果</title>
+    <style type="text/css">
+        .weeeb{
+            display:block;
+            width:192px;
+            height:70px;    background:url(http://sandbox.runjs.cn/uploads/rs/29/y5xcbrne/logo.gif);
+            position:fixed;
+            _position:absolute;
+            right:20px;
+            bottom:20px;
+            -webkit-transition:all .2s ease-in-out;
+            -moz-transition:all .2s ease-in-out;
+            opacity:0.4;
+          filter:alpha(opacity=40);
+            text-indent:-9999em;
+            z-index:9;
+        }
+        .weeeb:hover{
+            opacity:1;
+          filter:alpha(opacity=100);
+        }
+        body{ font-family: tahoma;font-size: 14px;color: #fff}
+        .roll{height: 50px;padding: 10px;background-color: #f4f4f4;border: lightgray 1px solid;position: relative;width: 660px; margin: 20px auto}
+        .roll span{ display: inline-block;text-align: center;line-height: 50px;height: 50px;width: 50px;
+            -webkit-transition:3s all ease-in-out;
+            -moz-transition:3s all ease-in-out;
+            -o-transition:3s all ease-in-out;
+            transition1s:3s all ease-in-out;
+        }
+        .roll-hover{background-color: green;cursor: pointer;}
+        .roll-run{ background-color: red;border-radius:50%;position: absolute;left:60px}
+        .roll-hover:hover{width:610px;}
+        .roll-hover:hover + .roll-run {
+             -webkit-transform: rotate(1440deg);
+             -moz-transform: rotate(1440deg);
+             -o-transform: rotate(1440deg);
+             -ms-transform: rotate(1440deg);
+             transform: rotate(1440deg);
+             left: 620px;
+         }
+
+        .jump{
+            height: 140px;
+            width: 660px;
+            padding: 10px; 
+            background-color: #f4f4f4;
+            border: lightgray 1px solid;
+            position: relative;
+            margin: 20px auto
+        }
+        .jump-dome{
+            display:inline-block;
+            width: 40px;
+            height: 40px; 
+            text-align: center;
+            line-height: 40px;
+            position: absolute;
+            top:10px;
+            left: 10px;
+            background: red;
+            -webkit-transition-property: left, top, background, -webkit-transform;
+            -webkit-transition-duration: 2s, 2s, 1s, 1s;
+            -webkit-transition-timing-function: ease-out, ease-in, linear, ease-in-out;
+            -webkit-transition-delay: 0, 0, 0, 1s;
+        }
+        .jump:hover .jump-dome {
+            left: 600px;
+            top: 100px;
+            background: blue;
+            -webkit-transform: rotate(360deg);
+        }
+
+        .seven{height: 150px;width: 660px;padding: 10px; background-color: #f4f4f4;border: lightgray 1px solid;position: relative;margin: 20px auto}
+        .seven span{display: inline-block;position: absolute;bottom: 10px;
+            -webkit-transition:2s all ease-in-out;
+            -moz-transition:2s all ease-in-out;
+            -o-transition:2s all ease-in-out;
+            transition1s:2s all ease-in-out;
+        }
+        .seven-1{width: 30px;height: 30px; background: #00e5a5;left: 10px;}
+        .seven-2{width: 30px;height: 30px; background: #e500cd; left: 70px;
+            -moz-transform: matrix(1, 0, 1, 1, 0, 0);
+            -webkit-transform: matrix(1, 0, 1, 1, 0, 0);
+            -o-transform: matrix(1, 0, 1, 1, 0, 0);
+            transform: matrix(1, 0, 1, 1, 0, 0);
+        }
+        .seven-3{width: 0;height: 0;left: 130px;
+            border-width:0 30px 30px 30px;
+            border-style:none solid solid;
+            border-color:transparent transparent red;
+        }
+        .seven-4{width: 0;height: 0;left: 200px;
+            border-width:0 30px 30px 30px;
+            border-style:none solid solid;
+            border-color:transparent transparent blue;
+        }
+        .seven-5{width: 0;height: 0;left: 270px;
+            border-width:0 50px 50px 50px;
+            border-style:none solid solid;
+            border-color:transparent transparent green;
+        }
+        .seven-6{width: 0;height: 0;left: 380px;
+            border-width:0 60px 60px 60px;
+            border-style:none solid solid;
+            border-color:transparent transparent orange;
+        }
+        .seven-7{width: 0;height: 0;left: 510px;
+            border-width:0 60px 60px 60px;
+            border-style:none solid solid;
+            border-color:transparent transparent #009be3;
+        }
+        .seven:hover .seven-7{
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+            left: 480px;
+            bottom:40px
+        }
+        .seven:hover .seven-6{
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+            left: 480px;
+            bottom:40px
+        }
+        .seven:hover .seven-5{
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+            left: 562px;
+            bottom:38px
+        }
+        .seven:hover .seven-4{
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+            left: 600px;
+            bottom:80px
+        }
+        .seven:hover .seven-3{
+            -webkit-transform: rotate(270deg);
+            -moz-transform: rotate(270deg);
+            -o-transform: rotate(270deg);
+            transform: rotate(270deg);
+            left: 465px;
+            bottom:85px
+        }
+        .seven:hover .seven-2{
+            left: 485px;
+            bottom:110px
+        }
+        .seven:hover .seven-1{
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+            left: 570px;
+            bottom:80px
+        }
+    </style>
+</head>
+<body>
+    <a target="_blank" class="weeeb" href="http://www.weeeb.cn/">关注前端</a>
+<div class="roll">
+    <span class="roll-hover">Hover</span>
+    <span class="roll-run">RUN</span>
+</div>
+<div class="jump">
+    <span class="jump-dome">Jump</span>
+</div>
+
+<div class="seven">
+    <span class="seven-1"></span>
+    <span class="seven-2"></span>
+    <span class="seven-3"></span>
+    <span class="seven-4"></span>
+    <span class="seven-5"></span>
+    <span class="seven-6"></span>
+    <span class="seven-7"></span>
+</div>
+
+<div class="plane">
+    <span class="plane-hover"></span>
+    <span class="plane-fly"></span>
+</div>
+</body>
+</html>

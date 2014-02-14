@@ -185,6 +185,7 @@
 
                 $('.btns > a').click(function () {
                   var fncal = function(json) {
+                    debugger;
                     $.each( json.shots, function( i, item ) {
                         $( "<img/>" ).attr( "src", item.image_teaser_url ).prependTo( $("#frame") );
                         if ( i === 11 ) {

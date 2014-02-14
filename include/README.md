@@ -256,6 +256,15 @@ sun.util.replaceAll('I am a boy', 'boy', 'girl');
 => "I am a girl"
 ```
 
+**removeAt** sun.util.array.removeAt(arrayList, numIndex);
+
+```
+sun.util.array.removeAt([11,22,33,44], 3);
+=> [11, 22, 44]
+sun.util.array.removeAt([11,22,33,44], [3, 1]);
+=> [22, 44]
+```
+
 **stringFormat**  sun.util.stringFormat(string, augments)
 
 ```

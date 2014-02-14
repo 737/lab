@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Youtube-like Ajax Loading Bar by Pete R. | The Pete Design</title>
+	<meta name="title" content="jQuery Youtube-like Ajax Loading Bar by Pete R. | The Pete Design" />
+	<meta name="description" content="Add an ajax loading bar like on Youtube to all your ajax links. Created by Pete R., Founder of BucketListly" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+	
+	<meta name="author" content="Pete R.">
+  
+    <link rel="stylesheet" type="text/css" href="/include/css/sun-base.css">
+    <link rel="stylesheet" type="text/css" href="/include/css/sun-dialog.css">
+    <script type="text/javascript" src='/include/lib/LAB.src.js'></script>
+	<script>
+        $LAB
+        .script('/include/lib/jquery.js')
+        .script('/include/lib/underscore.js')
+        .script('/include/sun.js')
+        .script('/include/sun.dialog.js')
+        .script('/include/sun.util.js')
+        .wait(function() {
+            $(document).ready(function() {
+                $('#ok').click(function() {
+
+                    sun.dialog({
+                        cssPath : '/include/css/sun-dialog.css'
+                    });
+
+                });
+
+
+                c = function() {
+                    sun.dialog({
+                        type: 'get',
+                         cssPath : '/include/css/sun-dialog.css',
+                         title: '成功领取',
+                         image: 'http://stc.weimob.com/img/smashegg/7.png',
+                         text: '线下兑换请到指定地点，出示此中奖码给我们的工作人确认兑换！兑奖请联系我们，电话4006305400',
+                         callback: function() {
+                            console.log('1234')
+                         }
+                    });
+                }
+
+                sun.key.set(32, c)
+            })
+        });
+		
+	</script>
+</head>
+<body>
+    <div class="wrapper">
+        <button id='ok'>Ok</button>
+    </div>
+
+
+
+</body>
+</html>
+
+
+

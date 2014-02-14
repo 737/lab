@@ -255,7 +255,6 @@ sun.ajax = function() {
             data: settings.data,
             async: settings.async,
             cache: settings.cache,
-            contentType: settings.contentType,
             global: settings.global,
             headers: settings.headers,
             statusCode: settings.statusCode,
@@ -371,7 +370,6 @@ sun.ajax = function() {
 sun.$ = function(query) {
     return document.querySelectorAll(query);
 };
-
 
 sun.key = (function() {
     var self = {},

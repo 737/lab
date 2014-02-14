@@ -1,7 +1,5 @@
 ﻿var sun = sun || {};
 
-sun.tag = {};
-
 /**
  * it is for alex to shortcut method
  * delete before online
@@ -255,7 +253,6 @@ sun.ajax = function() {
             data: settings.data,
             async: settings.async,
             cache: settings.cache,
-            contentType: settings.contentType,
             global: settings.global,
             headers: settings.headers,
             statusCode: settings.statusCode,
@@ -371,79 +368,6 @@ sun.ajax = function() {
 sun.$ = function(query) {
     return document.querySelectorAll(query);
 };
-
-
-sun.key = (function() {
-    var self = {},
-        keys = {
-            'Esc' : 27,
-            'Enter' : 13
-        },
-        keysEvent  = {
-
-        },
-        lastKey = null;
-
-    self.__init = function() {
-        document.addEventListener('keyup', function(evt) {
-            lastKey = evt;
-
-            var keyEvt = keysEvent[evt.keyCode];
-            if (!!keyEvt) {
-                for(var i = 0, max = keyEvt.length; i < max; i ++) {
-                    if (typeof keyEvt[i] === 'function') {
-                        keyEvt[i]();
-                    }
-                }
-            }
-        });
-    };
-
-    //
-    self.set = function(keyCode, fnCallBack) {
-        if (typeof keyCode != 'number') {
-            return 'the Parameters -> keycode is number';
-        }
-        if (typeof fnCallBack != 'function') {
-            return 'the Parameters -> fnCallBack is function';
-        }
-
-        var evt = keysEvent[keyCode];
-        if (!!evt) {
-            evt.push(fnCallBack);
-        } else {
-            evt = [];
-
-            evt.push(fnCallBack);
-
-            keysEvent[keyCode] = evt;
-        }
-    };
-
-    self.removeEvent = function(keyCode, fnCallBack) {
-        if ((keysEvent[keyCode].length > 0)&&(keysEvent[keyCode].indexOf(fnCallBack) > -1)) {
-            var index = keysEvent[keyCode].indexOf(fnCallBack);
-
-            keysEvent[keyCode][index] = null;
-        }
-
-    };
-
-    self.removeAllEvent = function(keyCode) {
-        if (keysEvent[keyCode].length > 0) {
-            keysEvent[keyCode] = [];
-        }
-    };
-
-    self.getLastKey = function() {
-        return lastKey;
-    };
-
-
-    self.__init();
-
-    return self;
-})();
 
 
 // var __readyFuns = [];   

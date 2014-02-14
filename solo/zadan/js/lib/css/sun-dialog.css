@@ -1,0 +1,78 @@
+
+
+#sun_dialog_wrap {
+    margin: auto;
+    
+    width: 300px;
+    height: 200px;
+    background: #fff;
+    border-radius: 5px;
+    -webkit-box-sizing: border-box;
+
+    position: absolute;
+    bottom: inherit;
+    top: 20px;
+    left: 50%;
+    right: inherit;
+    margin-left: -150px;
+    padding-bottom: 10px;
+    background-color: #222222;
+    -webkit-box-shadow: 0 0 3px rgba(255,255,255,0.3);
+}
+
+#sun_dialog_wrap header {
+    height: 15px;
+    line-height: 35px;
+    padding: 0 10px;
+}
+#sun_dialog_wrap .dialogContent {
+    height: 140px;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+}
+#sun_dialog_wrap .dialogContent .header {
+    line-height: 18px;
+    font-size: 14px;
+    color: #a6a9ac;
+    padding: 10px;
+    background: url(images/sun-dialog-title-bg.png) repeat 0 0;
+    -webkit-background-size: 10px auto;
+    text-align: center;
+    margin: 0 3px 3px 3px;
+    -webkit-box-sizing: border-box;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.9) inset;
+}
+#sun_dialog_wrap footer {
+    height: 35px;
+    line-height: 35px;
+    padding: 0 10px;
+    text-align: center;
+}
+#sun_dialog_wrap .dialogBtn {
+    cursor: pointer;
+    width: inherit;
+    display: inline-block;
+    min-width: 45px;
+    padding: 0 15px;
+    border: 0;
+    color: #ffffff;
+    border-radius: 5px;
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#308be8), to(#2262a4));
+}
+#sun_dialog_wrap.success table {
+    width: 280px;
+    margin: 5px auto;
+}
+#sun_dialog_wrap.success table tr td {
+    color: #d2d2d2;
+    position: relative;
+    padding: 10px 0;
+}
+#sun_dialog_wrap.success table tr td img {
+    width: 70px;
+    max-height: 120px;
+    padding: 0 10px;
+}
+#sun_dialog_wrap.success table tr td label {
+    line-height: 20px;
+}
