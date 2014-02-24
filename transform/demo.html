@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1.0, user-scalable=no">
+		<style>
+			body{
+				background-image: url('bg.jpg');
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+			.dice-animation{
+				-webkit-animation: bounce 2000ms;
+				-webkit-animation-fill-mode:forwards;
+			}
+			@-webkit-keyframes bounce {		
+			    0% {
+					-webkit-transform:translateY(-100%);
+				  }
+				  5% {
+					-webkit-transform:translateY(-100%);
+				  }
+				  15% {
+					-webkit-transform:translateY(0) scale(0.4);
+				  }
+				  30% {
+					-webkit-transform:translateY(-50%) scale(0.9);
+				  }
+				  40% {
+					-webkit-transform:translateY(0%) scale(0.4);
+				  }
+				  50% {
+					-webkit-transform:translateY(-30%) scale(0.7);
+				  }
+				  70% {
+					-webkit-transform:translateY(0%) scale(0.4);
+				  }
+				  80% {
+					-webkit-transform:translateY(-15%) scale(0.6);
+				  }
+				  90% {
+					-webkit-transform:translateY(0%) scale(0.4);
+				  }
+				  95% {
+					-webkit-transform:translateY(-10%) scale(0.5);
+				  }
+				  97% {
+					-webkit-transform:translateY(0%) scale(0.4);
+				  }
+				  99% {
+					-webkit-transform:translateY(-5%) scale(0.4);
+				  }
+				  100% {
+					-webkit-transform:translateY(0) scale(0.4);
+				  }
+			}
+		</style>
+		<script src="jquery-1.10.2.js" type="text/javascript"> </script>
+		<script src="jquery.bet.js" type="text/javascript"> </script>
+		<script src="sun.js" type="text/javascript"> </script>
+		<script src="sun.md.js" type="text/javascript"> </script>
+		<script>
+		$(document).ready(function(){
+			sun.md.setViewPortContent({ 
+				initWidth : 1024
+			});
+		});
+		</script>
+		<script>
+			window.onload = function () {
+				var  systemBookNum = 2; //来自于服务器随机值
+				$("#sys_begin").click(function () {
+					$(this).hide();
+					$("#yours_begin").show();
+					$(".system").addClass("dice-animation");
+					$(".system").runDice({bookNum: systemBookNum});
+					//$(".system").runMora({bookNum: systemBookNum});
+				});
+				
+				/*$("#yours_begin").click(function () {
+					$("#yours_begin").attr('disabled', 'disabled');
+					
+					$(".yours").runMora({callBack: function (res) {
+						var message = "";
+						if (res < systemBookNum) {
+							message = "你输了";
+						} else if (res == systemBookNum) {
+							message = "平局";
+						} else {
+							message = "你赢了";
+						}					
+					$(".message").html(message).show();
+					}});
+				});*/
+
+
+				$("#yours_begin").click(function () {
+					$("#yours_begin").attr('disabled', 'disabled');
+					$(".yours").addClass("dice-animation");
+					$(".yours").runDice({callBack: function (res) {
+						var message = "";
+						if (res < systemBookNum) {
+							message = "你输了";
+						} else if (res == systemBookNum) {
+							message = "平局";
+						} else {
+							message = "你赢了";
+						}					
+					$(".message").html(message).show();
+					}});
+				});
+			};
+			
+		</script>
+	</head>
+	<body>
+		<div class="content" style='width: 1024px; margin: 0 auto'>
+			<img src="img/t1.jpg" style="display:none" />
+			<img src="img/t2.jpg" style="display:none" />
+			<img src="img/t3.jpg" style="display:none" />
+			<img src="img/t4.jpg" style="display:none" />
+			<img src="img/t5.jpg" style="display:none" />
+			<img src="img/t6.jpg" style="display:none" />
+			<div style="width:250px; margin: 0 auto;">
+				<button id="sys_begin" style="width: 250px;height: 100px;">开始</button>
+				<button id="yours_begin" style="width: 250px;height: 100px; display:none">该你了</button>
+			</div>
+			<div class="body" style="width:600px;margin: 200px auto">
+				<div class="system" style="width:300px; height:300px;padding: 10px;display: table-cell;"></div>
+				<div class="yours" style="width:300px; height:300px;padding: 10px;display: table-cell;"></div>
+			</div>
+			<div class="message" style="display: none;margin-top: 10px;text-align: center;padding: 20px 0px;font: 50px bold;color: green;"></div>
+		</div>
+	</body>
+</html>
