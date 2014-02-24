@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        
+        <title>砸金蛋</title>
+        
+        <style type="text/css">
+
+        </style>
+        <!-- Mobile Devices Support @end -->
+        <link rel="stylesheet" type="text/css" href="css/sun-base.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <script type="text/javascript" src='js/lib/LAB.src.js'></script>
+        <script type="text/javascript">
+            $LAB
+            .script('js/lib/jquery.min.js')
+            .script('js/lib/jquery.path.js')
+            .script('js/lib/hammer.min.js')
+            .script('js/lib/sun.js')
+            .script('js/lib/sun.util.js')
+            .script('js/lib/sun.dialog.js')
+            .script('js/lib/sun.md.js').wait(function() {
+                sun.md.setViewPortContent({initWidth : 320});
+            })
+            .script('js/lib/underscore.js')
+            .script('js/main.js').wait(function() {
+                $(document).ready(function() {
+                    sun_hitEgg.init();
+                });
+            });
+        </script>
+    </head>
+    
+    <body>
+        <div id = 'sun_hitEgg_wrap'>
+            <!-- egg wrap -->
+            <section class='stage_wrap'>
+                <img id='stage_bg' src='css/images/stage.jpg' />
+                <div class='egg_wrap sun-hide'>
+                    <span style='z-index: 1' class='egg_shap'></span>
+                    <span class='egg_shap'></span>
+                    <span class='egg_shap'></span>
+                    <span class='ribbon sun-hide'></span>
+                    <span class='hammer sun-hide'></span>
+                </div>
+            </section>
+            <!-- /egg wrap -->
+            <section id='introl_wrap'>
+                <article>
+                    <h6>参与次数</h6>
+                    <div>
+                        <p>
+                            您还可以抽奖次数：<label class="sun-color-golden">96</label>
+                        </p>
+                    </div>
+                </article>
+                <article>
+                    <h6>活动说明</h6>
+                    <div>
+                        <p>双“蛋”来袭，大家一起来砸金蛋吧！</p>
+                        <p>每人每天限砸2次哦~</p>
+                        <p>解释权为微盟官方所有，活动奖项仅作为展示使用，不做真实兑换。</p>
+                    </div>
+                </article>
+                <article class="prizes">
+                    <h6>活动奖项</h6>
+                    <ol class='sun-cf'>
+                        <li>
+                            <p>一等奖<label class="sun-color-golden">:50</label></p>
+                            <figure><img src="http://img.weimob.com/static/1c/38/3c/image/20131212/20131212223117_45631.png"></figure>
+                            <label>微盟至尊版体验一周【演示】</label>
+                        </li>
+                        <li>
+                            <p>二等奖<label class="sun-color-golden">:100</label></p>
+                            <figure><img src="http://img.weimob.com/static/1c/38/3c/image/20131212/20131212223117_45631.png"></figure>
+                            <label>微盟商城行业版体验一周【演示】</label>
+                        </li>
+                        <li>
+                            <p>三等奖<label class="sun-color-golden">:500</label></p>
+                            <figure><img src="http://img.weimob.com/static/1c/38/3c/image/20131212/20131212223117_45631.png"></figure>
+                            <label>微盟增强版体验一周【演示】</label>
+                        </li>
+                    </ol>
+                </article>
+                <article>
+                    <h6>中奖记录</h6>
+                </article>
+                <article class="history">
+                    <h6>中奖名单</h6>
+                    <table class="sun-tc">
+                        <tbody>
+                            <tr>
+                                <td style="width:30%">左***</td>
+                                <td>砸中专家“鉴定”100元代金券</td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">张***</td>
+                                <td>砸中专家“鉴定”100元代金券</td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">林***</td>
+                                <td>砸中</td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">坤***</td>
+                                <td>砸中</td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">1***</td>
+                                <td>砸中</td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">廖***</td>
+                                <td>砸中</td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">鲁***</td>
+                                <td>砸中专家"鉴定"200元代金券</td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">鲁***</td>
+                                <td>砸中</td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">万***</td>
+                                <td>砸中</td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">万***</td>
+                                <td>砸中</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+            </section>
+            <footer>
+                <a href="" style="color:#fff;">©群硕技术支持</a>
+            </footer>
+        </div>
+    </body>
+</html>
