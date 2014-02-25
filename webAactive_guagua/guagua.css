@@ -1,0 +1,51 @@
+body,
+html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: url(imgs/activity-scratch-card-bg.jpg) #944f20;
+}
+.guagua{
+    padding-top: 50px;
+    width: 320px;
+    margin: 0 auto;
+    position: relative;
+}
+.guagua .bg-img{
+    width: 100%;
+    border: none;
+}
+.guagua .guagua-label{
+    vertical-align: top;
+    font-size: 2em;
+    line-height: 33px;
+}
+.guagua .guagua-box{
+/*    display: inline-block;
+    position: relative;*/
+
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    top: 195px;
+    left: 105px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 40px;
+    color: #333;
+}
+.guagua .result{
+    position: absolute;
+    font-size: 1.0em;
+    line-height: 33px;
+    width: 150px;
+}
+
+.prize-inner{
+    width: 90%;
+    margin: 0 auto;
+    height: 180px;
+    background: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+}

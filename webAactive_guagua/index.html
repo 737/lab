@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>刮刮卡</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <script src="jquery-1.10.2.js" type="text/javascript"></script>
+    <script type="text/javascript" src="wScratchPad.js"></script>
+    <link rel="stylesheet" type="text/css" href="guagua.css" />
+</head>
+<body style="text-align: center;">
+    <div class="guagua">
+        <img class="bg-img" src="imgs/activity-scratch-card-bannerbg.png">
+        <!-- <label class="guagua-label">刮奖区:</label> -->
+        <div class="guagua-box">
+            <div class="result">谢谢关注</div>
+            <div  id="inner_box"  class="inner-box"></div>
+        </div>
+    </div>
+ <!--    <div class="prize">
+        <div class="prize-inner"></div>
+    </div> -->
+</body>
+<script type="text/javascript">
+$(function() {
+    var sp = $("#inner_box").wScratchPad({
+        width: 150, 
+        height: 33,  
+        color: '#336699',
+        size: 15,
+        // scratchMove: function(e, percent) {
+        //     console.log(111);
+        // },
+        scratchUp: function(e, percent){ 
+            console.log("up: ", percent);
+            if(percent > 70)
+                this.clear();
+        }
+    });
+});
+</script>
+</html>
