@@ -1,5 +1,5 @@
-Sun.js Preview
-==============
+Sun.js
+======
 
 Sun.js is a utility-belt library for JavaScript.And it will always constantly review and update.For Your Information.:sunglasses:
 

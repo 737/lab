@@ -1,0 +1,126 @@
+﻿<!doctype html>
+<html>
+<head>
+<style>
+*{margin:0;padding:0;list-style:none;font-family:arial;}
+li{cursor:pointer;}
+.computer{width:400px;border:1px solid #333;background:#000;color:#fff;position:absolute;left:50%;top:20%;margin-left:-200px;}
+.text{display:block;width:100%;box-sizing:border-box;padding:3px 10px;border:none;background:#000;color:#fff;outline:none;height:50px;line-height:45px;font-size:35px;}
+.control{background:-webkit-linear-gradient(top,#555,#222);height:40px;border:1px solid #000;line-height:40px;}
+.control li{float:right;border-left:2px solid #000;width:98px;text-align:center;}
+.control li:hover{background:darkred;}
+.btn_box li{width:100px;float:left;font-size:50px;line-height:100px;text-align:center;border:1px solid #000;box-sizing:border-box;background:-webkit-linear-gradient(top,rgb(20,60,118),rgb(14,39,78));}
+.btn_box li:nth-child(4),.btn_box li:nth-child(8),.btn_box li:nth-child(12),.btn_box li:nth-child(15),.btn_box li:nth-child(16){background:-webkit-linear-gradient(top,#555,#222);}
+.btn_box li:hover{background:#333;}
+</style>
+</head>
+<body>
+	<div class="computer">
+	<input type="text" id="text" class="text" value="">
+	<ul class="control"><li id="clear">清除</li></ul>
+	<ul class="btn_box">
+		<li>7</li>
+		<li>8</li>
+		<li>9</li>
+		<li>/</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>*</li>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>-</li>
+		<li>.</li>
+		<li>0</li>
+		<li>=</li>
+		<li>+</li>
+	</ul>
+	</div>
+	<script>
+		var nResult;
+		var oText = document.getElementById('text');
+		var aBtn = document.getElementsByClassName('btn_box')[0].getElementsByTagName('li');
+		var oClear = document.getElementById('clear');
+		var currentString = '';
+		oClear.onclick = function(){
+			currentString = '';
+			oText.value = currentString;
+		}
+		
+		var i = 0;
+		for(i=0;i<aBtn.length;i++ ){
+			aBtn[i].onclick = function(){
+				switch (this.innerHTML){
+					case "0":
+					currentString += '0';
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					case "1":
+					currentString += '1';
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					case "2":
+					currentString += '2';
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					case "3":
+					currentString += '3';
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					case "4":
+					currentString += '4';
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					case "5":
+					currentString += '5';
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					case "6":
+					currentString += '6';
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					case "7":
+					currentString += '7';
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					case "8":
+					currentString += '8';
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					case "9":
+					currentString += '9';
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					case "=":
+					currentString = eval(currentString);
+					console.log(currentString);
+					oText.value = currentString;
+					break
+					default :
+					currentString += this.innerHTML;
+					console.log(currentString);
+					oText.value = currentString;					
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+	</script>
+</body>
+
+</html>
