@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        
+        <title>热键设置</title>
+        
+        <style type="text/css">
+
+        </style>
+        <!-- Mobile Devices Support @end -->
+        <link rel="stylesheet" type="text/css" href="css/sun-base.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <script type="text/javascript" src='js/lib/LAB.src.js'></script>
+        <script type="text/javascript">
+            $LAB
+            .script('js/lib/jquery.min.js')
+            .script('js/lib/sun.js')
+            .script('js/lib/underscore.js')
+            .script('js/main.js').wait(function() {
+                $(document).ready(function() {
+                    sun.hotKey.set(37, hotKey.turnLeft);
+                    sun.hotKey.set(39, hotKey.turnRight);
+                });
+            });
+        </script>
+    </head>
+    
+    <body>
+        
+    </body>
+</html>
