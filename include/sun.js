@@ -373,7 +373,7 @@ sun.$ = function(query) {
 };
 
 
-sun.key = (function() {
+sun.hotKey = (function() {
     var self = {},
         keys = {
             'Esc' : 27,
