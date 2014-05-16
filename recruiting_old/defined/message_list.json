@@ -1,0 +1,56 @@
+{
+  "code": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": 5,
+      "content": "123",
+      "createTime": 1388797470000,
+      "name": null,
+      "nickname": "Chuck Guo",
+      "openId": "oprpOuOkuDodBoC0gauzWHEsVb2s",
+      "avatar": "http://gaming.wc.augmarketing.cn/resource/avatar/1388744324631.jpg",
+      "realUserName": null
+    },
+    {
+      "id": 4,
+      "content": "在上海",
+      "createTime": 1388797458000,
+      "name": null,
+      "nickname": "Chuck Guo",
+      "openId": "oprpOuOkuDodBoC0gauzWHEsVb2s",
+      "avatar": "http://gaming.wc.augmarketing.cn/resource/avatar/1388744324631.jpg",
+      "realUserName": null
+    },
+    {
+      "id": 3,
+      "content": "阿",
+      "createTime": 1388797118000,
+      "name": null,
+      "nickname": "Ma Yun",
+      "openId": "oprpOuOkuDodBoC0gauzWHEsVb2s",
+      "avatar": "http://gaming.wc.augmarketing.cn/resource/avatar/1388744324631.jpg",
+      "realUserName": null
+    },
+    {
+      "id": 2,
+      "content": "aaa",
+      "createTime": 1388797074000,
+      "name": null,
+      "nickname": "Chuck Guo",
+      "openId": "oprpOuOkuDodBoC0gauzWHEsVb2s",
+      "avatar": "http://gaming.wc.augmarketing.cn/resource/avatar/1388744324631.jpg",
+      "realUserName": null
+    },
+    {
+      "id": 1,
+      "content": "！238是神经病",
+      "createTime": 1388744575000,
+      "name": null,
+      "nickname": "张海波",
+      "openId": "oprpOuDCb1HHLQ6oqIBXGq5ohYz4",
+      "avatar": "http://gaming.wc.augmarketing.cn/resource/avatar/1388744324445.jpg",
+      "realUserName": null
+    }
+  ]
+}

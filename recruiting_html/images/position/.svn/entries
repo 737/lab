@@ -1,0 +1,76 @@
+8
+
+dir
+575
+http://192.168.1.104/recruiting/svn/recruitingcms/wp-content/themes/campusrecruiting/images/position
+http://192.168.1.104/recruiting/svn
+
+
+
+2013-09-11T10:21:43.458442Z
+355
+kevin.huang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e40ca00b-fe5e-4bd9-b5dd-4a4ae4f163e4
+
+intern
+dir
+
+fresh-recruit_40x40.png
+file
+
+
+
+
+2013-09-12T07:09:25.083282Z
+c194c2cb099f0e404f1db6b61eb76c49
+2013-09-11T10:21:43.458442Z
+355
+kevin.huang
+has-props
+
+fresh
+dir
+
+social-recruit_40x40.png
+file
+
+
+
+
+2013-09-12T07:09:25.052034Z
+2546ca6baacbffa61a9e455048087885
+2013-09-11T10:21:43.458442Z
+355
+kevin.huang
+has-props
+
+social
+dir
+
+intern-recruit_40x40.png
+file
+
+
+
+
+2013-09-12T07:09:25.067658Z
+546d9aec43d28883d6e69e7a318bce44
+2013-09-11T10:21:43.458442Z
+355
+kevin.huang
+has-props
+

@@ -1,0 +1,74 @@
+{
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "list": [
+      {
+        "id": 1,
+        "media_id": "VcO4W6lQNX3I1Km6LVk988emW6stT99vQiCrHmszCFjH5SzcboWNsu6qvgrxTQnt",
+        "image_url": "http://localhost:8080/wechat/resource/material/image/1392083181998.jpg",
+        "create_time": 1392083183000
+      },
+      {
+        "id": 2,
+        "media_id": "150pid-bUS1iuX5-zg8_80M7rDQV8CG5iKBNaVP6Oydl70DtjuEMqLti0JjhmEOJ",
+        "image_url": "http://localhost:8080/wechat/resource/material/image/1392083180780.jpg",
+        "create_time": 1392083183000
+      }
+    ],
+    "pagination": {
+      "pageSize": 10,
+      "pageNum": 1,
+      "totalPage": 1,
+      "offset": 0
+    }
+  }
+}
+
+// audio
+{
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "list": [
+      {
+        "id": 1,
+        "name": "yinyue",
+        "media_id": "PWQgR1P93PjeRaYBP4yBNiA9MwIlz5YUukhpVYpGK9ejHamOSW5tZYW7vrZ1OZ3h",
+        "voice_url": "http://localhost:8080/wechat/resource/material/voice/1392193619605.mp3",
+        "create_time": 1392193619000
+      }
+    ],
+    "pagination": {
+      "pageSize": 10,
+      "pageNum": 1,
+      "totalPage": 1,
+      "offset": 0
+    }
+  }
+}
+
+
+// vedio
+{
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "list": [
+      {
+        "id": 1,
+        "title": "shiping",
+        "description": "descriptions",
+        "media_id": "QZKGU4Tb8pBxZfYndZJxOzxd3eUvMFfsSSf4IE00aEdqR1pbhqk1Kulskes3U65Q",
+        "video_url": "http://localhost:8080/wechat/resource/material/video/1392198643657.mp4",
+        "create_time": 1392198645000
+      }
+    ],
+    "pagination": {
+      "pageSize": 10,
+      "pageNum": 1,
+      "totalPage": 1,
+      "offset": 0
+    }
+  }
+}

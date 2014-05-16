@@ -1,0 +1,217 @@
+
+@import url('reset.css');
+
+.msg-wrapper {
+    margin-bottom: 20px;
+    border: 1px solid #d3d3d3;
+}
+
+ .tab-item {
+}
+
+ .tab-item a{
+    padding: 15px 30px;
+}
+
+ .tab-item:hover{
+    background-color: rgba(100, 187, 0, 0.5) !important;
+}
+
+ .tab-item.active a,  .tab-item.active a:hover{
+    background-color: #5ba10e !important;
+}
+
+ .tab-item .tab-item-delete{
+    color: #F00;
+    z-index: 2;
+    display: none;
+    position: absolute;
+    line-height: 14px;
+    right: 0;
+    top: 0;
+}
+
+ .tab-item:hover .tab-item-delete{
+    display:inline-block;
+    *display:inline;
+    *zoom:1;
+}
+
+.msg-wrapper .parting-line{
+    padding-left: 80px;
+    vertical-align: baseline;
+    position: relative;
+    height: 8px;
+    border-bottom: 2px dashed #d3d3d3;
+    margin-bottom: 10px;
+    font-size: 0;
+    line-height: 0;
+}
+
+.msg-wrapper .parting-line .ang_i {
+    position: absolute;
+    border-width: 0 8px 8px;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-style: outset outset solid outset;
+    _border-style: dotted dashed solid dashed;
+    color: #d3d3d3;
+    display: block;
+    line-height: 0;
+    font-size: 0;
+    zoom: 1;
+}
+
+.msg-wrapper .parting-line .bor2 {
+    top: 0;
+    left: 100px;
+}
+
+.msg-wrapper .parting-line .bor_bg {
+    top: 2px;
+    left: 100px;
+    color: #FFF;
+}
+
+.msg-wrapper span, .msg-wrapper p, .msg-wrapper textarea{
+    font-size: 14px;
+}
+
+.msg-wrapper textarea{
+    border-color: #d3d3d3;
+}
+
+.b-boder {
+    border-bottom: 1px solid #C5C5C5;
+}
+
+.msg-author-avatar {
+    padding: 10px;
+    width: 100px;
+}
+
+.msg-content {
+    max-width: 350px;
+    width: 350px;
+    padding: 10px 0;
+}
+
+.msg-content div{
+    margin: 0;
+}
+
+.msg-content .user-name{
+    color: #915833;
+}
+
+.msg-content .message-content{
+    color: #444444;
+}
+
+.message-pic-detail{
+    display: inline-table;
+    padding-left: 10px;
+}
+
+.message-pic-detail a{
+    display: block;
+}
+
+.message-pic-detail a img{
+    width: 100px;
+    height: 100px;
+}
+
+.msg-content p{
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.msg-content .message-content p{
+    line-height: 30px;
+    font-size: 18px;
+}
+
+.msg-response-content .msg-send-status {
+    padding: 25px;
+}
+
+.msg-operation {
+    margin-top: 30px;
+    position: relative;
+    padding-right: 0;
+}
+
+.msg-operation .btn, .msg-reply-operation .btn {
+    margin-right: 10px;
+}
+
+ .msg-list .msg-reply {
+    background-color: rgba(242, 242, 242, 0.32);
+    padding-left: 0;
+    margin: 0 50px;
+}
+
+.msg-reply .msg-request-content {
+    border-top: 1px dashed #d3d3d3;
+}
+
+.msg-reply .msg-response-content {
+    /*padding-left: 70px;*/
+}
+
+.msg-reply .msg-reply-content {
+}
+
+.msg-reply .msg-author-avatar {
+    width: 80px;
+}
+
+.msg-reply .msg-content .message-content{
+    /*padding-left: 10px;*/
+}
+
+.msg-reply-conf-nav {
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+#msg_pic_reply .news-wrapper .news-group {
+    border-radius: 8px;
+}
+
+.msg-reply-conf-nav a{
+    padding: 10px;
+}
+
+.reply-wrapper {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.msg-reply-operation {
+    margin-bottom: 8px;
+}
+
+.msg-wrapper .row {
+    margin: 0px;
+}
+
+ .msg-list .msg-reply {
+    background-color: rgba(242, 242, 242, 0.32);
+    padding-left: 0;
+    margin: 0 50px;
+}
+
+#msg_nav .tab-item.active a,
+.content .tab-item.active a:hover{
+    background-color: #5ba10e !important;
+}
+
+#msg_nav li:nth-child(-n + 2) button{
+    display: none;
+}
+
+.tab-content-wrapper {
+    padding: 10px 0 0;
+}

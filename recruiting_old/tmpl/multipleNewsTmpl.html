@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<div class="multiple-news-template news-template" id="{{:newsId}}">
+	<div class="content">
+		<div class="top">
+			<div class="date">{{:createTime}}</div>
+			<div class="cover">
+				<img width=100% height=180 alt=""  src="{{:items[0].image_url}}">
+				<div class="title">{{:items[0].title}}</div>
+			</div>
+		</div>
+		<hr />
+		<div class="bottom" >
+			{{for items}}
+			{{if #index > 0}}
+			<div class="row sub-template">
+				<div class="col-lg-8 sub-title">
+					{{:title}}
+				</div>
+				<div class="col-lg-4">
+					<img width=100% alt="" src="{{:image_url}}">
+				</div>
+			</div>
+			{{/if}}
+			{{/for}}
+		</div>
+	</div>
+	<footer>
+		<div class="row">
+			<div class="col-lg-6"><a href="javascript:void(0);" class="edit-news multiple">修改</a></div>
+			<div class="col-lg-6"><a href="javascript:void(0);" class="delete-news">删除</a></div>
+		</div>
+	</footer>
+</div>

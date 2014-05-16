@@ -1,0 +1,51 @@
+.question-wapper-container {
+	margin : 0 10px;
+	position: relative;
+}
+.send-question-title {
+	color:#388aa2;
+	font-size: 24px;
+	margin: 30px 0 5px 0;
+	font-weight: bold;
+}
+.send-btn-container {
+	margin : 5px 0 10px 0;
+	text-align: center;
+	max-width: 606px;
+	height: 30px;
+}
+.send-btn-container button:active{
+	background-image: url("../images/QA/submit_down.png");
+}
+.send-btn-container button{
+	background : transparent;
+	border : 0;
+	width:100%;
+	background-image: url("../images/QA/submit_up.png");
+	background-repeat: no-repeat;
+	position: relative;
+	height: 35px;
+	max-width:150px;
+	background-size:150px, 50px;
+}
+.question-send-container{
+	border : 0;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius:10px;
+    background-image: url("../images/QA/send-question-bg.png");
+    background-repeat: no-repeat;
+    margin: 0;
+}
+
+.question-content-container textarea{
+	background: transparent;
+	border : 0;
+	width: 100%;
+    font-size: 16px;
+    min-height: 247px;
+    max-width: 606px;
+}
+.loading {
+	display:none;
+}

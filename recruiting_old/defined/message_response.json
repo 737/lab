@@ -1,0 +1,64 @@
+{
+  "code": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": 5,
+      "content": "123",
+      "createTime": 1388797470000,
+      "name": null,
+      "nickname": "Chuck Guo",
+      "openId": "oprpOuOkuDodBoC0gauzWHEsVb2s",
+      "avatar": "http://gaming.wc.augmarketing.cn/resource/avatar/1388744324631.jpg",
+      "realUserName": null,
+      "reply": [
+        {
+          "replyId": 19,
+          "replyType": 1,
+          "createTime": "2015-1-22 11:11:12",
+          "content": "ghrhrgh"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "content": "1",
+      "createTime": 1388797458000,
+      "name": null,
+      "nickname": "Alex Li",
+      "openId": "oprpOuOkuDodBoC0gauzWHEsVb2s",
+      "avatar": "http://gaming.wc.augmarketing.cn/resource/avatar/1388744324631.jpg",
+      "realUserName": null,
+      "reply": []
+    },
+    {
+      "id": 3,
+      "content": "阿",
+      "createTime": 1388797118000,
+      "name": null,
+      "nickname": "Chuck Guo",
+      "openId": "oprpOuOkuDodBoC0gauzWHEsVb2s",
+      "avatar": "http://gaming.wc.augmarketing.cn/resource/avatar/1388744324631.jpg",
+      "realUserName": null,
+      "reply": []
+    },
+    {
+      "id": 2,
+      "content": "aaa",
+      "createTime": 1388797074000,
+      "name": null,
+      "nickname": "Chuck Guo",
+      "openId": "oprpOuOkuDodBoC0gauzWHEsVb2s",
+      "avatar": "http://gaming.wc.augmarketing.cn/resource/avatar/1388744324631.jpg",
+      "realUserName": null,
+      "reply": [
+        {
+          "replyId": 11,
+          "replyType": 1,
+          "createTime": 1388797137000,
+          "content": "123"
+        }
+      ]
+    }
+  ]
+}

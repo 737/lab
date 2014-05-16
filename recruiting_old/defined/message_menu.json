@@ -1,0 +1,17 @@
+{
+  "code": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": 1,
+      "name": "全部",
+      "label": null,
+      "deleted": false
+    },
+    {
+      "id": 2,
+      "name": "建议",
+      "label": null,
+      "deleted": false
+    }  ]
+}

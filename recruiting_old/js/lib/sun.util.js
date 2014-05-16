@@ -362,37 +362,7 @@ sun.util.transforTime = function (time) {
     return result;
 };
 
-/**
- * >> ()
- * => {
- *      height: 500
- *      left: 0
- *      pageHeight: 2542
- *      pageWidth: 320
- *      top: 2042
- *      width: 320
- *   }
- */
-sun.util.getPageScrollPos = function() {
-    var _height = document.documentElement.scrollTop==0? document.body.clientHeight : document.documentElement.clientHeight,
-        _width = null,
-        _top = document.documentElement.scrollTop==0? document.body.scrollTop : document.documentElement.scrollTop,
-        _pageHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight,
-        _pageWidth = null,
-        _left = null,
-        _width = null;
 
-    var pos = {
-        height: _height,
-        left: _left,
-        pageHeight: _pageHeight,
-        pageWidth: _pageWidth,
-        top: _top,
-        width: _width
-    };
-
-    return pos;
-};
 
 
 

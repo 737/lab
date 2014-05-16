@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<div class="single-news-template col-lg-6 news-template modal-template" id="{{:newsId}}">
+{{for items}}
+<div class="content">
+    <div class="top">
+        <div class="title">{{:title}}</div>
+        <div class="date">{{:#parent.parent.data.createTime}}</div>
+        <div class="cover">
+            <img width=100% height=125 alt=""  src="{{:image_url}}" />
+        </div>
+    </div>
+    <hr />
+    <div class="bottom">
+        <div class="description">{{:description}}</div>
+    </div>
+</div>
+{{/for}}
+</div>

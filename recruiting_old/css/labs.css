@@ -1,0 +1,115 @@
+.lbs-content table tr {
+    text-align: center;
+}
+
+.lbs-content table tr td {
+    vertical-align: middle;
+}
+
+.lbs-content .modal .modal-dialog {
+    width: 80%;
+    min-width: 700px;
+}
+
+.lbs-content .modal .add-labs-group-title-2 {
+    text-align: left;
+    padding-left: 31px;
+}
+
+.lbs-content .modal .map-container {
+    border: 1px solid #dddddd;
+    padding: 10px;
+}
+
+.lbs-content .modal #map {
+    width: 100%;
+    height: 514px
+}
+
+.lbs-content .modal table tr input,.lbs-content .modal table tr textarea
+    {
+    width: 75%;
+}
+
+.lbs-content .modal .file-inline {
+    display: inline-block;
+}
+
+.lbs-content .preview-img {
+    width: 50px;
+    height: 50px
+}
+
+.lbs-content .modal .upload-file-form {
+    width: 75%
+}
+
+.lbs-content .modal .upload-file-form input {
+    width: 50%
+}
+
+
+
+.keyword .list-group .list-group-item {
+    line-height: 30px;
+    overflow: hidden;
+}
+
+.keyword .list-group .list-group-item .badge {
+    background-color: #428bca;
+    padding: 8px 10px;
+    border-radius: 5px;
+}
+
+.keyword .keyword-form input {
+    margin-bottom: 10px;
+}
+
+.keyword .keyword-form .keyword-button-container {
+    padding-top: 20px;
+}
+
+.keyword .keyword-form .keyword-button-container button {
+    margin-bottom: 20px;
+}
+
+.keyword .add-keyword{
+	text-align: center;
+}
+.keyword .add-keyword:hover{
+    text-align: center;
+}
+.keyword .add-keyword a:hover{
+    cursor: pointer;
+    text-decoration: none;
+}
+.keyword .keyword-reply-message {
+	min-height: 300px;
+}
+.keyword .keyword-reply-message .keyword-reply-tip{
+	text-align: center;
+	padding-top: 100px;
+}
+
+.keyword .keyword-reply-message textarea{
+	width: 100%;
+	max-width: 100%;
+	height: 100px;
+	border-color: #428bca;
+	margin-top: 20px;
+}
+.keyword .keyword-reply-message .keyword-reply-tip {
+	color: #428bca;
+}
+.keyword .keyword-reply-message .reply-content{
+	display: none;
+}
+.keyword a.list-group-item.active{
+    background-color: #dddddd;
+}
+.keyword a.list-group-item.active > .badge {
+	color: #fff;
+}
+.keyword .tab-pane{
+	padding: 20px;
+}
