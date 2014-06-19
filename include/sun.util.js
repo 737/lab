@@ -1,55 +1,87 @@
 var sun = sun || {};
 sun.util = sun.util || {};
 
-sun.util.array = sun.util.array || {};
+sun.util.array = {
+    /** sun.util.array.sort(arrayList, [bool]) 
+     * >> ([1,2,32,4])
+     * => [1, 2, 4, 32]
+     * >> ([1,2,32,4], false)
+     * => [32, 4, 2, 1]
+     */
+    sort: function(arrayList, isAsc) {
+        if (typeof isAsc != 'boolean') {
+            isAsc = true;
+        }
+
+        function sortNumber(a, b)
+        {
+            if (!!isAsc) {
+                return a - b
+            } else {
+                return b - a
+            }
+        }
+
+        return arrayList.sort(sortNumber);
+    },
+
+    /** sun.util.array.removeAt(arrayList, *numIndex) 
+     * >> ([0, 11,22,33,44], 3)
+     * => [0, 11, 22, 44]
+     * >> ([0, 11,22,33,44], [2, 1, 0])
+     * => [33, 44]
+     */
+    removeAt: function(arrayList, numIndex) {
+        if ( numIndex < 0 || typeof numIndex === 'undefined') {
+            return arrayList;
+        } else if (sun.util.isArray(numIndex)) {
+            var _index = 0;
+
+            numIndex = this.sort(numIndex, false);
+
+            for(index in numIndex) {
+                _index = index - 1;
+                arrayList = this.removeAt(arrayList, numIndex[index]);
+            }
+
+            return arrayList;
+        } else {
+            return arrayList.slice(0, numIndex).concat(arrayList.slice(numIndex + 1, arrayList.length));
+        }        
+    }
+
+};
 
 /**
- * >> ([1,2,32,4])
- * => [1, 2, 4, 32]
- * >> ([1,2,32,4], false)
- * => [32, 4, 2, 1]
- */
-sun.util.array.sort = function(arrayList, isAsc) {
-    if (typeof isAsc != 'boolean') {
-        isAsc = true;
-    }
+* 深度克隆
+* => { name : 'sun' }
+* => { name : 'sun' }
+*/
+sun.util.deepClone = function (jsonObj) {
+    var buf;
 
-    function sortNumber(a, b)
-    {
-        if (!!isAsc) {
-            return a - b
-        } else {
-            return b - a
-        }
-    }
+    if (jsonObj instanceof Array) {
+        var i = jsonObj.length;
 
-    return arrayList.sort(sortNumber);
-};
-
-/** sun.util.array.removeAt(arrayList, *numIndex) 
- * >> ([0, 11,22,33,44], 3)
- * => [0, 11, 22, 44]
- * >> ([0, 11,22,33,44], [2, 1, 0])
- * => [33, 44]
- */
-sun.util.array.removeAt = function(arrayList, numIndex) {
-    if ( numIndex < 0 || typeof numIndex === 'undefined') {
-        return arrayList;
-    } else if (sun.util.isArray(numIndex)) {
-        var _index = 0;
-
-        numIndex = this.sort(numIndex, false);
-
-        for(index in numIndex) {
-            _index = index - 1;
-            arrayList = this.removeAt(arrayList, numIndex[index]);
+        buf = [];
+        while (i--) {
+            buf[i] = this.deepClone(jsonObj[i]);
         }
 
-        return arrayList;
+        return buf;
+    } else if (jsonObj instanceof Object) {
+        buf = {};
+
+        for (var k in jsonObj) {
+            buf[k] = this.deepClone(jsonObj[k]);
+        }
+
+        return buf;
     } else {
-        return arrayList.slice(0, numIndex).concat(arrayList.slice(numIndex + 1, arrayList.length));
+        return jsonObj;
     }
 };
+
 
 /**
  * (destination, *sources) 
@@ -219,30 +251,6 @@ sun.util.formatTime = function (format, sTime) {
 };
 
 /**
- * >> (4)
- * => true
- * >> (3)
- * => false
- */
-sun.util.isEven = function(num) {
-    return num % 2 == 0 ? true : false;
-};
-
-/**
- * >> ([])
- * => true
- * >> ({})
- * => false
- */
-sun.util.isArray = function(arg) {
-    // first way:
-    return Object.prototype.toString.call(arg) === '[object Array]';
-
-    // second way:
-    //return (arr instanceof Array);
-};
-
-/**
  * >> ()
  * => "2013-12-04 10:49:25"
  * >> ('hh:mm:ss yy/MM/dd');
@@ -362,37 +370,7 @@ sun.util.transforTime = function (time) {
     return result;
 };
 
-/**
- * >> ()
- * => {
- *      height: 500
- *      left: 0
- *      pageHeight: 2542
- *      pageWidth: 320
- *      top: 2042
- *      width: 320
- *   }
- */
-sun.util.getPageScrollPos = function() {
-    var _height = document.documentElement.scrollTop==0? document.body.clientHeight : document.documentElement.clientHeight,
-        _width = null,
-        _top = document.documentElement.scrollTop==0? document.body.scrollTop : document.documentElement.scrollTop,
-        _pageHeight = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight,
-        _pageWidth = null,
-        _left = null,
-        _width = null;
 
-    var pos = {
-        height: _height,
-        left: _left,
-        pageHeight: _pageHeight,
-        pageWidth: _pageWidth,
-        top: _top,
-        width: _width
-    };
-
-    return pos;
-};
 
 
 

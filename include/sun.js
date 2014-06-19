@@ -10,8 +10,18 @@ sun.tag = {};
     _sun.tojs = function(vmodel) {
         return ko.mapping.toJS(vmodel)
     };
-    _sun.log = function (){
-        console.log(arguments)
+    _sun.log = function() {
+        if (arguments.length > 1) {
+            console.log(arguments);
+        } else {
+            console.log(arguments[0]);
+        }
+        
+        if (arguments.callee.caller) {
+            console.log('vvvvvvvvvvvvvvvvvvvvvvvvvv caller start vvvvvvvvvvvvvvvvvvvvvvvvvv');
+            console.log(arguments.callee.caller.toString());
+            console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^ caller end ^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+        }
     };
     _sun.write = function(txt){
         var p = document.createElement('p');
@@ -373,7 +383,7 @@ sun.$ = function(query) {
 };
 
 
-sun.hotKey = (function() {
+sun.key = (function() {
     var self = {},
         keys = {
             'Esc' : 27,
