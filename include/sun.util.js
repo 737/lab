@@ -329,22 +329,25 @@ sun.util.reload = function() {
 sun.util.stringFormat = function(txt) {
     var arg = arguments,
         matchResult,
+        matchResultLength,
         matLength,
-        str = txt,
         reg = /\{\d+?\}/gmi,
-        i;
+        i,
+        content = '';
 
-    matchResult = str.match(reg);
-    if (matchResult) {
-        matLength = matchResult.length;
-        if (arg.length >= matLength) {
-            for (i = 0; i < matLength; i++) {
-                str = str.replace(matchResult[i], arg[i + 1]);
-            }
+    matchResult = txt.match(reg);
+    matLength = arg.length;
+    matchResultLength = matchResult.length;
+    if (matchResultLength >  0 && matLength > 0) {
+        for (i = 0; i < matLength; i++) {
+            content = !!arg[i + 1] ? arg[i + 1] : '';
+            txt = txt.replace(matchResult[i], content);
         }
     }
 
-    return str;
+
+
+    return txt;
 };
 
 /**
