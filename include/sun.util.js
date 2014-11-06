@@ -212,10 +212,13 @@ sun.util.formatFloat = function (amtStr, isCurrency) {
 };
 
 /**
- * >> ('yy-MM-dd hh:mm')
+ * >> ('yy-MM-dd hh:mm:ss')
  * => "2013-12-04 10:49:25"
  * >> ('yy-MM-dd hh:mm', '2013-12-23 18:33:22')
- * => 13-12-23 18:33
+ * => "13-12-23 18:33"
+ * >> ('M-d', '2014-03-10')
+ * => "3-10"
+ * 注意M需要大写，其它字母小写
  */
 sun.util.formatTime = function (format, sTime) {
     var _this = new Date();
@@ -329,25 +332,22 @@ sun.util.reload = function() {
 sun.util.stringFormat = function(txt) {
     var arg = arguments,
         matchResult,
-        matchResultLength,
         matLength,
+        str = txt,
         reg = /\{\d+?\}/gmi,
-        i,
-        content = '';
+        i;
 
-    matchResult = txt.match(reg);
-    matLength = arg.length;
-    matchResultLength = matchResult.length;
-    if (matchResultLength >  0 && matLength > 0) {
-        for (i = 0; i < matLength; i++) {
-            content = !!arg[i + 1] ? arg[i + 1] : '';
-            txt = txt.replace(matchResult[i], content);
+    matchResult = str.match(reg);
+    if (matchResult) {
+        matLength = matchResult.length;
+        if (arg.length >= matLength) {
+            for (i = 0; i < matLength; i++) {
+                str = str.replace(matchResult[i], arg[i + 1]);
+            }
         }
     }
 
-
-
-    return txt;
+    return str;
 };
 
 /**
