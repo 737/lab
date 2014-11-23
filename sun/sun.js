@@ -456,6 +456,37 @@ sun.key = (function() {
 })();
 
 
+// 自动关闭窗口
+sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
+    var isFirst = true;
+    
+    function callBack(evt) {
+        console.log('1234124');
+    
+        // 第一次事件方法不执行
+        if (isFirst) {
+            isFirst = false;
+            return;
+        }
+        
+        // 再次点击的是 触发窗口中的元素
+        if (nodeTrigger.contains(evt.target)) {
+            document.removeEventListener('click', callBack);
+            return;
+        }
+        
+        // 点击的是 结果窗口中的元素
+        if (nodeResult.contains(evt.target)) {
+            'nothing';
+        } else {
+            fnblur();
+            document.removeEventListener('click', callBack);
+        }
+    };
+    
+    document.addEventListener('click', callBack);
+};
+
 // var __readyFuns = [];   
 // function DOMReady(){   
 //     for(var i=0,l=readyFuns.length;i&lt;l;i++){   
