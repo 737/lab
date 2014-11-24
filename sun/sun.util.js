@@ -26,11 +26,11 @@ sun.util.array = {
     },
 
     /** sun.util.array.removeAt(arrayList, *numIndex) 
-     * >> ([0, 11,22,33,44], 3)
-     * => [0, 11, 22, 44]
-     * >> ([0, 11,22,33,44], [2, 1, 0])
-     * => [33, 44]
-     */
+         * >> ([0, 11,22,33,44], 3)
+         * => [0, 11, 22, 44]
+         * >> ([0, 11,22,33,44], [2, 1, 0])
+         * => [33, 44]
+         */
     removeAt: function(arrayList, numIndex) {
         if ( numIndex < 0 || typeof numIndex === 'undefined') {
             return arrayList;

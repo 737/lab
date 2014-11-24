@@ -579,3 +579,120 @@ function ___addEvent (type, element, fun) {
     }
     return addEvent(type, element, fun);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sun.autoBlur = (function () {
+    var self = null,
+        item = null,
+        isFirst = true;
+    
+    // 只传入第一个参数即可
+    function searchNode(node, oItem, isDigui) {
+        function abs(item) {
+            
+            if (item && item['type'] == 'id') {
+                if (item['tag'] != node.id) {
+                    node = node.parentNode;
+                    
+                    searchNode(node, item, true);
+                } else {
+                    console.log('点的这里面J_alarmClockListBox， 不关闭，');
+                }
+            }
+        };
+    
+        if (self.nodes && !self.nodes.length) {
+            console.log('没有值0');
+            document.removeEventListener('click', function(evt) {
+                searchNode(evt.target);
+            }, false);
+            return;
+        }
+    
+        // 最高检索到 body 元素
+        if (!node || node.nodeType != 1 || node.nodeName.toUpperCase() == 'BODY' || node.nodeName.toUpperCase() == 'HTML') {
+            if (!oItem && self.nodes && self.nodes.length) {
+                for(var i = 0, max = self.nodes.length; i < max; i++) {
+                    oItem = self.nodes[i];
+                    if(!!oItem && typeof oItem['callback'] == 'function') {
+                        oItem.callback()
+                        oItem.callback = null;
+                    }
+                }
+                self.nodes = [];
+            } else {
+                if(!!oItem && typeof oItem['callback'] == 'function') {
+                    oItem.callback();
+                    oItem.callback = null;
+                    
+                    self.nodes = sun.toolkit.array.removeAt(self.nodes, 0);
+                }
+            }
+            
+            return;
+        }
+        
+        if (isDigui) {
+            abs(oItem)
+        } else {
+            for(var i = 0, max = self.nodes.length; i < max; i++) {
+                abs(self.nodes[i])
+            }
+        }
+    }
+
+    function __init() {
+        document.addEventListener('click', function(evt) {
+            if(self.__isPush) {
+                self.__isPush = false;
+            } else {
+                searchNode(evt.target);
+            }
+        });
+    }
+    
+    __init();
+    
+    return {
+        __isPush: false,
+        nodes: [],
+        // @params nodeString  {object}  例如： {  
+        //      type: 'id',        // id 或者 class
+        //      tag: 'J_alarmClockListBox',
+        //      callback: function() {
+        //          console.log(' 不是点的这里面J_alarmClockListBox，关闭');
+        //     }
+        // }
+        set: function (oData){
+            self = this;
+            
+            if (!!oData) {
+                self.nodes.push({
+                    type: oData['type'],
+                    tag: oData['tag'],
+                    callback: oData['callback']
+                });
+                self.__isPush = true;
+            }
+        }
+    }
+})();
+
+
+
