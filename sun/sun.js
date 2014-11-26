@@ -461,7 +461,7 @@ sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
     var isFirst = true;
     
     function callBack(evt) {
-        console.log('1234124');
+        console.log('asdfasdfasdf');
     
         // 第一次事件方法不执行
         if (isFirst) {
@@ -470,16 +470,16 @@ sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
         }
         
         // 再次点击的是 触发窗口中的元素
-        if (nodeTrigger.contains(evt.target)) {
+        if (nodeTrigger && nodeTrigger.contains(evt.target)) {
             document.removeEventListener('click', callBack);
             return;
         }
         
         // 点击的是 结果窗口中的元素
-        if (nodeResult.contains(evt.target)) {
+        if (nodeResult && nodeResult.contains(evt.target)) {
             'nothing';
         } else {
-            fnblur();
+            (typeof fnblur == 'function') && fnblur();
             document.removeEventListener('click', callBack);
         }
     };
@@ -619,7 +619,7 @@ sun.guid = function (len, radix) {
     }
 
     return uuid.join('');
-}
+};
 
 //-----------------------------  undealed  -----------------------------------
 function ___addEvent (type, element, fun) {
