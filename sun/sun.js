@@ -458,7 +458,8 @@ sun.key = (function() {
 
 // 自动关闭窗口
 sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
-    var isFirst = true;
+    var isFirst = true,
+        self = this;
     
     function callBack(evt) {
         // 第一次事件方法不执行
@@ -469,7 +470,7 @@ sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
         
         // 再次点击的是 触发窗口中的元素
         if (nodeTrigger && nodeTrigger.contains(evt.target)) {
-            document.removeEventListener('click', callBack);
+            self.event.remove('click', document, callBack);
             return;
         }
         
@@ -478,30 +479,40 @@ sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
             'nothing';
         } else {
             (typeof fnblur == 'function') && fnblur();
-            document.removeEventListener('click', callBack);
+            self.event.remove('click', document, callBack);
         }
     };
     
-    document.addEventListener('click', callBack);
+    self.event.add('click', document, callBack);
 };
 
-// var __readyFuns = [];   
-// function DOMReady(){   
-//     for(var i=0,l=readyFuns.length;i&lt;l;i++){   
-//       readyFun();   
-//     }   
-//     readyFuns = null;   
-//     document.removeEventListener('DOMContentLoaded',DOMReady,false);   
-// };
-// sun.ready = function(fn){
-//     if(readyFuns.length == 0){   
-//        document.addEventListener('DOMContentLoaded',DOMReady,false);   
-//     }   
-//     readyFuns.push(fn);   
-// }  
-
-
 sun.context = sun.context || {};
+
+sun.event = {
+    add: function (type, node, fun) {
+        var _addEvent = null;
+        
+        if (node.addEventListener) {
+            node.addEventListener(type, fun, false);
+        } else if(node.attachEvent){
+            node.attachEvent('on' + type, fun);
+        } else {
+            node['on' + type] = fun;
+        }
+        return _addEvent;
+    },
+    remove: function (type, node, fun) {
+        var rmEvent = null;
+    
+        if (node.removeEventListener) {
+            node.removeEventListener(type, fun, false);
+        } else if (node.detachEvent){
+            node.detachEvent('on' + type, fun);
+        } else {
+            node['on' + type] = null;
+        };
+    }
+};
 
 sun.context.getQueryStringByName = function(name) {
     var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
@@ -618,26 +629,6 @@ sun.guid = function (len, radix) {
 
     return uuid.join('');
 };
-
-//-----------------------------  undealed  -----------------------------------
-function ___addEvent (type, element, fun) {
-    if (element.addEventListener) {
-        addEvent = function (type, element, fun) {
-            element.addEventListener(type, fun, false);
-        }
-    }
-    else if(element.attachEvent){
-        addEvent = function (type, element, fun) {
-            element.attachEvent('on' + type, fun);
-        }
-    }
-    else{
-        addEvent = function (type, element, fun) {
-            element['on' + type] = fun;
-        }
-    }
-    return addEvent(type, element, fun);
-}
 
 define([], function () {
     return sun;
