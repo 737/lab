@@ -461,8 +461,6 @@ sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
     var isFirst = true;
     
     function callBack(evt) {
-        console.log('asdfasdfasdf');
-    
         // 第一次事件方法不执行
         if (isFirst) {
             isFirst = false;
