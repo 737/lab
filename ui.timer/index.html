@@ -2,19 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<meta name="keywords" content="JS代码,菜单导航,JS广告代码,JS特效代码" />
-<meta name="description" content="此代码内容为页面右上角可伸缩关闭的菜单，属于站长常用代码，更多菜单导航代码请访问懒人图库JS代码频道。" />
-<title>页面右上角可伸缩关闭的菜单_懒人图库</title>
+
+<title>时间选择器</title>
 
 
 <style type='text/css'>
-    #box2 {
+    #timer2 {
         width: 300px;
         height: 50px;
-        border: 1px solid #333;
+        border: 1px solid green;
         position: absolute;
-        left: 50px;
+        left: 250px;
         top: 200px;
+        z-index: -1;
     }
     
     .ui-selector {
@@ -84,12 +84,16 @@
 </style>
 
 </head>
-<body style="text-align:center">
-    <input type='input' id='searchBox' value='2014-12-12' />
+<body>
+    <input type='input' id='searchBox' value='23:03' />
     
-    <input type='input' id='searchBox2' value='22' />
-
-    <script typ='text/javascript' data-main='js/main.js' src='/include/js/require.2.1.15.js' ></script>
+    <div id ='timer2'>
+        <input type='input' id='searchBox2' value='10:33' />
+    </div>
+    
+    <script typ='text/javascript' src='/include/jquery.js' ></script>
+    <script typ='text/javascript' src='/include/underscore.js' ></script>
+    <script typ='text/javascript' data-main='js/main.js' src='/include/require.js' ></script>
 </body>
 </html>
 

@@ -1,0 +1,72 @@
+﻿/*OTA link*/
+.cntbox-ota .divider {padding-bottom:10px; margin-bottom:10px; border-bottom:1px dashed #e4e4e4;}
+.cntbox-ota .inninfo li {padding:5px 0px; overflow:hidden; font-size:14px;}
+.cntbox-ota .inninfo li .lab {display:inline-block; width:80px; font-size:14px;}
+
+/*OTA room mapping*/
+.room-mapping {padding:10px 10px 20px 0;}
+.room-mapping .room-row {float:left; width:200px;}
+.room-mapping .room-linked {width:65%; margin-right:30px;}
+.room-mapping .room-fixed {position:fixed; top:60px;}
+.room-row .header {height:20px; padding:5px 10px; background:#fff; border-bottom:2px solid #ddd; border-left:5px solid #009000; font-size:14px; line-height:20px;}
+.room-row .room-content {padding-left:15px;}
+.room-row .room-content .single {float:left; width:45%; margin-bottom:10px; margin-right:10px;}
+.room-row .room-block li {float:left; height:20px; padding:2px 10px; margin:0 5px 5px 0; background:#fff; border:1px solid #ccc; border-radius:10px; text-align:center; cursor:default; position:relative;}
+.room-linked .room-block li {background:#fff; border-color:#999;}
+.room-row .room-block .move {background:#f5f5f5; border:1px solid #ccc; cursor:move;}
+.room-row .room-block .move:hover {border-color:#568e42}
+.room-row .room-block .ui-sortable-helper {opacity:.7; border-color:#568e42;}
+.room-row .room-block li .text {font-size:14px; white-space:nowrap;}
+.room-row .room-block .linked {display:block; color:#C00; margin-top:25px; text-align:center;}
+.room-linked .room-block {min-height:70px; padding:5px; background:#fff; border:1px dashed #ccc; border-radius:5px; overflow:hidden;}
+.room-linked .room-block-tip {background:#fff url(../pic/bg-room-mapping.png?t=201411182000) no-repeat center;}
+.room-linked .single-header {height:20px; padding-top:10px;}
+.room-linked .single-header span {float:left; max-width:70%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:14px;}
+.room-linked .sh-full span {max-width:100%;}
+.room-linked .single-header a {float:left;}
+.room-yunzhanggui .room-block {margin-top:30px; padding-bottom:10px;}
+
+
+/*OTA room*/
+.setotaroom {width:760px; margin-left:-380px;}
+.setotaroom .modal-body{max-height:450px; padding:5px 15px 15px 15px}
+.setotaroom .nav-tabs a {font-size:12px;}
+.tabbable .date-tools {position:static; float:right; width:130px; height:33px; border-top:1px solid #ddd; box-shadow:none;}
+.tabbable .date-tools .range {width:92px;}
+.tabbable .date-tools .range p {padding-top:2px;}
+.tabbable .date-tools .prev, .tabbable .date-tools .next {height:33px; background-position:0 -3px;}
+.tabbable .ota-option {float:right;}
+.tabbable .ota-option .droplist {padding-top:2px; padding-bottom:2px;}
+.table thead th {background-color:#d7ebbc;}
+.table-otarooms th, .table-otarooms td {border-right:1px solid #ddd; font-size:12px;}
+.table-otarooms tr:hover{background:none}
+.table-otarooms th:last-child, .table-otarooms td:last-child {border-right:0;}
+.table-otarooms .editable, .table-otarooms .closed {cursor:pointer;}
+.table-otarooms .editable:hover, .table-otarooms .closed:hover {background-color:#fccf78;}
+.table-otarooms .closed {background-color:#dbdbdb;}
+.table-otarooms .room-full {background-color:#eb4747 !important; color:#fff;}
+
+/*OTA Box*/
+.otaBox li {float:left; width:184px; min-height:192px; margin-bottom:30px; padding:0 25px; border-bottom:1px dotted #ccc;}
+.otaBox li .logo {margin-bottom:10px;}
+.otaBox li .logo a {display:block; width:180px; height:75px; border:2px solid #d5d5d5; background:url(../pic/logo-ota.png?t=201411182000) no-repeat; font-size:0; line-height:0; overflow:hidden;}
+.otaBox li .logo a:hover {opacity:.7;}
+.otaBox li .logo .ota-elong  {background-position:0 0;}
+.otaBox li .logo .ota-ctrip  {background-position:0 -75px;}
+.otaBox li .logo .ota-qunar  {background-position:0 -150px;}
+.otaBox li .logo .ota-taobao {background-position:0 -225px;}
+.otaBox li .logo .ota-meituan{background-position:0 -300px;}
+.otaBox li .logo .ota-17u    {background-position:0 -375px;}
+.otaBox li .logo .ota-qmango {background-position:0 -450px;}
+.otaBox li .logo .ota-booking{background-position:0 -525px;}
+.otaBox li .logo .ota-agoda  {background-position:0 -600px;}
+.otaBox li .logo .ota-lashou  {background-position:0 -675px;}
+.otaBox li .logo .ota-wowotuan  {background-position:0 -750px;}
+.otaBox li .logo .ota-lemon  {background-position:0 -825px;}
+.otaBox li .logo .ota-91kezhan  {background-position:0 -900px;}
+.otaBox li .logo .ota-becod  {background-position:0 -975px;}
+.otaBox li .link .btn {width:122px;}
+.otaBox li .link .ico-question {display:inline-block; width:16px; height:16px; margin-left:10px; background:url(../pic/icon-symbol.png?t=201411182000) no-repeat; vertical-align:-3px; *vertical-align:middle; cursor:pointer;}
+.otaBox li .link .ico-question:hover {opacity:.7;}
+.otaBox li .link .btn-waiting, .otaBox li .link .btn-waiting:hover {cursor:default; background-color:#e6e6e6; background-repeat:repeat-x; border:1px solid #ccc; *border:0; border-color:#e6e6e6 #e6e6e6 #bfbfbf; border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25); border-bottom-color:#b3b3b3; filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffff',endColorstr='#ffe6e6e6',GradientType=0); filter:progid:DXImageTransform.Microsoft.gradient(enabled=false); *zoom:1; -webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05); -moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05); box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05)}
+.otaBox li .note {width:170px; height:40px; margin-bottom:10px; resize:vertical;}

@@ -12,7 +12,7 @@
             #nav { background-color:#78D035; width: 100%; height:100px; }
             #plotting { background-color:#333; width: 50px; height:100px; }
         </style>
-        <script type="text/javascript" src='/include/lib/LAB.src.js'></script>
+        <script type="text/javascript" src='/include/LAB.src.js'></script>
     </head>
 
 <body>
@@ -147,12 +147,12 @@
         //fnDomScorllConcept();
 
         $LAB
-        .script('/include/lib/jquery.min.js')
-        .script('/include/lib/underscore.js')
-        .script('/include/sun.js')
-        .script('/include/sun.md.js')
-        .script('/include/sun.util.js')
-		.script('/include/sun.validate.js').wait(function() {
+        .script('/include/jquery.min.js')
+        .script('/include/underscore.js')
+        .script('/sun/sun.js')
+        .script('/sun/sun.md.js')
+        .script('/sun/sun.util.js')
+		.script('/sun/sun.validate.js').wait(function() {
             sun.md.setViewPortContent({initWidth : '100%'});
         }).wait(function() {
             $(document).ready(function() {

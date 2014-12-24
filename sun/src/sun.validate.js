@@ -189,6 +189,24 @@ sun.validate = sun.validate || {
 
       return false;
     },
+    
+    isIE: function() {
+        var ie = 0/*@cc_on+1@*/;
+        return !!ie;
+    },
+    isIE6: function() {
+        return (navigator.appName == "Microsoft Internet Explorer")
+    },
+    isIE7: function() {
+        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/7./i) == "7.")
+    },
+    isIE8: function() {
+        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8.")
+    },
+    isIE9: function() {
+        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/9./i) == "9.")
+    },
+    
     isCharsLenWithinRange: function(value, max) {
       if (!result.isString(value)) return false;
 

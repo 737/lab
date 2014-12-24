@@ -3,49 +3,68 @@ require.config({
     urlArgs: "v=" + (new Date()).getTime(),
     baseUrl: 'js/',
     paths: {
-        'jQuery': '/include/js/jquery',
-        'underscore': '/include/js/underscore',
-        'text': '/include/js/require.text',
-        'domReady': '/include/js/require.domReady',
+        'text': '/include/require.text',
         'sun': '/sun/sun'
+    },
+    shim: {
+        'sun':  {
+            exports: 'sun'
+        }
     }
 });
 
-require(['jQuery', 'underscore', 'sun', 'ui.timer'], function (cc, cc, cc, UiTimer) {
-    var elmTimer = $('#searchBox');
+require(['ui.timer', 'sun'], function (UiTimer, sun) {
     
-    elmTimer.click(function (evt){
+    var timer1 = null;
+    $('#searchBox').click(function (evt){
         var self = this;
     
-        if (this.timer1) {
-            this.timer1.show(elmTimer);
+        var options = {
+            elmTrigger: $(this),
+            elmContainer: $(this).parent(':first'),
+            sTime: this.value,
+            close: function(time) {
+                console.log(time);
+            
+                self.value = time;
+            }
+        };
+    
+        if (timer1) {
+            timer1.setOptions({
+                sTime: this.value,
+            });
         } else {
-            this.timer1 = new UiTimer();
-            this.timer1.show(elmTimer);
+            timer1 = new UiTimer(options);
         }
-        
-        sun.autoBlur(elmTimer[0], this.timer1.body[0], function () {
-            self.timer1.hide();
-        });
+        timer1.show();
     });
     
+    
+    var timer2 = null;
     $('#searchBox2').click(function (evt){
         var self = this;
     
-        if (this.timer2) {
-            this.timer2.show($('#searchBox2'));
-        } else {
-            this.timer2 = new UiTimer();
-            this.timer2.show($('#searchBox2'));
+        var options = {
+            elmTrigger: $(this),
+            elmContainer: $(this).parent(':first'),
+            sTime: this.value,
+            close: function(time) {
+                console.log(time);
+            
+                self.value = time;
+            }
+        };
+    
+        if (!timer2) {
+            timer2 = new UiTimer(options);
         }
         
-        sun.autoBlur($('#searchBox2')[0], this.timer2.body[0], function () {
-            self.timer2.hide();
-        });
+        timer2.show();
     });
 });
 
-function getTemplateUrl (sUrl) {
+function getTemplatesUrl(sUrl) {
     return 'text!../templates/' + sUrl;
 }
 

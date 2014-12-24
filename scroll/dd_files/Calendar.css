@@ -1,0 +1,44 @@
+﻿/*
+ * iCal v1.0 Stylesheet
+ * Copyright (c) 2013 Kevin Liam
+ * Date:2013.6.3 14:33
+*/
+ 
+/*iCal for table*/
+.ical{margin:0px -1px -1px -1px;}
+.ical .td,.ical th{padding:0; vertical-align:top; white-space:nowrap}
+.ical table{border-collapse:collapse; border-spacing:0; width:100%; border:1px solid #ddd;}
+.ical th,.ical td{border:1px solid #bce5c6; -webkit-user-select:none; -moz-user-select:-moz-none; -webkit-user-drag:none; cursor:default}
+.ical th{background:#ecf7f0; padding:5px}
+.ical td .iday{padding:3px; text-align:left; font-family:Lato,"Open Sans", arial; font-size:12px; color:#333; cursor:default;}
+.ical td .irate{padding:0px 0px 10px; margin-top:-5px; text-align:center; color:#009807; font:normal 18px/1.6em Lato,"Open Sans",Arial,"Microsoft YaHei";}
+.ical td.igray .iday,.ical td.igray .irate{color:#bbb}
+.ical td:active,.ical td.curr{background:#ffc;}
+
+
+/*iCal used for ul li*/
+.ical ul.h{height:30px; border:1px solid #dddddd; border-right:none;}
+.ical ul.h li,
+.ical ul.d li{display:block; width:77px; float:left; overflow:hidden; -webkit-user-select:none; -moz-user-select:-moz-none; -webkit-user-drag:none; cursor:default; text-align:center}
+.ical ul.h li{height:30px; line-height:30px; background:#ecf7f0; border-right:1px solid #dddddd;}
+.ical ul.h li.last,.ical ul.h li.last{border-right:none}
+.ical ul.d{border-left:1px solid #dddddd;}
+.ical ul.d li{height:60px; border-right:1px solid #dddddd; border-bottom:1px solid #dddddd;}
+.ical ul.d li i{display:block; padding:2px 4px 5px 0px; text-align:right; font-style:normal; font-family:Lato,"Open Sans", arial; font-size:12px; color:#333; cursor:default; position:relative;}
+.ical ul.d li i.holiday {padding-top:0; border-top:2px solid #5dad4b;}
+.ical ul.d li.igray i.holiday {border-top-color:#bbb;}
+.ical ul.d li.iorange i.holiday {border-top-color:#e2945e;}
+.ical ul.d li.ui-selecting i.holiday, .ical ul.d li.ui-selected i.holiday {border-top-color:#1e851e;}
+
+.ical ul.d li i.holiday tt {position:absolute; top:0; left:0; padding-left:5px; font-family:Lato,"Open Sans",Arial,"Microsoft YaHei";}
+.ical ul.d li b{display:block; text-align:center; color:#19ad20; font:normal 18px/1.2em Lato,"Open Sans",Arial,"Microsoft YaHei";}
+.ical ul.d li b:first-letter{font-size:12px;}
+.ical ul.d li.igray{background:#f5f5f5; cursor:not-allowed}
+.ical ul.d li.igray i,.ical ul.d li.igray b{cursor:not-allowed; color:#aaa}
+.ical ul.d li.iorange{background:#ffedbd;}
+.ical ul.d li.iorange i,.ical ul.d li.iorange b{color:#df6d20}
+.ical ul.d li.today{background:#cbeabe}.ical ul.d li.today i{color:#009804}
+.ical ul.d li.maximal b{color:#b60000}
+.ical ul.d li.ui-selecting,.ical ul.d li.ui-selected,.ical ul.d li.today.ui-selecting,.ical ul.d li.today.ui-selected{background:#16d416;}
+.ical ul.d li.ui-selecting i,.ical ul.d li.ui-selected i,.ical ul.d li.ui-selecting b,.ical ul.d li.ui-selected b,.ical ul.d li.today.ui-selecting b,.ical ul.d li.today.ui-selecting i,.ical ul.d li.today.ui-selected b,.ical ul.d li.today.ui-selected i{color:#fff}
+
