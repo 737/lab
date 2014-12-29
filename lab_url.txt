@@ -1,14 +1,5 @@
-// 打地鼠
+﻿// 打地鼠
 http://sh.qq.com/zt2014/2014315/index.htm
+   
 
-
-origin         branch
-
-
-fetch11 1234567
-
-
-
-git commit1
-
-git commit2
+    一个测试，没什么用
