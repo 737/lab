@@ -10,7 +10,7 @@
 ---
 <a name='ui-controller'></a>
 ### UI控件
-- /ui.timer -- 时间选器控件
+- /ui/ui.timer -- 时间选器控件
 
 
 
