@@ -18,3 +18,5 @@
     
     grunt.registerTask('default', ['uglify']);
 }
+
+
