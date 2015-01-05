@@ -206,6 +206,12 @@ sun.validate = sun.validate || {
     isIE9: function() {
         return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/9./i) == "9.")
     },
+    isFirefox: function() {
+        return navigator.userAgent.indexOf("Firefox") > -1
+    },
+    isChrome: function() {
+        return navigator.userAgent.indexOf("Chrome") > -1
+    },
     
     isCharsLenWithinRange: function(value, max) {
       if (!result.isString(value)) return false;

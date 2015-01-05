@@ -16,46 +16,17 @@
     </head>
 
 <body>
-    <p><a href='http://172.16.188.115:8899/webapp/hotel/hoteldetail/dianping/18496.html'>asdfasdf</a></p>
     <h1>VIEW PORT</h1>
     <hr>
-    <hr>
-    <p></p>
+    <p id='J_viewPortContent'></p>
+    <p id='J_screen'></p>
+    <p id='J_DPI'></p>
     <hr>
     <div class='font-20' id="nav"></div>
     <div class='font-20' id='plotting'></div>
-    <div><a href='http://172.16.188.115:8899/webapp/hotel/hoteldetail/dianping/18496.html?from=http%3A%2F%2Fwww.baidu.com' >asdfasdf</a></div>
-<!--     <hr>
-    <div id="divParent" style="padding: 8px; background-color: #aaa; position: relative;">
-        <div id="divDisplay" style="background-color: #0f0; margin: 30px; padding: 10px;
-            height: 200px; width: 200px; border: solid 3px #f00;">
-        </div>
-    </div>
-    <hr>
-    <div id="divParent_scorll" style="background-color: #aaa; padding:8px; border:solid 7px #000; height:200px;  overflow:auto;">
-        <div id="divDisplay_scorll" style="background-color: #0f0; margin: 30px; padding: 10px;
-            height: 400px; width: 200px; border: solid 3px #f00;">
-        </div>
-    </div>
-    <hr> -->
+
 </body>
     <script type="text/javascript">
-        var domP = document.getElementsByTagName('p'),
-            _viewPortContent = domP[0],
-            _screen = domP[1],
-            _viewPortText = '',
-            _nav = document.getElementById('nav'),
-            _plotting = document.getElementById('plotting');
-
-
-        function getScreenToWeb() {
-            var html = sun.md.screen;
-
-            html = sun.util.replaceAll(html, '\n', '</br>');
-
-            return html;
-        }
-
         function getScrollOffsets(w) {
             var w = w || window;
             if (w.pageXoffset != null) {
@@ -132,34 +103,55 @@
             return arrDPI;
         }
 
-
-        function main(){
-            //document.getElementsByTagName('body')[0].style.width = '100%';
-            _viewPortText = sun.md.getViewPortContent(516 ,null, false);
-
-            _viewPortContent.innerHTML = _viewPortText;
-            _screen.innerHTML = getScreenToWeb();
-            _nav.innerHTML = "width:" + _nav.offsetWidth + '<br/>height:' + _nav.offsetHeight;
-            _plotting.innerHTML = "width:" + _plotting.offsetWidth + '<br/>height:' + _plotting.offsetHeight;
+        function bindEvent() {
+            $('body').on('mouseover', '#J_screen ul li', function(evt) {
+                var elmLi = $(this);
+                var elmSpan = elmLi.find('span');
+                
+                if (!elmSpan.length) {
+                    elmLi.append('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + elmLi.attr('data-object') + '</span>');
+                }
+            });
+            $('body').on('mouseleave', '#J_screen ul li', function(evt) {
+                var elmLi = $(this);
+                var elmSpan = elmLi.find('span');
+                
+                if (elmSpan.length) {
+                    elmSpan.remove();
+                }
+            });
+            
         }
-
+        
         //fnDomConcept();
         //fnDomScorllConcept();
 
         $LAB
         .script('/include/jquery.min.js')
         .script('/include/underscore.js')
-        .script('/sun/sun.js')
-        .script('/sun/sun.md.js')
-        .script('/sun/sun.util.js')
-		.script('/sun/sun.validate.js').wait(function() {
+        .script('/sun/src/sun.js')
+        .script('/sun/src/sun.md.js')
+        .script('/sun/src/sun.util.js')
+		.script('/sun/src/sun.validate.js').wait(function() {
             sun.md.setViewPortContent({initWidth : '100%'});
         }).wait(function() {
             $(document).ready(function() {
-                //_viewPortContent.innerHTML = js_getDPI();
-                main();
+            
+                bindEvent();
+            
+                document.getElementById('J_viewPortContent').innerHTML = sun.md.getViewPortContent(516 ,null, false);
+                document.getElementById('J_screen').innerHTML = sun.md.screen;
+                document.getElementById('J_DPI').innerHTML = js_getDPI();
+                
+                var _nav = document.getElementById('nav'),
+                    _plotting = document.getElementById('plotting');
+                
+                _nav.innerHTML = "width:" + _nav.offsetWidth + '<br/>height:' + _nav.offsetHeight;
+                _plotting.innerHTML = "width:" + _plotting.offsetWidth + '<br/>height:' + _plotting.offsetHeight;
             })
         });
+        
+        
 
 
         // window.onload = function() {

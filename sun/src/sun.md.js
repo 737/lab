@@ -128,26 +128,26 @@ sun.md = (function(global){
         // http://www.zhangxinxu.com/wordpress/2012/08/window-devicepixelratio/
         // window.screen.width = Android设备返回的是物理像素宽，IOS =》 dips宽
 
-        var s = "网页可见区域宽：" +       document.body.clientWidth + "\n";
-            s += " 网页可见区域高：" +     document.body.clientHeight + "\n";
-            s += " 网页可见区域宽：" +     document.body.offsetWidth + " (包括边线和滚动条的宽)" + "\n";
-            s += " 网页可见区域高：" +     document.body.offsetHeight + " (包括边线的宽)" + "\n";
-            s += " 网页正文全文宽：" +     document.body.scrollWidth + "\n";
-            s += " 网页正文全文高：" +     document.body.scrollHeight + "\n";
-            s += " 网页被卷去的高(ff)：" + document.body.scrollTop + "\n";
-            s += " 网页被卷去的高(ie)：" + document.documentElement.scrollTop + "\n";
-            s += " 网页被卷去的左：" +     document.body.scrollLeft + "\n";
-            s += " 网页正文部分上：" +     window.screenTop + "\n";
-            s += " 网页正文部分左：" +     window.screenLeft + "\n";
-            s += " 屏幕分辨率的高：" +     window.screen.height + "\n";
-            s += " 屏幕分辨率的宽：" +     window.screen.width + "\n";
-            s += " 屏幕可用工作区高度：" + window.screen.availHeight + "\n";
-            s += " 屏幕可用工作区宽度：" + window.screen.availWidth + "\n";
-            s += " 你的屏幕设置是 " +      window.screen.colorDepth + " 位彩色" + "\n";
-            s += " 物理像素/独立像素比: " +window.devicePixelRatio + " 像素/英寸" + "\n";
-            s += " 你的屏幕设置 " +        window.screen.deviceXDPI + " 像素/英寸" + "\n";
+        var s =  '<li data-object="document.body.clientWidth"   >网页可见区域宽：' +     document.body.clientWidth + '</li>';
+            s += '<li data-object="document.body.clientHeight"  >网页可见区域高：' +     document.body.clientHeight + '</li>';
+            s += '<li data-object="document.body.offsetWidth"   >网页可见区域宽：' +     document.body.offsetWidth + ' (包括边线和滚动条的宽)' + '</li>';
+            s += '<li data-object="document.body.offsetHeight"  >网页可见区域高：' +     document.body.offsetHeight + ' (包括边线的宽)' + '</li>';
+            s += '<li data-object="document.body.scrollWidth"   >网页正文全文宽：' +     document.body.scrollWidth + '</li>';
+            s += '<li data-object="document.body.scrollHeight"  >网页正文全文高：' +     document.body.scrollHeight + '</li>';
+            s += '<li data-object="document.body.scrollTop"     >网页被卷去的高(ff)：' + document.body.scrollTop + '</li>';
+            s += '<li data-object="document.documentElement.scrollTop"  >网页被卷去的高(ie)：' + document.documentElement.scrollTop + '</li>';
+            s += '<li data-object="document.body.scrollLeft"            >网页被卷去的左：' +     document.body.scrollLeft + '</li>';
+            s += '<li data-object="window.screenTop"            >网页正文部分上：' +     window.screenTop + '</li>';
+            s += '<li data-object="window.screenLeft"           >网页正文部分左：' +     window.screenLeft + '</li>';
+            s += '<li data-object="window.screen.height"        >屏幕分辨率的高：' +     window.screen.height + '</li>';
+            s += '<li data-object="window.screen.width"         >屏幕分辨率的宽：' +     window.screen.width + '</li>';
+            s += '<li data-object="window.screen.availHeigh"    >屏幕可用工作区高度：' + window.screen.availHeight + '</li>';
+            s += '<li data-object="window.screen.availWidth"    >屏幕可用工作区宽度：' + window.screen.availWidth + '</li>';
+            s += '<li data-object="window.screen.colorDepth"    >你的屏幕设置是 ' +      window.screen.colorDepth + ' 位彩色' + '</li>';
+            s += '<li data-object="window.devicePixelRatio"     >物理像素/独立像素比: ' + window.devicePixelRatio + ' 像素/英寸' + '</li>';
+            s += '<li data-object="window.screen.deviceXDPI"    >你的屏幕设置 ' +        window.screen.deviceXDPI + ' 像素/英寸' + '</li>';
         
-        return s;
+        return ('<ul>' + s + '</ul>');
     };
 
     self = {};
