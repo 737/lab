@@ -1,22 +1,22 @@
+// 独立不依赖任何其它类
+// author: arleigh.lee@qq.com
+
 var sun = sun || {};
 
 sun.validate = sun.validate || {
 
-    /**
-     * >> (4)
-     * => true
-     * >> (3)
-     * => false
-     */
+    // >> (4)
+    // => true
+    // >> (3)
+    // => false
     isEven: function(num) {
         return num % 2 == 0 ? true : false;
     },
-    /**
-     * >> ([])
-     * => true
-     * >> ({})
-     * => false
-     */
+    
+    // >> ([])
+    // => true
+    // >> ({})
+    // => false
     isArray: function(arg) {
         // first way:
         return Object.prototype.toString.call(arg) === '[object Array]';
@@ -173,13 +173,12 @@ sun.validate = sun.validate || {
     isPhone: function(target){
       return /^[0-9]{3,4}-[0-9]{7,8}$/.test(target);
     },
-    /**
-     * sun.validate.isUrl({string})
-     * >> ('/tuan/a.html')
-     * => false
-     * >> ('http://www.baidu.com')
-     * => true
-     */
+    
+    // sun.validate.isUrl({string})
+    // >> ('/tuan/a.html')
+    // => false
+    // >> ('http://www.baidu.com')
+    // => true
     isUrl: function(target){
       return /^http(s)?:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\:+!]*([^<>])*$/.test(target);
     },
@@ -247,15 +246,13 @@ sun.validate = sun.validate || {
         return result;
     },
     
-    /**
-             * sun.validate.value({string}, {object|JSON}, {repalce})
-             * >> ('person.name.last', {person: { name: { first: 'sun', last: 'cms' }, age: 26 }})
-             * => 'cms'
-             * >> ('person.name.age', {person: { name: { first: 'sun', last: 'cms' }, age: 26 }})
-             * => 'undefined'
-             * >> ('person.name.age', {person: { name: { first: 'sun', last: 'cms' }, age: 26 }}, 'suncms')
-             * => 'suncms'
-             */
+    // sun.validate.value({string}, {object|JSON}, {repalce})
+    // >> ('person.name.last', {person: { name: { first: 'sun', last: 'cms' }, age: 26 }})
+    // => 'cms'
+    // >> ('person.name.age', {person: { name: { first: 'sun', last: 'cms' }, age: 26 }})
+    // => 'undefined'
+    // >> ('person.name.age', {person: { name: { first: 'sun', last: 'cms' }, age: 26 }}, 'suncms')
+    // => 'suncms'
     value: function(NSString, root, repalce) {
         var nsPath = NSString.split("."),
             ns = root || window || {},
