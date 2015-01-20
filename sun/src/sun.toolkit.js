@@ -7,12 +7,11 @@ var sun = sun || {};
 sun.toolkit = sun.toolkit || {};
 
 sun.toolkit.array = {
-    /** sun.toolkit.array.sort(arrayList, [bool]) 
-     * >> ([1,2,32,4])
-     * => [1, 2, 4, 32]
-     * >> ([1,2,32,4], false)
-     * => [32, 4, 2, 1]
-     */
+    // sun.toolkit.array.sort(arrayList, [bool]) 
+    // >> ([1,2,32,4])
+    // => [1, 2, 4, 32]
+    // >> ([1,2,32,4], false)
+    // => [32, 4, 2, 1]
     sort: function(arrayList, isAsc) {
         if (typeof isAsc != 'boolean') {
             isAsc = true;
@@ -30,12 +29,11 @@ sun.toolkit.array = {
         return arrayList.sort(sortNumber);
     },
 
-    /** sun.toolkit.array.removeAt(arrayList, *numIndex) 
-         * >> ([0, 11,22,33,44], 3)
-         * => [0, 11, 22, 44]
-         * >> ([0, 11,22,33,44], [2, 1, 0])
-         * => [33, 44]
-         */
+    // sun.toolkit.array.removeAt(arrayList, *numIndex) 
+    // >> ([0, 11,22,33,44], 3)
+    // => [0, 11, 22, 44]
+    // >> ([0, 11,22,33,44], [2, 1, 0])
+    // => [33, 44]
     removeAt: function(arrayList, numIndex) {
         if ( numIndex < 0 || typeof numIndex === 'undefined') {
             return arrayList;
@@ -86,7 +84,6 @@ sun.toolkit.deepClone = function (jsonObj) {
         return jsonObj;
     }
 };
-
 
 /**
  * (destination, *sources) 
@@ -306,10 +303,9 @@ sun.toolkit.parseToInt = function(obj, defaultNum, radix){
     return _t;
 };
 
-/**
- * >> ('I am a boy', 'boy', 'girl')
- * => "I am a girl" 
- */
+// 
+// >> ('I am a boy', 'boy', 'girl')
+// => "I am a girl" 
 sun.toolkit.replaceAll = function (oString, AFindText, ARepText) {
     var raRegExp = new RegExp(AFindText.replace(/([\(\)\[\]\{\}\^\$\+\-\*\?\.\"\'\|\/\\])/g, "\\$1"), "ig");
     return oString.replace(raRegExp, ARepText);
@@ -330,11 +326,11 @@ sun.toolkit.reload = function() {
     */
 };
 
-
+// sun.util.stringFormat(string, augments)
 // >> sun.toolkit.stringFormat('{2} {0} {1}, and best {0} for {1}', 'wish', 'you', 'I')
-// => "best wish for you"
+// => "I wish you, and best wish for you."
 sun.toolkit.stringFormat = function(txt) {
-    var reg = new RegExp(/\{(\d+?)\}/gmi);
+    var reg = new RegExp(/\{(\d+?)\}/i);
     var match = null;
     var idx = 0,
         val = null;
@@ -349,10 +345,9 @@ sun.toolkit.stringFormat = function(txt) {
     return txt;
 };
 
-/**
- * >> (12341234)
- * => "Thur Jan 1 1970 11:25"
- */
+// sun.toolkit.transforTime()
+// >> (12341234)
+// => "Thur Jan 1 1970 11:25"
 sun.toolkit.transforTime = function (time) {
     var date = parseInt(time);
     var weekdays = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
@@ -371,7 +366,6 @@ sun.toolkit.transforTime = function (time) {
     result += new Date(date).getMinutes();
     return result;
 };
-
 
 sun.toolkit.parseURL = function (url) {
     var a =  document.createElement('a');
@@ -401,13 +395,3 @@ sun.toolkit.parseURL = function (url) {
         segments: a.pathname.replace(/^\//,'').split('/')
     };
 };
-
-
-//数组删除任意位置
-// b = [1,2,3,4,5];
-// b.baoremove(5);
-// Array.prototype.baoremove = function(dx)
-// {
-//     if(isNaN(dx)||dx>this.length){return false;}
-//     this.splice(dx,1);
-// }

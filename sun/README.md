@@ -265,7 +265,7 @@ sun.util.array.removeAt([11,22,33,44], [3, 1]);
 => [22, 44]
 ```
 
-**stringFormat**  sun.util.stringFormat(string, augments)
+**stringFormat**
 
 ```
 sun.util.stringFormat('best {0} for {1}', 'wish', 'you');

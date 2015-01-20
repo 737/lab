@@ -66,10 +66,10 @@ sun.util.array.removeAt([11,22,33,44], [3, 1]);
 => [22, 44]
 ```
 
-**stringFormat**  sun.util.stringFormat(string, augments)
+**stringFormat**    sun.util.stringFormat(string, augments)
 
 ```
 sun.toolkit.stringFormat('{2} {0} {1}, and best {0} for {1}', 'wish', 'you', 'I'); 
-=> 'I wish you, and best {0} for you'
+=> "I wish you, and best wish for you."
 ```
 
