@@ -1,4 +1,4 @@
-// 独立不依赖任何其它类
+// 依赖 sun.validate.js
 // author:  arleigh.lee@qq.com
 // date:    2014/01/01
 
@@ -20,9 +20,9 @@ sun.toolkit.array = {
         function sortNumber(a, b)
         {
             if (!!isAsc) {
-                return a - b
+                return a - b;
             } else {
-                return b - a
+                return b - a;
             }
         }
 
@@ -37,12 +37,12 @@ sun.toolkit.array = {
     removeAt: function(arrayList, numIndex) {
         if ( numIndex < 0 || typeof numIndex === 'undefined') {
             return arrayList;
-        } else if (sun.toolkit.isArray(numIndex)) {
+        } else if (sun.validate.isArray(numIndex)) {
             var _index = 0;
 
             numIndex = this.sort(numIndex, false);
 
-            for(index in numIndex) {
+            for(var index in numIndex) {
                 _index = index - 1;
                 arrayList = this.removeAt(arrayList, numIndex[index]);
             }
@@ -85,19 +85,17 @@ sun.toolkit.deepClone = function (jsonObj) {
     }
 };
 
-/**
- * (destination, *sources) 
- * => ({a: 'a1', c: 1},{ b : 'b'}, { b: 'b1', c: 2})
- * => {a: "a1", c: 2, b: "b1"}
- */
+// sun.toolkit.extend(destination, *sources) 
+// => sun.toolkit.extend({a: 'a1', c: 1},{ b : 'b'}, { b: 'b1', c: 2})
+// => {a: "a1", c: 2, b: "b1"}
 sun.toolkit.extend = function(obj) {
     this.each(arguments, function(source, index) {
-        if ((index != 0)&&(!!source)) {
+        if ((index !== 0)&&(!!source)) {
             for(var prop in source) {
                 obj[prop] = source[prop];
             }
         }
-    })
+    });
 
     return obj;
 };
@@ -113,7 +111,7 @@ sun.toolkit.extend = function(obj) {
 sun.toolkit.each = function(obj, iterator) {
     if ( obj === null) return;
     if (typeof iterator === 'function') {
-        if (sun.toolkit.isArray(obj)) {
+        if (sun.validate.isArray(obj)) {
             for(var i = 0, max = obj.length; i < max; i++ ) {
                 iterator(obj[i], i);
             }
@@ -134,10 +132,12 @@ sun.toolkit.each = function(obj, iterator) {
  */
 sun.toolkit.formatIntNum = function (amtStr) {
     var isInt = function (num) {
-        return (num % 1 === 0)
+        return (num % 1 === 0);
     };
-    var amtStr = (isInt(amtStr)) ? amtStr : Number(amtStr).toFixed(0);
+    
+    amtStr = (isInt(amtStr)) ? amtStr : Number(amtStr).toFixed(0);
     amtStr = "" + amtStr;
+    
     var a, renum = '';
     var j = 0;
     var a1 = '', a2 = '', a3 = '';
@@ -179,13 +179,14 @@ sun.toolkit.formatFloat = function (amtStr, isCurrency) {
     var isInt = function (num) {
         return (num % 1 === 0);
     };
-    var amtStr = (isInt(amtStr)) ? amtStr : Number(amtStr).toFixed(2);
+    amtStr = (isInt(amtStr)) ? amtStr : Number(amtStr).toFixed(2);
     amtStr = "" + amtStr;
     var a, renum = '';
     var j = 0;
     var a1 = '', a2 = '', a3 = '';
     var tes = /^-/;
-    var isCurrency = (typeof (isCurrency) != 'undefined') ? isCurrency : true;
+    
+    isCurrency = (typeof (isCurrency) != 'undefined') ? isCurrency : true;
     var subfix = (isInt(amtStr) && isCurrency) ? '.00' : '';
     a = amtStr.replace(/,/g, "");
     a = a.replace(/[^-\.,0-9]/g, "");
@@ -335,7 +336,7 @@ sun.toolkit.stringFormat = function(txt) {
     var idx = 0,
         val = null;
     
-    while ((match = reg.exec(txt)) != null) {
+    while ((match = reg.exec(txt)) !== null) {
         idx = (match[1] | 0) + 1;
         val = (typeof arguments[idx] != 'undefined') ? arguments[idx] : '';
         

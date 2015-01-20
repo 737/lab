@@ -14,7 +14,7 @@ sun.md = (function(global){
         screenHeight : null,
         getScreenHeight : function() {
             var that = this;
-            if (null == that.screenHeight) {
+            if (that.screenHeight) {
                 that.screenHeight = (screen.width < screen.height) ? screen.height : screen.width;
             }
             return that.screenHeight;
@@ -28,7 +28,7 @@ sun.md = (function(global){
         },
         getPixelRatio : function() {
             var that = this;
-            if (null == that.pr) {
+            if (that.pr) {
                 that.pr = window.devicePixelRatio;
             }
             return that.pr;
@@ -66,14 +66,15 @@ sun.md = (function(global){
     _parseViewPortContent = function(initWidth, initHeight, isUserScale, initScale, minScale, maxScale, isIntelligence) {
         var w = !!initWidth ? initWidth : "100%",
             h = !!initHeight ? initHeight : BOMHeight(),
-            isUserScale = !!isUserScale ? 'yes' : 'no',
-            initScale = !!initScale ? initScale : 1.0,     //最大极限是 1.69
-            minScale = !!minScale ? minScale : 1.0,
-            maxScale = !!maxScale ? maxScale : 1.0,
             domeMeta = '',
             targetDensitydpi = 'device-dpi',      // [dpi_value(70 - 400) | device-dpi | high-dpi | medium-dpi | low-dpi]
             clientW = document.documentElement.clientWidth,
             screenW = window.screen.width;
+            
+        initScale = !!initScale ? initScale : 1.0;     //最大极限是 1.69
+        isUserScale = !!isUserScale ? 'yes' : 'no';
+        minScale = !!minScale ? minScale : 1.0;
+        maxScale = !!maxScale ? maxScale : 1.0;
 
         if (w === '100%') {
             w = "device-width";

@@ -35,7 +35,7 @@ var _loadingbar = function(){
                   break;
                 }
             }
-    };
+    }
 
     function _end(){
         switch (settings.direction) { 
@@ -60,13 +60,13 @@ var _loadingbar = function(){
                  });
                break;
           }
-    };
+    }
 
     self.start = function() {
         var _url = sun.loading.config.cssPath + 'sun_loadingbar.css';
 
         sun.load.css(_url, function() {
-            setTimeout(_start, 1000)
+            setTimeout(_start, 1000);
         });
     };
 
@@ -85,44 +85,44 @@ var _loadCircle = function(){
 
     function _start(){
         if ($("#sun_loadCircle").length > 0) {
-            var html = '<div id="sun_loadCircle">'
-                            + '<div class="spinner">'
-                              + '<div class="spinner-container container1">'
-                                + '<div class="circle1"></div>'
-                                + '<div class="circle2"></div>'
-                                + '<div class="circle3"></div>'
-                                + '<div class="circle4"></div>'
-                              + ' </div>'
-                              + '<div class="spinner-container container2">'
-                                + '<div class="circle1"></div>'
-                                + '<div class="circle2"></div>'
-                                + '<div class="circle3"></div>'
-                                + '<div class="circle4"></div>'
-                              + '</div>'
-                              + '<div class="spinner-container container3">'
-                                + '<div class="circle1"></div>'
-                                + '<div class="circle2"></div>'
-                                + '<div class="circle3"></div>'
-                                + '<div class="circle4"></div>'
-                              + ' </div>'
-                            + ' </div>'
-                        + ' </div>';
+            var html = '<div id="sun_loadCircle">' +
+                              '<div class="spinner">' +
+                                '<div class="spinner-container container1">' +
+                                  '<div class="circle1"></div>' +
+                                  '<div class="circle2"></div>' +
+                                  '<div class="circle3"></div>' +
+                                  '<div class="circle4"></div>' +
+                                ' </div>' +
+                                '<div class="spinner-container container2">' +
+                                  '<div class="circle1"></div>' +
+                                  '<div class="circle2"></div>' +
+                                  '<div class="circle3"></div>' +
+                                  '<div class="circle4"></div>' +
+                                '</div>' +
+                                '<div class="spinner-container container3">' +
+                                  '<div class="circle1"></div>' +
+                                  '<div class="circle2"></div>' +
+                                  '<div class="circle3"></div>' +
+                                  '<div class="circle4"></div>' +
+                                ' </div>' +
+                              ' </div>' +
+                          ' </div>';
 
             $("body").append(html);
         }
-    };
+    }
 
     function _end(){
         if ($("#sun_loadCircle").length === 0) {
             $("#sun_loadCircle").remove();
         }
-    };
+    }
 
     self.start = function() {
         var _url = sun.loading.config.cssPath + 'sun_loadcircle.css';
 
         sun.load.css(_url, function() {
-            setTimeout(_start, 1000)
+            setTimeout(_start, 1000);
         });
     };
 

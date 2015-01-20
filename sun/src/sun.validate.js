@@ -10,7 +10,7 @@ sun.validate = sun.validate || {
     // >> (3)
     // => false
     isEven: function(num) {
-        return num % 2 == 0 ? true : false;
+        return num % 2 === 0 ? true : false;
     },
     
     // >> ([])
@@ -186,7 +186,8 @@ sun.validate = sun.validate || {
     isIP: function(obj) { //是否为IP
       if (!obj || result.isNull(obj)) return false;
 
-      var re = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/g //匹配IP地址的正则表达式
+      var re = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/g; //匹配IP地址的正则表达式
+      
       if (re.test(obj)) {
         if (RegExp.$1 < 256 && RegExp.$2 < 256 && RegExp.$3 < 256 && RegExp.$4 < 256) return true;
       }
@@ -199,29 +200,29 @@ sun.validate = sun.validate || {
         return !!ie;
     },
     isIE6: function() {
-        return (navigator.appName == "Microsoft Internet Explorer")
+        return (navigator.appName == "Microsoft Internet Explorer");
     },
     isIE7: function() {
-        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/7./i) == "7.")
+        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/7./i) == "7.");
     },
     isIE8: function() {
-        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8.")
+        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8.");
     },
     isIE9: function() {
-        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/9./i) == "9.")
+        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/9./i) == "9.");
     },
     isFirefox: function() {
-        return navigator.userAgent.indexOf("Firefox") > -1
+        return navigator.userAgent.indexOf("Firefox") > -1;
     },
     isChrome: function() {
-        return navigator.userAgent.indexOf("Chrome") > -1
+        return navigator.userAgent.indexOf("Chrome") > -1;
     },
     
     isCharsLenWithinRange: function(value, max) {
       if (!result.isString(value)) return false;
 
       var reg = value.match(/\W/g);
-      var length = reg == null ? value.length : value.length + reg.length;
+      var length = reg === null ? value.length : value.length + reg.length;
       var isValidate = length >= 0 && length <= max;
 
       if (!isValidate) {
@@ -234,7 +235,8 @@ sun.validate = sun.validate || {
     },
     
     isLeftClick: function(evt) {
-        var evt = window.event || evt;
+        evt = window.event || evt;
+        
         var val = evt.button,
             result = true;
         
@@ -255,13 +257,16 @@ sun.validate = sun.validate || {
     // => 'suncms'
     value: function(NSString, root, repalce) {
         var nsPath = NSString.split("."),
-            ns = root || window || {},
-            root = ns;
+            ns = root || window || {};
+            
+            console.log(12341234);
+            
+        root = ns;
 
         for (var i = 0, len = nsPath.length; i < len; i++) {
             ns[nsPath[i]] = i + 1 === nsPath.length ? ns[nsPath[i]] : ns[nsPath[i]] || {};
             ns = ns[nsPath[i]];
-        };
+        }
 
         if (!ns && typeof repalce != 'undefined') {
             ns = repalce;

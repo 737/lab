@@ -8,7 +8,7 @@ sun.tag = {};
  */
 (function shortCut(_sun) {
     _sun.tojs = function(vmodel) {
-        return ko.mapping.toJS(vmodel)
+        return ko.mapping.toJS(vmodel);
     };
     _sun.log = function() {
         if (arguments.length > 1) {
@@ -31,7 +31,7 @@ sun.tag = {};
         document.body.appendChild(hr);
         document.body.appendChild(p);
     };
-})(sun)
+})(sun);
 
 /**
  * Providing you to load Javascript, css files then execute your code.
@@ -47,13 +47,13 @@ sun.load = function() {
             reg = /webkit/i;
 
         if (reg.test(navigator.userAgent)) { //webkit
-            if (node['sheet']) {
+            if (node.sheet) {
                 isLoaded = true;
             }
-        } else if (node['sheet']) { //FF
+        } else if (node.sheet) { //FF
             try 
             {
-                if (node['sheet'].cssRules) {
+                if (node.sheet.cssRules) {
                     isLoaded = true;
                 }
             } catch (ex) {
@@ -72,7 +72,8 @@ sun.load = function() {
                 _poll(node, callback);
             }, 1);
         }
-    };
+    }
+    
     function _styleOnload(node, callback) {
         if (node.attachEvent) {
             node.attachEvent('onload', callback);
@@ -81,7 +82,8 @@ sun.load = function() {
                 _poll(node, callback);
             }, 0);
         }
-    };
+    }
+    
     function _loadcss(url, callback){
         var node = document.createElement("link");
 
@@ -95,16 +97,19 @@ sun.load = function() {
             _registerUrl(url);
             callback();
         });
-    };
+    }
+    
     function _isUrlLoaded(url) {
         return __loadedUrls[url] === true;
-    };
+    }
+    
     function _unregisterUrl(url) {
         __loadedUrls[url] = false;
-    };
+    }
+    
     function _registerUrl(url) {
         __loadedUrls[url] = true;
-    };
+    }
 
     /**
      * >> sun.load.css(_url, function() {
@@ -169,7 +174,7 @@ sun.load = function() {
             if (!_isUrlLoaded(links[i].href)) {
                 _registerUrl(links[i].href);
             }
-        };
+        }
 
         return __loadedUrls;
     };
@@ -216,7 +221,7 @@ sun.ajax = function() {
         beforeSend: function(XMLHttpRequest) {
             /* loading */
             if ((!!sun.loading)&&(!!sun.loading.config.isWorking)) {
-                var _type = sun.loading.config['type'];
+                var _type = sun.loading.config.type;
 
                 sun.loading[_type].start();
             }
@@ -225,21 +230,21 @@ sun.ajax = function() {
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             if (XMLHttpRequest.status !== 200) return;
             // => [Object, "parsererror", SyntaxError]
-            var _txt = '---------------- sun.ajax error -------------------'
-                     + '\n\rstatus ---> ' + textStatus
-                     + '\n\rdetail ---> ' + errorThrown.message
-                     + '\n\r       ---> ' + errorThrown.stack
-                     + '\n\r---------------- /sun.ajax error -------------------';
+            var _txt = '---------------- sun.ajax error -------------------' +
+                    '\n\rstatus ---> ' + textStatus +
+                    '\n\rdetail ---> ' + errorThrown.message +
+                    '\n\r       ---> ' + errorThrown.stack +
+                    '\n\r---------------- /sun.ajax error -------------------';
 
             console.error(_txt);
         },
         complete: function(XMLHttpRequest, textStatus) {
             if (textStatus !== 'success') {
-                var _txt = '---------------- sun.ajax complete -------------------'
-                     + '\n\rstatus ---> ' + textStatus
-                     + '\n\rdetail ---> ' + XMLHttpRequest.status + '  (' + XMLHttpRequest.statusText + ')'
-                     + '\n\rXMLHttpRequest ---> ' + sun.ajax.lastXMLHttpRequest()
-                     + '\n\r---------------- /sun.ajax complete -------------------';
+                var _txt = '---------------- sun.ajax complete -------------------' +
+                    '\n\rstatus ---> ' + textStatus +
+                    '\n\rdetail ---> ' + XMLHttpRequest.status + '  (' + XMLHttpRequest.statusText + ')' +
+                    '\n\rXMLHttpRequest ---> ' + sun.ajax.lastXMLHttpRequest() +
+                    '\n\r---------------- /sun.ajax complete -------------------';
 
                 __XMLHttpRequest = XMLHttpRequest;
 
@@ -257,7 +262,7 @@ sun.ajax = function() {
             settings.url = settings.url + '?t=' + Math.random();
         }else {
             settings.url = settings.url + '&t=' + Math.random();
-        };
+        }
 
         $.ajax({
             type: settings.type,
@@ -279,7 +284,7 @@ sun.ajax = function() {
         }).always(function() {
             /* loading */
             if ((!!sun.loading)&&(!!sun.loading.config.isWorking)) {
-                var _type = sun.loading.config['type'];
+                var _type = sun.loading.config.type;
 
                 sun.loading[_type].end();
             }
@@ -297,7 +302,7 @@ sun.ajax = function() {
         if (typeName === 'object'){
             _setting = $.extend({}, defaults, sUrl);
 
-            if (!!sUrl['done'] && typeof sUrl.done === 'function') {
+            if (!!sUrl.done && typeof sUrl.done === 'function') {
                 _setting.done = sUrl.done;
             }
         } else {
@@ -337,7 +342,7 @@ sun.ajax = function() {
                 if ((typeof oData === 'function') && (!fnCallBack)) {
                     fnCallBack = oData;
                     oData = null;
-                };
+                }
 
                 _options = parseOptions('!object', sPageUrl, 'POST', mime.json, oData, fnCallBack, false, isAsync);
             }
@@ -365,7 +370,7 @@ sun.ajax = function() {
                 if ((typeof oData === 'function') && (!fnCallBack)) {
                     fnCallBack = oData;
                     oData = null;
-                };
+                }
 
                 _options = parseOptions('!object', sPageUrl, 'get', mime.json, oData, fnCallBack, false, isAsync);
             }
@@ -373,9 +378,9 @@ sun.ajax = function() {
             return base(_options);
         },
         lastXMLHttpRequest: function() {
-            return __XMLHttpRequest
+            return __XMLHttpRequest;
         }
-    }
+    };
 }();
 
 sun.$ = function(query) {
@@ -476,12 +481,14 @@ sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
         
         // 点击的是 结果窗口中的元素
         if (nodeResult && nodeResult.contains(evt.target || evt.srcElement)) {
-            'nothing';
+            
         } else {
-            (typeof fnblur == 'function') && fnblur();
+            if (typeof fnblur == 'function') {
+                 fnblur();
+            }
             self.event.remove('click', document, callBack);
         }
-    };
+    }
     
     self.event.add('click', document, callBack);
 };
@@ -511,14 +518,14 @@ sun.event = {
             node.detachEvent('on' + type, fun);
         } else {
             node['on' + type] = null;
-        };
+        }
     }
 };
 
 sun.context.getQueryStringByName = function(name) {
     var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
 
-    if (result == null || result.length < 1) {
+    if (result || result.length < 1) {
         return "";
     }
 
@@ -546,7 +553,7 @@ sun.context.cookie = (function(){
     self.get = function (name){
         var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
 
-        if(arr != null) {
+        if(arr) {
             return unescape(arr[2]);
         }
         return null;
@@ -561,7 +568,7 @@ sun.context.cookie = (function(){
         var cval= this.get(name);
 
         exp.setTime(exp.getTime() - 1);
-        if(cval!=null) {
+        if(cval) {
             document.cookie= name + "="+cval+";expires="+exp.toGMTString();
         }
     };
@@ -576,7 +583,7 @@ sun.context.localStorage = (function(global) {
     };
 
     self.set = function(name, value) {
-        this._ls.setItem(name,value.toString())
+        this._ls.setItem(name,value.toString());
     };
 
     self.get = function(name) {
@@ -595,7 +602,7 @@ sun.context.localStorage = (function(global) {
     };
 
     self.clearAll = function() {
-        global.localStorage.clear()
+        global.localStorage.clear();
     };
 
     return self;

@@ -468,7 +468,109 @@ vertical-align:1px;
 </style>
 </head>
 <body>
-<h2 id="sun-util">sun.util</h2>
+<h1 id="sun-js">Sun.js</h1>
+<p>Sun.js is a utility-belt library for JavaScript.And it will always constantly review and update.For Your Information.<img src="https://assets-cdn.github.com/images/icons/emoji/sunglasses.png" alt=":sunglasses:" title=":sunglasses:" class="emoji" align="absmiddle" height="20" width="20"></p>
+<p><strong>But, it beta now.</strong></p>
+<h3 id="about-namespace">About namespace</h3>
+<pre><code>sun
+├── ajax
+├── context
+│   ├── cookie
+│   └── localStorage
+├── md
+└── util
+</code></pre><h2 id="sun">sun</h2>
+<p><strong>$</strong> sun.$(domId)</p>
+<pre><code>sun.$(&#39;#btn_ok&#39;);
+=&gt;[&lt;button id=&#39;btn_ok&#39; /&gt;]
+</code></pre><h2 id="sun-ajax">sun.ajax</h2>
+<p><strong>post</strong>    sun.ajax.post(‘moo/lazyer’, oData, fnCallBack, [isAsync])</p>
+<pre><code>sun.ajax.post(sPageUrl, oData, fnCallBack, [isAsync]);
+</code></pre><p><strong>getJSON</strong> sun.ajax.getJSON(sPageUrl, oData, fnCallBack, [isAsync])</p>
+<pre><code>sun.ajax.getJSON(&#39;~/defined/product.json&#39;, oData, fnCallBack, [isAsync]);
+=&gt; { &quot;name&quot; : &quot;sun&quot; }
+</code></pre><h2 id="sun-context">sun.context</h2>
+<p><strong>getQueryStringByName</strong> sun.context.getQueryStringByName(name)</p>
+<p>It will return the value of checking url.If name is null, then null will be returned.</p>
+<pre><code> sun.context.getQueryStringByName(&quot;id&quot;);
+ =&gt; 10035
+</code></pre><h2 id="sun-context-cookie">sun.context.cookie</h2>
+<p><strong>set</strong> sun.context.cookie.set(name, value)</p>
+<pre><code>sun.context.cookie.set(&#39;passId&#39;, 350350);
+</code></pre><p><strong>setExpires</strong>  sun.context.cookie.setExpires(name,value,expiresValue)</p>
+<p>The arguments expiresValue type is int.</p>
+<pre><code>sun.context.cookie.setExpires(&quot;passId&quot;, 350350, 15);
+</code></pre><p><strong>get</strong> sun.context.cookie.get(name, value)</p>
+<pre><code>sun.context.cookie.get(&#39;passId&#39;);
+=&gt; 350350
+</code></pre><p><strong>del</strong> sun.context.cookie.del(name, value)</p>
+<pre><code>sun.context.cookie.del(&#39;passId&#39;);
+</code></pre><h2 id="sun-context-localstorage">sun.context.localStorage</h2>
+<p><strong>set</strong> sun.context.localStorage.set(name, value)</p>
+<pre><code>sun.context.localStorage.set(&#39;passId&#39;, 350350);
+</code></pre><p><strong>get</strong> sun.context.localStorage.get(name, value)</p>
+<pre><code>sun.context.localStorage.get(&#39;passId&#39;);
+=&gt; 350350
+</code></pre><p><strong>del</strong> sun.context.localStorage.del(name, value)</p>
+<pre><code>sun.context.localStorage.del(&#39;passId&#39;);
+</code></pre><p><strong>clearAll</strong> sun.context.localStorage.clearAll()</p>
+<pre><code>sun.context.localStorage.clearAll();
+</code></pre><h2 id="sun-md">sun.md</h2>
+<p><strong>userAgent</strong> sun.md.userAgent</p>
+<pre><code>sun.md.userAgent
+=&gt; Mozilla/5.0 (iPod; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523 MicroMessenger/5.0
+</code></pre><p><strong>screen</strong> sun.md.screen</p>
+<pre><code>sun.md.userAgent
+=&gt; 
+网页可见区域宽：980
+网页可见区域高：305
+网页可见区域宽：980 (包括边线和滚动条的宽)
+网页可见区域高：305 (包括边线的宽)
+网页正文全文宽：980
+网页正文全文高：1415
+网页被卷去的高(ff)：0
+网页被卷去的高(ie)：0
+网页被卷去的左：0
+网页正文部分上：0
+网页正文部分左：0
+屏幕分辨率的高：568
+屏幕分辨率的宽：320
+屏幕可用工作区高度：548
+屏幕可用工作区宽度：320
+你的屏幕设置是 32 位彩色
+物理像素/独立像素比: 2 像素/英寸
+你的屏幕设置 undefined 像素/英寸
+</code></pre><p><strong>setViewPortContent</strong> sun.md.setViewPortContent(object)</p>
+<pre><code>sun.md.setViewPortContent({
+    initWidth: 300, 
+    initHeight: 600,
+    isUserScale: false,
+    initScale: 1.0,
+    minScale: 0.1,
+    maxScale: 10,
+    isIntelligence: false
+});
+
+or
+
+sun.md.setViewPortContent({ initWidth : &#39;100%&#39; });
+
+or
+
+sun.md.setViewPortContent({ initWidth : 540 });
+</code></pre><p><strong>isAndroid</strong> sun.md.isAndroid()</p>
+<pre><code>sun.md.isAndroid()
+=&gt;true/false
+</code></pre><p><strong>isWindows</strong> sun.md.isWindows()</p>
+<pre><code>sun.md.isWindows()
+=&gt;true/false
+</code></pre><p><strong>isWinPhone</strong> sun.md.isWinPhone()</p>
+<pre><code>sun.md.isWinPhone()
+=&gt;true/false
+</code></pre><p><strong>isIOS</strong> sun.md.isIOS()</p>
+<pre><code>sun.md.isIOS();
+=&gt;true/false
+</code></pre><h2 id="sun-util">sun.util</h2>
 <p><strong>formatIntNum</strong> sun.util.formatIntNum(int)</p>
 <pre><code>sun.util.formatIntNum(12000);
 =&gt; &#39;1,2000&#39;
@@ -504,10 +606,6 @@ sun.util.array.removeAt([11,22,33,44], [3, 1]);
 <pre><code>sun.toolkit.stringFormat(&#39;{2} {0} {1}, and best {0} for {1}&#39;, &#39;wish&#39;, &#39;you&#39;, &#39;I&#39;); 
 =&gt; &quot;I wish you, and best wish for you.&quot;
 </code></pre>
-
-<script type='text/javascript' src='/sun/src/sun.validate.js'></script>
-<script type='text/javascript' src='/sun/src/sun.toolkit.js'></script>
-
 </body>
 </html>
 <!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

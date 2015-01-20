@@ -11,12 +11,16 @@
                     'dest/<%= pkg.file%>.min.js': ['src/*.js']
                 }
             }
+        },
+        jshint: {
+            all: ['src/*.js']
         }
     });
     
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     
-    grunt.registerTask('default', ['uglify']);
+    grunt.registerTask('default', ['jshint:all', 'uglify']);
 }
 
 

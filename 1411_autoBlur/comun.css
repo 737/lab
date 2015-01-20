@@ -17,11 +17,11 @@
 	BACKGROUND: #666666; COLOR: #fff
 }
 #settings {
-	Z-INDEX: 8000; POSITION: fixed; TEXT-INDENT: -99999px; WIDTH: 43px; DISPLAY: block; BACKGROUND: url(../images/opciones.gif) no-repeat 0px 0px; HEIGHT: 43px; TOP: 0px; CURSOR: pointer; RIGHT: 0px
+	Z-INDEX: 8000; POSITION: fixed; TEXT-INDENT: -99999px; WIDTH: 43px; DISPLAY: block; BACKGROUND: url(opciones.gif) no-repeat 0px 0px; HEIGHT: 43px; TOP: 0px; CURSOR: pointer; RIGHT: 0px
 }
 #settings:hover {
-	BACKGROUND: url(../images/opciones.gif) no-repeat 0px -86px
+	BACKGROUND: url(opciones.gif) no-repeat 0px -86px
 }
 .cerrar {
-	BACKGROUND: url(../images/opciones.gif) no-repeat 0px -43px!important;
+	BACKGROUND: url(opciones.gif) no-repeat 0px -43px!important;
 }

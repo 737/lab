@@ -1,7 +1,8 @@
 ﻿
 (function (sun) {
-    var sun = sun || {};
+    sun = sun || {};
 
+    sun.tag = {};
     sun.tag.dialog_isBinded = false;
     /*
         opt => {
@@ -27,37 +28,37 @@
         fnHtml = function() {
             opt = sun.util.extend(_defaultOPT, opt);
 
-            var html = '<header>'
-                      +         '<dl>'
-                      +             '<dd>'
-                      +                 '<label></label>'
-                      +             '</dd>'
-                      +             '<dd>'
-                      +             '</dd>'
-                      +         '</dl>'
-                      +     '</header>'
-                      +     '<article class="dialogContent">'
-                      +         '<div class="header">'
-                      +             '<h6>' + opt.title + '</h6>'
-                      +         '</div>'
-                      +         '<table>'
-                      +             '<tbody>'
-                      +                 '<tr>'
-                      +                     '{0}'
-                      +                     '<td >'
-                      +                         '<label>' + opt.text + '</label>'
-                      +                     '</td>'
-                      +                 '</tr>'
-                      +             '</tbody>'
-                      +         '</table>'
-                      +     '</article>'
-                      +     '<footer>'
-                      +         '<div class="box">'
-                      +             '<div>'
-                      +                 '{1}'
-                      +             '</div>'
-                      +          '</div>'
-                      +      '</footer>';
+            var html = '<header>' +
+                                '<dl>' +
+                                    '<dd>' +
+                                        '<label></label>' +
+                                    '</dd>' +
+                                    '<dd>' +
+                                    '</dd>' +
+                                '</dl>' +
+                            '</header>' +
+                            '<article class="dialogContent">' +
+                                '<div class="header">' +
+                                    '<h6>' + opt.title + '</h6>' +
+                                '</div>' +
+                                '<table>' +
+                                    '<tbody>' +
+                                        '<tr>' +
+                                            '{0}' +
+                                            '<td >' +
+                                                '<label>' + opt.text + '</label>' +
+                                            '</td>' +
+                                        '</tr>' +
+                                    '</tbody>' +
+                                '</table>' +
+                            '</article>' +
+                            '<footer>' +
+                                '<div class="box">' +
+                                    '<div>' +
+                                        '{1}' +
+                                    '</div>' +
+                                 '</div>' +
+                             '</footer>';
 
             if (opt.image.length > 0) {
                 opt.cssPath = opt.cssPath;
@@ -110,7 +111,7 @@
                 });
                 sun.tag.dialog_isBinded = true;
             }
-        }
+        };
 
         _main();
     };

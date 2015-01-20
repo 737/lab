@@ -3,11 +3,11 @@ require.config({
     urlArgs: "v=" + (new Date()).getTime(),
     baseUrl: 'js/',
     paths: {
-        'jQuery': '/include/js/jquery',
-        'underscore': '/include/js/underscore',
-        'text': '/include/js/require.text',
-        'domReady': '/include/js/require.domReady',
-        'sun': '/sun/sun'
+        'jQuery': '/lib/jquery.v1.11.0',
+        'underscore': '/lib/underscore.v1.4.4',
+        'text': '/lib/require.text',
+        'domReady': '/lib/require.domReady',
+        'sun': '/sun/src/'
     }
 });
 
