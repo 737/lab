@@ -338,7 +338,7 @@ sun.toolkit.stringFormat = function(txt) {
     
     while ((match = reg.exec(txt)) !== null) {
         idx = (match[1] | 0) + 1;
-        val = (typeof arguments[idx] != 'undefined') ? arguments[idx] : '';
+        val = (typeof arguments[idx] !== 'undefined') ? arguments[idx] : '';
         
         txt = txt.replace(match[0], val);
     }
