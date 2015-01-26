@@ -121,7 +121,11 @@ sun.md = (function(global){
         return domeMeta.trim();
     };
 
-    _getScreen =  function(){
+    self = {};
+
+    self.userAgent = _userAgent;
+
+    self.screen = function(){
         // dips: 设备独立像素(device-independent pixels)
         // dp = dip: Density-independent Pixels
         // detail information to  http://www.cnblogs.com/tearer/archive/2010/09/06/1819471.html
@@ -138,6 +142,7 @@ sun.md = (function(global){
             s += '<li data-object="document.body.scrollTop"     >网页被卷去的高(ff)：' + document.body.scrollTop + '</li>';
             s += '<li data-object="document.documentElement.scrollTop"  >网页被卷去的高(ie)：' + document.documentElement.scrollTop + '</li>';
             s += '<li data-object="document.body.scrollLeft"            >网页被卷去的左：' +     document.body.scrollLeft + '</li>';
+            s += '<li                                                   ><strong>屏幕的:</strong></li>';
             s += '<li data-object="window.screenTop"            >网页正文部分上：' +     window.screenTop + '</li>';
             s += '<li data-object="window.screenLeft"           >网页正文部分左：' +     window.screenLeft + '</li>';
             s += '<li data-object="window.screen.height"        >屏幕分辨率的高：' +     window.screen.height + '</li>';
@@ -149,13 +154,7 @@ sun.md = (function(global){
             s += '<li data-object="window.screen.deviceXDPI"    >你的屏幕设置 ' +        window.screen.deviceXDPI + ' 像素/英寸' + '</li>';
         
         return ('<ul>' + s + '</ul>');
-    };
-
-    self = {};
-
-    self.userAgent = _userAgent;
-
-    self.screen = _getScreen();
+    }();
 
     self.getViewPortContent = function() {
         var domeMeta = document.getElementsByName('viewport')[0];

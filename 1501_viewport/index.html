@@ -12,7 +12,7 @@
             #nav { background-color:#78D035; width: 100%; height:100px; }
             #plotting { background-color:#333; width: 50px; height:100px; }
         </style>
-        <script type="text/javascript" src='/include/LAB.src.js'></script>
+        <script type="text/javascript" src='/lib/LAB.src.js'></script>
     </head>
 
 <body>
@@ -107,9 +107,10 @@
             $('body').on('mouseover', '#J_screen ul li', function(evt) {
                 var elmLi = $(this);
                 var elmSpan = elmLi.find('span');
+                var content = elmLi.attr('data-object');
                 
-                if (!elmSpan.length) {
-                    elmLi.append('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + elmLi.attr('data-object') + '</span>');
+                if (!elmSpan.length && content) {
+                    elmLi.append('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + content + '</span>');
                 }
             });
             $('body').on('mouseleave', '#J_screen ul li', function(evt) {
@@ -127,11 +128,11 @@
         //fnDomScorllConcept();
 
         $LAB
-        .script('/include/jquery.min.js')
-        .script('/include/underscore.js')
+        .script('/lib/jquery.v1.11.0.js')
+        .script('/lib/underscore.v1.4.4.js')
         .script('/sun/src/sun.js')
         .script('/sun/src/sun.md.js')
-        .script('/sun/src/sun.util.js')
+        .script('/sun/src/sun.toolkit.js')
 		.script('/sun/src/sun.validate.js').wait(function() {
             sun.md.setViewPortContent({initWidth : '100%'});
         }).wait(function() {
