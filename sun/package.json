@@ -1,10 +1,33 @@
 {
     "name" : "sunjs",
-    "file" : "sun",
     "version" : "0.1.0",
+    "description" : "一个小型的Javascript常用静态方法库。",
+    "main" : "entry",
+    "directories" : {
+        "example" : "examples",
+        "test" : "test"
+    },
+    "dependencies" : {
+        "grunt" : "~0.4.5",
+        "grunt-contrib-jshint" : "~0.10.0",
+        "grunt-contrib-uglify" : "~0.2.7"
+    },
     "devDependencies" : {
-        "grunt" : "~0.4.1",
-        "grunt-contrib-uglify" : "~0.2.0",
-        "grunt-contrib-jshint" : "^0.10.0"
-    }
+        "grunt-conventional-changelog" : "^1.1.0",
+        "grunt-markdown" : "^0.7.0",
+        "grunt-contrib-yuidoc" : "^0.7.0"
+    },
+    "scripts" : {
+        "test" : "test"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/737/sun.js.git"
+    },
+    "author" : "Arleigh Lee",
+    "license" : "MIT",
+    "bugs" : {
+        "url" : "https://github.com/737/sun.js/issues"
+    },
+    "homepage" : "https://github.com/737/sun.js"
 }
