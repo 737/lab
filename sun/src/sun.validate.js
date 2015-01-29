@@ -4,6 +4,7 @@
 var sun = sun || {};
 
 sun.validate = sun.validate || {
+
     // >> ([])
     // => true
     // >> ({})
@@ -44,6 +45,23 @@ sun.validate = sun.validate || {
       return true;
     },
 
+    // 判断当前是什么浏览器
+    browserInfo: {
+        userAgent: navigator.userAgent.toLowerCase(),
+        isAndroid: Boolean(navigator.userAgent.match(/android/ig)),
+        isIphone: Boolean(navigator.userAgent.match(/iphone|ipod/ig)),
+        isIpad: Boolean(navigator.userAgent.match(/ipad/ig)),
+        isWeixin: Boolean(navigator.userAgent.match(/MicroMessenger/ig)),
+        
+        isIE: Boolean(0/*@cc_on+1@*/),
+        isIE6: Boolean(navigator.appName == "Microsoft Internet Explorer"),
+        isIE7: Boolean(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/7./i) == "7."),
+        isIE8: Boolean(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8."),
+        isIE9: Boolean(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/9./i) == "9."),
+        isFirefox: Boolean(navigator.userAgent.indexOf("Firefox") > -1),
+        isChrome: Boolean(navigator.userAgent.indexOf("Chrome") > -1),
+    },
+    
     isChinese: function(text) {
       var reg = /^[\u4e00-\u9fff]{0,}$/;
       return reg.test(text);
@@ -176,29 +194,6 @@ sun.validate = sun.validate || {
       }
 
       return false;
-    },
-    
-    isIE: function() {
-        var ie = 0/*@cc_on+1@*/;
-        return !!ie;
-    },
-    isIE6: function() {
-        return (navigator.appName == "Microsoft Internet Explorer");
-    },
-    isIE7: function() {
-        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/7./i) == "7.");
-    },
-    isIE8: function() {
-        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8.");
-    },
-    isIE9: function() {
-        return (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/9./i) == "9.");
-    },
-    isFirefox: function() {
-        return navigator.userAgent.indexOf("Firefox") > -1;
-    },
-    isChrome: function() {
-        return navigator.userAgent.indexOf("Chrome") > -1;
     },
     
     isIDCardNo: function(text) {

@@ -519,6 +519,15 @@ sun.event = {
         } else {
             node['on' + type] = null;
         }
+    },
+    
+    //阻止事件冒泡函数
+    stopBubble: function (e) {
+        if (e && e.stopPropagation) {
+            e.stopPropagation();
+        } else {
+            window.event.cancelBubble = true;
+        }
     }
 };
 

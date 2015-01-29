@@ -265,6 +265,72 @@ sun.toolkit = {
         return this.formatTime(sStyle, null);
     },
 
+    // 获取当前点击事件的Object对象
+    getEvent: function() {
+        if (document.all) {
+            return window.event; //如果是ie
+        }
+        func = getEvent.caller;
+        while (func != null) {
+            var arg0 = func.arguments[0];
+            if (arg0) {
+                if ((arg0.constructor == Event || arg0.constructor == MouseEvent)
+        || (typeof (arg0) == "object" && arg0.preventDefault && arg0.stopPropagation)) {
+                    return arg0;
+                }
+            }
+            func = func.caller;
+        }
+        return null;
+    },
+    
+    // 获得当前浏览器JS的版本
+    getJavascriptVersion: function getjsversion(){
+        var n = navigator;
+        var u = n.userAgent;
+        var apn = n.appName;
+        var v = n.appVersion;
+        var ie = v.indexOf('MSIE ');
+        if (ie > 0){
+           apv = parseInt(i = v.substring(ie + 5));
+           if (apv > 3) {
+               apv = parseFloat(i);
+           }
+        } else {
+           apv = parseFloat(v);
+        }
+        var isie = (apn == 'Microsoft Internet Explorer');
+        var ismac = (u.indexOf('Mac') >= 0);
+        var javascriptVersion = "1.0";
+        if (String && String.prototype) {
+           javascriptVersion = '1.1';
+           if (javascriptVersion.match) {
+               javascriptVersion = '1.2';
+               var tm = new Date;
+               if (tm.setUTCDate) {
+                   javascriptVersion = '1.3';
+                   if (isie && ismac && apv >= 5) javascriptVersion = '1.4';
+                   var pn = 0;
+                   if (pn.toPrecision) {
+                       javascriptVersion = '1.5';
+                       a = new Array;
+                       if (a.forEach) {
+                           javascriptVersion = '1.6';
+                           i = 0;
+                           o = new Object;
+                           tcf = new Function('o', 'var e,i=0;try{i=new Iterator(o)}catch(e){}return i');
+                           i = tcf(o);
+                           if (i && i.next) {
+                               javascriptVersion = '1.7';
+                           }
+                       }
+                   }
+               }
+           }
+        }
+        return javascriptVersion;
+    },
+    
     /**
      * 
      * >> ('&lt;span&gt;I am Hero!&lt;/span&gt;')
