@@ -1,21 +1,26 @@
-
-
-$(function() {
-    var sun = {
-        isLeftClick: function(evt) {
-            var evt = window.event || evt;
-            var val = evt.button,
-                result = true;
-            
-            // 用户点击的是右建
-            if(val == 2 || val ==3) {
-                result = false;
-            }
-            
-            return result;
+require.config({
+    waitSeconds: 20,
+    baseUrl: '',
+    paths: {
+        'underscore': '/lib/underscore.v1.4.4',
+        'jquery': '/lib/jQuery.v1.11.0-beta3',
+        'sun': '/sun/src/sun'
+    },
+    shim: {
+        'jquery': {
+            exports: '$'
+        },
+        'underscore': {
+            exports: '_'
+        },
+        'sun': {
+            exports: 'sun'
         }
-    };
+    }
+});
+
+require(['underscore', 'jquery', 'sun'], function() {
     
-    
+    console.log('start');
     
 });

@@ -1,10 +1,8 @@
 // 独立不依赖任何其它类
 // author: arleigh.lee@qq.com
-
 var sun = sun || {};
 
-sun.validate = sun.validate || {
-
+sun.validate = {
     // >> ([])
     // => true
     // >> ({})
@@ -317,4 +315,8 @@ sun.validate = sun.validate || {
     }
 };
 
-
+if (typeof require === 'function') {
+    define(function() {
+        return sun.validate;
+    });
+}

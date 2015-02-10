@@ -1,0 +1,383 @@
+﻿<style type="text/css">
+/*S 低价趋势*/
+
+#chart-container {
+    position: relative;
+    /*padding-top: 50px;*/
+    
+    background-color: #67b7df;
+    background-image: -moz-linear-gradient(top, #67b7df, #f7fafc);
+    background-image: -o-linear-gradient(top, #67b7df, #f7fafc);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#67b7df), to(#f7fafc));
+    background-image: -webkit-linear-gradient(top, #67b7df, #f7fafc);
+    background-image: linear-gradient(to bottom, #67b7df, #f7fafc);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+#chart-container canvas {
+    position: relative;
+    z-index: 1;
+}
+.flt-djqs-bgline {
+    position: absolute;
+    top: 130px;
+    left: 5px;
+    width: 100%;
+    height: 1px;
+    background: rgba(235, 245, 249, .2);
+    box-shadow: 0 27px rgba(235, 245, 249, .2), 0 54px rgba(235, 245, 249, .2), 0 81px rgba(235, 245, 249, .2), 0 108px rgba(235, 245, 249, .2), 0 135px rgba(235, 245, 249, .2), 0 162px rgba(235, 245, 249, .2), 0 189px rgba(235, 245, 249, .2), 0 216px rgba(235, 245, 249, .2);
+}
+#chart-container #cursor {
+    position: absolute;
+    z-index: 2;
+    width: 150px;
+    height: 37px;
+    left: 0px;
+    top: 75px;
+    background-color: white;
+    border-radius: 16px
+}
+#pointValue {
+    position: absolute;
+    width: 150px;
+    height: 37px;
+    line-height: 37px;
+    top: 0;
+    left: 10px;
+    color: #4e5f71;
+    font-size: 18px;
+}
+#pointValue:after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    right: 22px;
+    top: 13px;
+    border-top: 2px solid #c1c1c1;
+    border-right: 2px solid #c1c1c1;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+#pointValue .flt-djqs-price {
+    position: absolute;
+    right: 35px;
+    top: 0;
+    font-size: 14px;
+}
+#pointValue .flt-djqs-price dfn {
+    font-size: 12px;
+    color: #ff7d13;
+}
+#pointValue .flt-djqs-price span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff7d13;
+}
+.move-transition {
+    -webkit-transition: .1s ease;
+}
+.flight-djqs-drag-target {
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    top: 108px;
+    width: 20px;
+    height: 180px;
+}
+#chart-container #cursor-line {
+    height: 180px;
+    width: 20px;
+    position: absolute;
+    z-index: 2;
+    left: 0px;
+    top: 2px;
+}
+#chart-container #cursor-line:before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: -5px;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+#cursor-line > div {
+    height: 180px;
+    width: 2px;
+    background: #fff;
+    margin: 0px auto 0px;
+}
+.circle {
+    -webkit-transform: rotate(45deg);
+    border: 2px solid white;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    background: rgba(252, 190, 0, 1);
+    position: absolute;
+    z-index: 2;
+    left: 0px;
+    box-sizing: border-box;
+    box-shadow: 2px 2px #5ac7ff;
+}
+.flight-djqs-date-tabs-container {
+    padding: 10px 25px;
+    background: #099fde;
+    margin-bottom: 60px;
+}
+.flight-djqs-date-tabs-container-ios {
+    background: #03a7dd;
+}
+.flight-djqs-date-tabs {
+    width: 100%;
+    padding-top:1px;
+    overflow: hidden;
+}
+.flight-djqs-date-tabs > li {
+    width: 25%;
+    float: left;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    color: white;
+    position: relative;
+}
+.flight-djqs-date-tabs > li:before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    left: -50%;
+    top: -50%;
+    margin-left: -1px;
+    border: 1px solid #fff;
+    border-right: none;
+    box-sizing: border-box;
+    -moz-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+}
+.flight-djqs-date-tabs > li:first-of-type {
+    border-radius: 5px 0 0 5px;
+}
+.flight-djqs-date-tabs > li:last-of-type {
+    border-radius: 0 5px 5px 0;
+}
+.flight-djqs-date-tabs > li:first-of-type:before {
+    border-radius: 10px 0 0 10px;
+    margin-left: 0;
+}
+.flight-djqs-date-tabs > li:last-of-type:before {
+    border-right: 1px solid #fff;
+    border-radius: 0 10px 10px 0;
+}
+.flight-djqs-date-tabs .current {
+    background: white;
+    color: #099fde;
+    font-weight: bold;
+}
+.flight-djqs-trobbing-box {
+    margin-top: -10px;
+    z-index: 5;
+    position: absolute;
+    width: 100%;
+}
+.flight-djqs-trobbing-title {
+    line-height: 44px;
+    height: 28px;
+    background: white;
+    padding-left: 15px;
+    font-size: 15px;
+    color: black;
+    box-sizing: border-box;
+    color: #4e5f71;
+    font-weight: bold;
+}
+.flight-djqs-trobbing-pirces {
+    background: white;
+}
+.flight-djqs-trobbing-pirces > li {
+    line-height: 44px;
+    height: 44px;
+    border-bottom: 1px solid #efefef;
+    padding: 0 28px 0 15px;
+    color: #4e5f71;
+    position: relative;
+    overflow: hidden;
+}
+.flight-djqs-trobbing-pirces > li:after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    right: 15px;
+    top: 17px;
+    border-top: 2px solid #c1c1c1;
+    border-right: 2px solid #c1c1c1;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.flight-djqs-trobbing-pirces > li .flt-djqs-price {
+    float: right;
+    font-size: 14px;
+    color: #4e5f71;
+}
+.flight-djqs-trobbing-pirces > li .flt-djqs-price dfn {
+    color: #ff7d13;
+    font-weight: bold;
+    font-size: 14px;
+}
+.flight-djqs-trobbing-pirces > li .flt-djqs-price .flt-djqs-pricenum {
+    font-size: 18px;
+    color: #ff7d13;
+    font-weight: bold;
+}
+.flight-djqs-fullscreen-btn {
+    position: absolute;
+    z-index: 9;
+    width: 80px;
+    height: 32px;
+    line-height: 16px;
+    left: 50%;
+    bottom: 7px;
+    margin-left: -40px;
+    text-align: center;
+    color: #099fde;
+}
+.flight-djqs-fullscreen-btn i {
+    display: inline-block;
+    width: 21px;
+    height: 12px;
+    background: url(http://pic.c-ctrip.com/h5/flight/flight-icon2.png?v3) no-repeat -55px -40px;
+    background-size: 100px;
+    margin-left: 3px;
+    vertical-align: -1px;
+}
+.flt-djqs-fullscreen-close {
+    position: absolute;
+    z-index: 3;
+    right: 0px;
+    top: 18px;
+    width: 30px;
+    height: 30px;
+}
+.flt-djqs-fullscreen-close:before,
+.flt-djqs-fullscreen-close:after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 7px;
+    width: 19px;
+    height: 2px;
+    background: #fff;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.flt-djqs-fullscreen-close:after {
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.flight-djqs-fullscreen {
+    -webkit-transform: rotate(90deg);
+}
+.flight-djqs-fullscreen .flight-djqs-date-tabs-container {
+    background: none;
+    width: 60%;
+    padding: 10px 15px 10px;
+}
+/*E 低价趋势*/
+</style>
+<div id="chart-container">
+    <div class="flt-djqs-bgline"></div>
+    <div class="flight-djqs-date-tabs-container flight-djqs-date-tabs-container-ios">
+        <ul class="j_dateTabs flight-djqs-date-tabs">
+            <li class="current" data-index='0'>两周</li>
+            <li data-index='1'>1个月</li>
+            <li data-index='2'>2个月 </li>
+            <li data-index='3'>3个月</li>
+        </ul>
+    </div>
+    <canvas id="chartCanvas" width="320" height="200"></canvas>
+    <div id="cursor" data-role="transition" style="display: none">
+        <div id="pointValue">
+            <span class="j_date"></span>
+            <span class="flt-djqs-price"><dfn>&yen;</dfn><span class="j_price"></span><em>起</em>
+            </span>
+        </div>
+    </div>
+
+    <!--div id="cursor-line" data-role="transition" style="display: none">
+        <div></div>
+    </div>
+    <div id="circle" class="circle" data-role="transition" style="display: none"></div-->
+
+    <div id="j_dragTargetTendency" data-role="transition" class="flight-djqs-drag-target">
+        <div id="cursor-line" data-role="transition" style="display: none">
+            <div></div>
+        </div>
+        <div id="circle" class="circle" data-role="transition" style="display: none"></div>
+    </div>
+
+    <div id="rotateBtn" class="flight-djqs-fullscreen-btn">全屏显示<i></i>
+    </div>
+    <div id="closeFullScreenBtn" class="flt-djqs-fullscreen-close" style="display: none;"></div>
+</div>
+
+<div id="j_trobbingPirceList_box" class="flight-djqs-trobbing-box"></div>
+
+<div id="j_noDataTendency_box"></div>
+
+<script type="text/template" id="j_trobbingPirceList_tpl">
+    <%if (prices && prices.length) {%>
+        <div class="flight-djqs-trobbing-title">心动低价</div>
+        <ul class="j_trobbingPriceList flight-djqs-trobbing-pirces">
+            <%for (var i=0 , count=0 ; i < prices.length; i++) {%>
+                <%if (count===3 ) break;%>
+                    <%if (prices[i].price && +prices[i].price !=0 ) { count++;%>
+                        <li data-date="<%=prices[i].dDate%>">
+                            <span class="flt-djqs-price"><dfn>&yen;</dfn><span class="flt-djqs-pricenum"><%=prices[i].price%></span><em>起</em><span class="flt-djqs-discount">(<%=prices[i].discount%>折)</span></span>
+                            <%=prices[i].dDate.substr(5,5)%>
+                                <%=prices[i].airname || ''%>
+                                    <%=prices[i].flightNo || ''%>
+                        </li>
+                        <%}%>
+                            <%}%>
+        </ul>
+        <%}%>
+</script>
+
+<script type="text/template" id="j_emptyTendency_tpl">
+    <div class="flight-listerr-reload" style="margin-top:30px;">
+        <i class="icon-search"><em></em></i>
+        <p class="errtips">价格低得羞于见人，请再召唤一次</p>
+        <button style="margin-top:20px;" class="flight-btn-org2 j_backToSearch">重试</button>
+    </div>
+</script>
+
+<script type="text/template" id="j_networkListTendency_tpl">
+    <div class="flight-listerr-reload" style="margin-top:50px;">
+        <i class="icon-wifi"><em></em></i>
+        <p class="errtips">网络开小差，请刷新试试</p>
+        <button style="margin-top:20px;" class="flight-btn-org2 j_refreshBtn">刷新</button>
+    </div>
+</script>

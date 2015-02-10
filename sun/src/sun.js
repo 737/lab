@@ -1,37 +1,7 @@
-﻿var sun = sun || {};
+﻿
+var sun = sun || {};
 
 sun.tag = {};
-
-/**
- * it is for alex to shortcut method
- * delete before online
- */
-(function shortCut(_sun) {
-    _sun.tojs = function(vmodel) {
-        return ko.mapping.toJS(vmodel);
-    };
-    _sun.log = function() {
-        if (arguments.length > 1) {
-            console.log(arguments);
-        } else {
-            console.log(arguments[0]);
-        }
-        
-        if (arguments.callee.caller) {
-            console.log('vvvvvvvvvvvvvvvvvvvvvvvvvv caller start vvvvvvvvvvvvvvvvvvvvvvvvvv');
-            console.log(arguments.callee.caller.toString());
-            console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^ caller end ^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-        }
-    };
-    _sun.write = function(txt){
-        var p = document.createElement('p');
-        var hr = document.createElement('hr');
-
-        p.innerHTML = txt;
-        document.body.appendChild(hr);
-        document.body.appendChild(p);
-    };
-})(sun);
 
 /**
  * Providing you to load Javascript, css files then execute your code.
@@ -387,7 +357,6 @@ sun.$ = function(query) {
     return document.querySelectorAll(query);
 };
 
-
 sun.key = (function() {
     var self = {},
         keys = {
@@ -459,7 +428,6 @@ sun.key = (function() {
 
     return self;
 })();
-
 
 // 自动关闭窗口
 sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
@@ -646,3 +614,64 @@ sun.guid = function (len, radix) {
 
     return uuid.join('');
 };
+
+/**
+ * it is for alex to shortcut method
+ * delete before online
+ */
+(function shortCut(_sun) {
+    _sun.tojs = function(vmodel) {
+        return ko.mapping.toJS(vmodel);
+    };
+    _sun.log = function() {
+        if (arguments.length > 1) {
+            console.log(arguments);
+        } else {
+            console.log(arguments[0]);
+        }
+        
+        if (arguments.callee.caller) {
+            console.log('vvvvvvvvvvvvvvvvvvvvvvvvvv caller start vvvvvvvvvvvvvvvvvvvvvvvvvv');
+            console.log(arguments.callee.caller.toString());
+            console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^ caller end ^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+        }
+    };
+    _sun.write = function(txt){
+        var p = document.createElement('p');
+        var hr = document.createElement('hr');
+
+        p.innerHTML = txt;
+        document.body.appendChild(hr);
+        document.body.appendChild(p);
+    };
+})(sun);
+
+function getPath(sPath) {
+    var scripts = document.scripts || [];
+    var dir = '';
+    
+    for (var i = 0, max = scripts.length; i < max; i++) {
+        var src = scripts[i] && scripts[i].getAttribute('src') || '';
+        
+        if (/sun([^\/]*?).js/i.test(src)) {
+            dir = src.replace(/sun([^\/]*?).js/i, '');
+        }
+    }
+    
+    return dir + sPath;
+};
+
+if (typeof require === 'function') {
+    define([getPath('sun.toolkit.js'), getPath('sun.validate.js')], function(Toolkit, Validate) {
+        sun.toolkit = Toolkit;
+        sun.validate = Validate;
+        
+        return sun;
+    });
+}
+
+
+
+
+
+
