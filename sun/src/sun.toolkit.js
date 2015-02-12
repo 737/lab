@@ -1,9 +1,11 @@
 // 依赖 sun.validate.js
 // author:  arleigh.lee@qq.com
 // date:    2014/01/01
+
 var sun = sun || {};
 
 sun.toolkit = {
+    
     array: {
         // sun.toolkit.array.sort(arrayList, [bool]) 
         // >> ([1,2,32,4])
@@ -35,7 +37,7 @@ sun.toolkit = {
         removeAt: function(arrayList, numIndex) {
             if ( numIndex < 0 || typeof numIndex === 'undefined') {
                 return arrayList;
-            } else if (validate.isArray(numIndex)) {
+            } else if (sun.validate.isArray(numIndex)) {
                 var _index = 0;
 
                 numIndex = this.sort(numIndex, false);
@@ -108,7 +110,7 @@ sun.toolkit = {
     each: function(obj, iterator) {
         if ( obj === null) return;
         if (typeof iterator === 'function') {
-            if (validate.isArray(obj)) {
+            if (sun.validate.isArray(obj)) {
                 for(var i = 0, max = obj.length; i < max; i++ ) {
                     iterator(obj[i], i);
                 }

@@ -2,7 +2,8 @@
 // author: arleigh.lee@qq.com
 var sun = sun || {};
 
-sun.validate = {
+sun.validate = sun.validate || {
+
     // >> ([])
     // => true
     // >> ({})

@@ -240,7 +240,6 @@ sun.md = (function(global){
     return self;
 })(this);
 
-
 if (typeof require === 'function') {
     define(function() {
         return sun.md;
