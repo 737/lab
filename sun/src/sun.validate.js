@@ -317,7 +317,7 @@ sun.validate = sun.validate || {
 };
 
 if (typeof require === 'function') {
-    define(function() {
+    define('sun.validate', function() {
         return sun.validate;
     });
 }

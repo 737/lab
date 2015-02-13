@@ -1,5 +1,5 @@
 
-sun = sun || {};
+var sun = sun || {};
 
 sun.md = (function(global){
     var self,
@@ -241,7 +241,7 @@ sun.md = (function(global){
 })(this);
 
 if (typeof require === 'function') {
-    define(function() {
+    define('sun.md', function() {
         return sun.md;
     });
 }

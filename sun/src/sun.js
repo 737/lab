@@ -650,24 +650,40 @@ function getPath(sPath) {
     var scripts = document.scripts || [];
     var dir = '';
     
+    return;
+    
     for (var i = 0, max = scripts.length; i < max; i++) {
         var src = scripts[i] && scripts[i].getAttribute('src') || '';
         
-        if (/sun([^\/]*?).js/i.test(src)) {
-            dir = src.replace(/sun([^\/]*?).js/i, '');
+        debugger;
+        
+        if (src.indexOf(sPath) < 0) {
+            if (/sun([^\/]*?).js/i.test(src)) {
+                dir = src.replace(/sun([^\/]*?).js/i, '');
+                break;
+            }
+        } else {
+            debugger;
         }
     }
     
-    return dir + sPath;
+    if (dir) {
+        return dir + sPath;
+    } else {
+        return null;
+    }
 };
 
 if (typeof require === 'function') {
-    define([getPath('sun.toolkit.js'), getPath('sun.validate.js')], function(Toolkit, Validate) {
-        sun.toolkit = Toolkit;
-        sun.validate = Validate;
+    // define([getPath('sun.toolkit.js'), getPath('sun.validate.js'), getPath('sun.md.js')], function(Toolkit, Validate, Md) {
         
-        return sun;
-    });
+        
+        // sun.toolkit = Toolkit;
+        // sun.validate = Validate;
+        // sun.md = Md;
+        
+        // return sun;
+    // });
 }
 
 

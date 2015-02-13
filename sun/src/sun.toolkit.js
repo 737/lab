@@ -470,11 +470,36 @@ sun.toolkit = {
             relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [,''])[1],
             segments: a.pathname.replace(/^\//,'').split('/')
         };
+    },
+    
+    _getPath: function (sPath) {
+        var scripts = document.scripts || [];
+        var dir = '';
+        
+        for (var i = 0, max = scripts.length; i < max; i++) {
+            var src = scripts[i] && scripts[i].getAttribute('src') || '';
+            
+            if (src.indexOf(sPath) < 0) {
+                if (/sun([^\/]*?).js/i.test(src)) {
+                    dir = src.replace(/sun([^\/]*?).js/i, '');
+                    break;
+                }
+            } else {
+                debugger;
+            }
+        }
+        
+        if (dir) {
+            return dir + sPath;
+        } else {
+            return null;
+        }
     }
 };
 
 if (typeof require === 'function') {
-    define([getPath('sun.validate.js')], function(validate) {
+    define('sun.toolkit', [sun.toolkit._getPath('sun.validate.js')], function(validate) {
+        debugger;
         return sun.toolkit;
     });
 }
