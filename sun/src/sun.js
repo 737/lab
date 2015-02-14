@@ -646,24 +646,18 @@ sun.guid = function (len, radix) {
     };
 })(sun);
 
-function getPath(sPath) {
+sun._getPath = function (sPath) {
     var scripts = document.scripts || [];
     var dir = '';
     
-    return;
-    
     for (var i = 0, max = scripts.length; i < max; i++) {
         var src = scripts[i] && scripts[i].getAttribute('src') || '';
-        
-        debugger;
         
         if (src.indexOf(sPath) < 0) {
             if (/sun([^\/]*?).js/i.test(src)) {
                 dir = src.replace(/sun([^\/]*?).js/i, '');
                 break;
             }
-        } else {
-            debugger;
         }
     }
     
@@ -675,15 +669,9 @@ function getPath(sPath) {
 };
 
 if (typeof require === 'function') {
-    // define([getPath('sun.toolkit.js'), getPath('sun.validate.js'), getPath('sun.md.js')], function(Toolkit, Validate, Md) {
-        
-        
-        // sun.toolkit = Toolkit;
-        // sun.validate = Validate;
-        // sun.md = Md;
-        
-        // return sun;
-    // });
+    define([sun._getPath('sun.toolkit.js'), sun._getPath('sun.validate.js'), sun._getPath('sun.md.js')], function() {
+        return sun;
+    });
 }
 
 
