@@ -554,7 +554,6 @@ sun.context.cookie = (function(){
 })();
 
 sun.context.localStorage = (function(global) {
-    
     var self = {
         _ls : global.localStorage
     };
@@ -584,6 +583,111 @@ sun.context.localStorage = (function(global) {
 
     return self;
 })(window);
+
+sun.location = {
+            __replaceState: function(sQueryString) {
+                if (!!history) {
+                    //这里可以是你想给浏览器的一个State对象，为后面的StateEvent做准备。
+                    var state = { 
+                        title : "HTML 5 History API simple demo",
+                        url : location.origin + location.pathname + sQueryString
+                    };
+                    
+                    history.replaceState(state, 'title', sQueryString);
+                } else {
+                    location.replace(sQueryString);
+                }
+            },
+    
+            // 更新localtion.pathname
+            // @param oObject {object} 段位和值的键值对: { {string} : {object} } => key为参数名称，value为值
+            // @param sPathname {string}? 默认为当前的location.search
+            // e.g.: ({ day: '50', '1-2' : '12341234' })
+            updateSearch: function (oObject, sSearch) {
+                var _queryString = location.search || sSearch;
+                    
+                // 返回新的localtion.search的值
+                function getNewUrlSearch(keyName, keyValue, _search) {
+                    if (keyName != null && keyValue != null) {
+                        var newParams = keyName + '=' + keyValue;
+                        var re = new RegExp("(?![\?\&])\\b" + keyName + "[=][^&#|]*", 'img');
+
+                        if (re.test(_search)) {
+                            _search = _search.replace(re, newParams);
+                        } else {
+                            if (_search.indexOf('?') > -1) {
+                                _search += '&' + newParams;
+                            } else {
+                                _search += '?' + newParams;
+                            }
+                        }
+                    }
+
+                    return _search;
+                };
+                
+                if ((oObject instanceof Object) && !_.isEmpty(oObject)) {
+                    _.each(oObject, function (v, k) {
+                        _queryString = getNewUrlSearch(k, v, _queryString);
+                    });
+                    
+                    if (_queryString.indexOf('?') < 0) {
+                        _queryString += '?' + _queryString
+                    }
+                    
+                    this.__replaceState(_queryString);
+                }
+                
+                return location.href;
+            },
+            
+            // 更新localtion.pathname
+            // @param oObject {object} 段位和值的键值对: { {number} : {object} } 其中number为0时，默认更新为最后一段
+            // @param sPathname {string}? 默认为当前的location.pathname
+            // e.g: ({ 1 : 'webapp', 0 : 'default.html' })
+            updatePathname: function(oObject, sPathname) {
+                var _pathname = sPathname || location.pathname;
+                var _pathnameList = _pathname.match(/\/{1}[^\/]*/ig) || [];
+                
+                // 使用pushstate方法 更新localtion.search
+                function updateQueryString(sQueryString) {
+                    if (!!history) {
+                        //这里可以是你想给浏览器的一个State对象，为后面的StateEvent做准备。
+                        var state = { 
+                            title : "HTML 5 History API simple demo",
+                            url : location.origin + location.pathname + sQueryString
+                        };
+                        
+                        history.replaceState(state, 'title', sQueryString);
+                    } else {
+                        location.replace(sQueryString);
+                    }
+                };
+                
+                if ((oObject instanceof Object) && !_.isEmpty(oObject)) {
+                    var _section = 0,
+                        _value = '';
+                    
+                    _.each(oObject, function (v, k) {
+                        _section = k | 0;
+                        // value转为string
+                        v = v + '';
+                        // 如果 value为空，则为删除此段位
+                        _value = !!v ? '/' + v : '';
+                        
+                        if (_section > 0) {
+                            _pathnameList[_section - 1] = _value;
+                        } else {
+                            _pathnameList[_pathnameList.length - 1] = _value;
+                        }
+                    })
+                    
+                    this.__replaceState(_pathnameList.join('') + location.search);
+                }
+                
+                return location.href;
+            }
+};
 
 sun.guid = function (len, radix) {
     var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');

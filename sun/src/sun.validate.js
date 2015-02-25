@@ -16,6 +16,14 @@ sun.validate = sun.validate || {
         //return (arr instanceof Array);
     },
     
+    isObject: function(arg) {
+        // first way:
+        return Object.prototype.toString.call(arg) === '[object Object]';
+        
+        // second way:
+        //return (arr instanceof Object);
+    },
+    
     isAllowSetTradingPass: function(text) {
       var case1 = true; //数字相同验证
       var case2 = true; //连续数字验证
