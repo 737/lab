@@ -1,17 +1,25 @@
-
 require.config({
-    urlArgs: "v=" + (new Date()).getTime(),
-    baseUrl: 'js/',
+    waitSeconds: 20,
+    baseUrl: '',
     paths: {
-        'jQuery': '/lib/jquery.v1.11.0',
         'underscore': '/lib/underscore.v1.4.4',
-        'text': '/lib/require.text',
-        'domReady': '/lib/require.domReady',
-        'sun': '/sun/src/'
+        'jquery': '/lib/jQuery.v1.11.0-beta3',
+        'sun': '/sun/src/sun'
+    },
+    shim: {
+        'jquery': {
+            exports: '$'
+        },
+        'underscore': {
+            exports: '_'
+        },
+        'sun': {
+            exports: 'sun'
+        }
     }
 });
 
-require(['jQuery', 'underscore', 'sun'], function () {
+require(['jquery', 'underscore', 'sun'], function () {
     $('#opciones').hide();
         
     var srcElm = $('#searchBox');
