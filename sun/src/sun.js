@@ -21,7 +21,7 @@ sun.load = function() {
                 isLoaded = true;
             }
         } else if (node.sheet) { //FF
-            try 
+            try
             {
                 if (node.sheet.cssRules) {
                     isLoaded = true;
@@ -43,7 +43,7 @@ sun.load = function() {
             }, 1);
         }
     }
-    
+
     function _styleOnload(node, callback) {
         if (node.attachEvent) {
             node.attachEvent('onload', callback);
@@ -53,7 +53,7 @@ sun.load = function() {
             }, 0);
         }
     }
-    
+
     function _loadcss(url, callback){
         var node = document.createElement("link");
 
@@ -68,15 +68,15 @@ sun.load = function() {
             callback();
         });
     }
-    
+
     function _isUrlLoaded(url) {
         return __loadedUrls[url] === true;
     }
-    
+
     function _unregisterUrl(url) {
         __loadedUrls[url] = false;
     }
-    
+
     function _registerUrl(url) {
         __loadedUrls[url] = true;
     }
@@ -131,7 +131,7 @@ sun.load = function() {
     };
     /**
      * >> sun.load.getUrlLoaded();
-     * => { http://xx.xx/sun.js : true, 
+     * => { http://xx.xx/sun.js : true,
      * =>   http://xx.xx/sun.css: true }
      *
      * .tg true  => loaded
@@ -175,7 +175,7 @@ sun.ajax = function() {
     var defaults = {
         replaceURL: false,
         target: "#loadingbar-frame",
-        
+
         /* Deafult Ajax Parameters  */
         async: true,
         type: "",
@@ -286,7 +286,7 @@ sun.ajax = function() {
 
             _setting = $.extend({}, defaults, _setting);
         }
-        
+
         return _setting;
     };
 
@@ -316,7 +316,7 @@ sun.ajax = function() {
 
                 _options = parseOptions('!object', sPageUrl, 'POST', mime.json, oData, fnCallBack, false, isAsync);
             }
-            
+
             return base(_options);
         },
         // >> sun.ajax.getJSON('url', function (json) {
@@ -344,7 +344,7 @@ sun.ajax = function() {
 
                 _options = parseOptions('!object', sPageUrl, 'get', mime.json, oData, fnCallBack, false, isAsync);
             }
-            
+
             return base(_options);
         },
         lastXMLHttpRequest: function() {
@@ -433,23 +433,23 @@ sun.key = (function() {
 sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
     var isFirst = true,
         self = this;
-    
+
     function callBack(evt) {
         // 第一次事件方法不执行
         if (isFirst) {
             isFirst = false;
             return;
         }
-        
+
         // 再次点击的是 触发窗口中的元素
         if (nodeTrigger && nodeTrigger.contains(evt.target || evt.srcElement)) {
             self.event.remove('click', document, callBack);
             return;
         }
-        
+
         // 点击的是 结果窗口中的元素
         if (nodeResult && nodeResult.contains(evt.target || evt.srcElement)) {
-            
+
         } else {
             if (typeof fnblur == 'function') {
                  fnblur();
@@ -457,7 +457,7 @@ sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
             self.event.remove('click', document, callBack);
         }
     }
-    
+
     self.event.add('click', document, callBack);
 };
 
@@ -466,7 +466,7 @@ sun.context = sun.context || {};
 sun.event = {
     add: function (type, node, fun) {
         var _addEvent = null;
-        
+
         if (node.addEventListener) {
             node.addEventListener(type, fun, false);
         } else if(node.attachEvent){
@@ -476,10 +476,10 @@ sun.event = {
         }
         return _addEvent;
     },
-    
+
     remove: function (type, node, fun) {
         var rmEvent = null;
-    
+
         if (node.removeEventListener) {
             node.removeEventListener(type, fun, false);
         } else if (node.detachEvent){
@@ -488,7 +488,7 @@ sun.event = {
             node['on' + type] = null;
         }
     },
-    
+
     //阻止事件冒泡函数
     stopBubble: function (e) {
         if (e && e.stopPropagation) {
@@ -514,16 +514,16 @@ sun.context.cookie = (function(){
     var self  = {};
 
     self.setExpires = function (name,value,expiresValue){
-        var Days = expiresValue; 
+        var Days = expiresValue;
         var exp  = new Date();    //new Date("December 31, 9998");
-        
+
         exp.setTime(exp.getTime() + Days*24*60*60*1000);
         document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
     };
 
     self.set = function (name,value){
         var Days = 30; //此 cookie 将被保存 30 天
-        
+
         this.setExpires(name, value, Days);
     };
 
@@ -585,117 +585,117 @@ sun.context.localStorage = (function(global) {
 })(window);
 
 sun.location = {
-            __replaceState: function(sQueryString) {
-                if (!!history) {
-                    //这里可以是你想给浏览器的一个State对象，为后面的StateEvent做准备。
-                    var state = { 
-                        title : "HTML 5 History API simple demo",
-                        url : location.origin + location.pathname + sQueryString
-                    };
-                    
-                    history.replaceState(state, 'title', sQueryString);
+    __replaceState: function(sQueryString) {
+        if (!!history) {
+            //这里可以是你想给浏览器的一个State对象，为后面的StateEvent做准备。
+            var state = {
+                title : "HTML 5 History API simple demo",
+                url : location.origin + location.pathname + sQueryString
+            };
+
+            history.replaceState(state, 'title', sQueryString);
+        } else {
+            location.replace(sQueryString);
+        }
+    },
+
+    // 更新localtion.pathname
+    // @param oObject {object} 段位和值的键值对: { {string} : {object} } => key为参数名称，value为值
+    // @param sPathname {string}? 默认为当前的location.search
+    // e.g.: ({ day: '50', '1-2' : '12341234' })
+    updateSearch: function (oObject, sSearch) {
+        var _queryString = sSearch || location.search;
+
+        // 返回新的localtion.search的值
+        function getNewUrlSearch(keyName, keyValue, _search) {
+            if (keyName != null && keyValue != null) {
+                var newParams = keyName + '=' + keyValue;
+                var re = new RegExp("(?![\?\&])\\b" + keyName + "[=][^&#|]*", 'img');
+
+                if (re.test(_search)) {
+                    _search = _search.replace(re, newParams);
                 } else {
-                    location.replace(sQueryString);
-                }
-            },
-    
-            // 更新localtion.pathname
-            // @param oObject {object} 段位和值的键值对: { {string} : {object} } => key为参数名称，value为值
-            // @param sPathname {string}? 默认为当前的location.search
-            // e.g.: ({ day: '50', '1-2' : '12341234' })
-            updateSearch: function (oObject, sSearch) {
-                var _queryString = sSearch || location.search;
-                    
-                // 返回新的localtion.search的值
-                function getNewUrlSearch(keyName, keyValue, _search) {
-                    if (keyName != null && keyValue != null) {
-                        var newParams = keyName + '=' + keyValue;
-                        var re = new RegExp("(?![\?\&])\\b" + keyName + "[=][^&#|]*", 'img');
-
-                        if (re.test(_search)) {
-                            _search = _search.replace(re, newParams);
-                        } else {
-                            if (_search.indexOf('?') > -1) {
-                                _search += '&' + newParams;
-                            } else {
-                                _search += '?' + newParams;
-                            }
-                        }
+                    if (_search.indexOf('?') > -1) {
+                        _search += '&' + newParams;
+                    } else {
+                        _search += '?' + newParams;
                     }
-
-                    return _search;
-                };
-                
-                // 返回新的localtion.search的值
-                function removeByName(keyName, _search) {
-                    if (keyName != null) {
-                        var re = new RegExp("[\?\&]\\b" + keyName + "[=][^&#|]*", 'img');
-
-                        if (re.test(_search)) {
-                            _search = _search.replace(re, '');
-                        }
-                        
-                        if (!_.isEmpty(_search) && _search[0] == '&') {
-                            _search = _search.replace('&', '?');
-                        }
-                    }
-
-                    return _search;
-                };
-                
-                if ((oObject instanceof Object) && !_.isEmpty(oObject)) {
-                    _.each(oObject, function (v, k) {
-                        // 删除此key值
-                        if (!v && v != '0') {
-                            _queryString = removeByName(k, _queryString);
-                        } else {
-                            _queryString = getNewUrlSearch(k, v, _queryString);
-                        }
-                        
-                    });
-                    
-                    // 如果_queryString为空的话，history.replaceState不可执行
-                    if (_queryString.indexOf('?') < 0) {
-                        _queryString += '?' + _queryString
-                    }
-                    
-                    this.__replaceState(_queryString);
                 }
-                
-                return location.href;
-            },
-            
-            // 更新localtion.pathname
-            // @param oObject {object} 段位和值的键值对: { {number} : {object} } 其中number为0时，默认更新为最后一段
-            // @param sPathname {string}? 默认为当前的location.pathname
-            // e.g: ({ 1 : 'webapp', 0 : 'default.html' })
-            updatePathname: function(oObject, sPathname) {
-                var _pathname = sPathname || location.pathname;
-                var _pathnameList = _pathname.match(/\/{1}[^\/]*/ig) || [];
-                
-                if ((oObject instanceof Object) && !_.isEmpty(oObject)) {
-                    var _section = 0,
-                        _value = '';
-                    
-                    _.each(oObject, function (v, k) {
-                        _section = k | 0;
-                        // value转为string
-                        v = v + '';
-                        // 如果 value为空，则为删除此段位
-                        _value = !!v ? '/' + v : '';
-                        
-                        if (_section > 0) {
-                            _pathnameList[_section - 1] = _value;
-                        } else {
-                            _pathnameList[_pathnameList.length - 1] = _value;
-                        }
-                    })
-                    
-                    this.__replaceState(_pathnameList.join('') + location.search);
-                }
-                
-                return location.href;
             }
+
+            return _search;
+        };
+
+        // 返回新的localtion.search的值
+        function removeByName(keyName, _search) {
+            if (keyName != null) {
+                var re = new RegExp("[\?\&]\\b" + keyName + "[=][^&#|]*", 'img');
+
+                if (re.test(_search)) {
+                    _search = _search.replace(re, '');
+                }
+
+                if (!_.isEmpty(_search) && _search[0] == '&') {
+                    _search = _search.replace('&', '?');
+                }
+            }
+
+            return _search;
+        };
+
+        if ((oObject instanceof Object) && !_.isEmpty(oObject)) {
+            _.each(oObject, function (v, k) {
+                // 删除此key值
+                if (!v && v != '0') {
+                    _queryString = removeByName(k, _queryString);
+                } else {
+                    _queryString = getNewUrlSearch(k, v, _queryString);
+                }
+
+            });
+
+            // 如果_queryString为空的话，history.replaceState不可执行
+            if (_queryString.indexOf('?') < 0) {
+                _queryString += '?' + _queryString
+            }
+
+            this.__replaceState(_queryString);
+        }
+
+        return location.href;
+    },
+
+    // 更新localtion.pathname
+    // @param oObject {object} 段位和值的键值对: { {number} : {object} } 其中number为0时，默认更新为最后一段
+    // @param sPathname {string}? 默认为当前的location.pathname
+    // e.g: ({ 1 : 'webapp', 0 : 'default.html' })
+    updatePathname: function(oObject, sPathname) {
+        var _pathname = sPathname || location.pathname;
+        var _pathnameList = _pathname.match(/\/{1}[^\/]*/ig) || [];
+
+        if ((oObject instanceof Object) && !_.isEmpty(oObject)) {
+            var _section = 0,
+                _value = '';
+
+            _.each(oObject, function (v, k) {
+                _section = k | 0;
+                // value转为string
+                v = v + '';
+                // 如果 value为空，则为删除此段位
+                _value = !!v ? '/' + v : '';
+
+                if (_section > 0) {
+                    _pathnameList[_section - 1] = _value;
+                } else {
+                    _pathnameList[_pathnameList.length - 1] = _value;
+                }
+            })
+
+            this.__replaceState(_pathnameList.join('') + location.search);
+        }
+
+        return location.href;
+    }
 };
 
 sun.guid = function (len, radix) {
@@ -742,7 +742,7 @@ sun.guid = function (len, radix) {
         } else {
             console.log(arguments[0]);
         }
-        
+
         if (arguments.callee.caller) {
             console.log('vvvvvvvvvvvvvvvvvvvvvvvvvv caller start vvvvvvvvvvvvvvvvvvvvvvvvvv');
             console.log(arguments.callee.caller.toString());
@@ -762,10 +762,10 @@ sun.guid = function (len, radix) {
 sun._getPath = function (sPath) {
     var scripts = document.scripts || [];
     var dir = '';
-    
+
     for (var i = 0, max = scripts.length; i < max; i++) {
         var src = scripts[i] && scripts[i].getAttribute('src') || '';
-        
+
         if (src.indexOf(sPath) < 0) {
             if (/sun([^\/]*?).js/i.test(src)) {
                 dir = src.replace(/sun([^\/]*?).js/i, '');
@@ -773,22 +773,12 @@ sun._getPath = function (sPath) {
             }
         }
     }
-    
+
     if (dir) {
         return dir + sPath;
     } else {
         return null;
     }
 };
-
-if (typeof require === 'function') {
-    define([sun._getPath('sun.toolkit.js'), sun._getPath('sun.validate.js'), sun._getPath('sun.md.js')], function() {
-        return sun;
-    });
-}
-
-
-
-
 
 
