@@ -26,7 +26,19 @@ require(['underscore', 'jquery', 'sun'], function() {
         
         evt.currentTarget.innerText = _.random(10, 1000);
         
+        // 修改指定段位
         sun.location.updatePathname({ 1 : 'webapp', 0: 'default.html' });
+        
+        // 删除最后一段位
+        //sun.location.updatePathname({ 0: '' });
+    });
+    
+    $('#btn_remove').click(function(evt) {
+        // update
+        sun.location.updateSearch({ 'type': '更改' });
+        
+        // 删除
+        //sun.location.updateSearch({ 'type': '' });
     });
     
 });

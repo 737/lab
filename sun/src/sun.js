@@ -626,11 +626,35 @@ sun.location = {
                     return _search;
                 };
                 
+                // 返回新的localtion.search的值
+                function removeByName(keyName, _search) {
+                    if (keyName != null) {
+                        var re = new RegExp("[\?\&]\\b" + keyName + "[=][^&#|]*", 'img');
+
+                        if (re.test(_search)) {
+                            _search = _search.replace(re, '');
+                        }
+                        
+                        if (!_.isEmpty(_search) && _search[0] == '&') {
+                            _search = _search.replace('&', '?');
+                        }
+                    }
+
+                    return _search;
+                };
+                
                 if ((oObject instanceof Object) && !_.isEmpty(oObject)) {
                     _.each(oObject, function (v, k) {
-                        _queryString = getNewUrlSearch(k, v, _queryString);
+                        // 删除此key值
+                        if (!v && v != '0') {
+                            _queryString = removeByName(k, _queryString);
+                        } else {
+                            _queryString = getNewUrlSearch(k, v, _queryString);
+                        }
+                        
                     });
                     
+                    // 如果_queryString为空的话，history.replaceState不可执行
                     if (_queryString.indexOf('?') < 0) {
                         _queryString += '?' + _queryString
                     }
@@ -648,21 +672,6 @@ sun.location = {
             updatePathname: function(oObject, sPathname) {
                 var _pathname = sPathname || location.pathname;
                 var _pathnameList = _pathname.match(/\/{1}[^\/]*/ig) || [];
-                
-                // 使用pushstate方法 更新localtion.search
-                function updateQueryString(sQueryString) {
-                    if (!!history) {
-                        //这里可以是你想给浏览器的一个State对象，为后面的StateEvent做准备。
-                        var state = { 
-                            title : "HTML 5 History API simple demo",
-                            url : location.origin + location.pathname + sQueryString
-                        };
-                        
-                        history.replaceState(state, 'title', sQueryString);
-                    } else {
-                        location.replace(sQueryString);
-                    }
-                };
                 
                 if ((oObject instanceof Object) && !_.isEmpty(oObject)) {
                     var _section = 0,
