@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta name="viewport" content=""> 
+        <meta charset="utf-8">
+        <title>Arleigh Javascript Demo</title>
+        <link style='text/css' rel='stylesheet' href='css.css' />
+        
+        <style type='text/css'>
+            body, html {
+                height: 100%;
+                overflow: hidden;
+            }
+            
+            #box {
+                list-style: none;
+                width: 100%;
+                height: 100%;
+                display: block;
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+            }
+            #box li {
+                float: left;
+                height: 100%;
+            }
+            
+            #box li.box-input {
+                width: 40%;
+            }
+            
+            #box li.box-tip {
+                width: 10%;
+                text-align: center;
+                padding-top: 30px;
+            }
+            
+            
+            .txtBox {
+                width: 100%;
+                height: 70%;
+            }
+            
+            #inputBox {
+                
+            }
+            
+            #outBox {
+                
+            }
+        </style>
+    </head>
+    
+<body>
+    <h1>JSON数据按0-9A-Za-z进行排列</h1>
+    <hr>
+    <p id='J_viewPortContent'></p>
+    <p id='J_screen'></p>
+    <p id='J_DPI'></p>
+    <hr>
+    
+    <ul id="box">
+        <li class='box-input'>
+            <textarea class='txtBox' id='inputBox'>{
+    "setInfo" : {
+        "cityId" : 37,
+        "dstId" : 0,
+        "inDay" : "2015-05-08",
+        "outDay" : "2015-05-08"
+    },
+    "querys" : [{
+            "type" : 16,
+            "val" : "37|64"
+        }
+    ],
+    "facility" : 0,
+    "pay" : 0,
+    "contrl" : 2,
+    "contrlExt" : 0,
+    "biz" : 1,
+    "sort" : {
+        "dir" : 1,
+        "idx" : 1,
+        "ordby" : 0,
+        "size" : 25
+    },
+    "key" : "",
+    "keytp" : 0,
+    "hiddenids" : "",
+    "nearbyquery" : {},
+    "campaigntype" : 2,
+    "alliance" : {
+        "aid" : "66672",
+        "sid" : "508670",
+        "ouid" : ""
+    },
+    "head" : {
+        "cid" : "09031142110000050723",
+        "ctok" : "",
+        "cver" : "1.0",
+        "lang" : "01",
+        "sid" : "8888",
+        "syscode" : "09",
+        "auth" : "D1B46B195EC1B905EC2171BD009B9C1A3E46383F800975D7ADC58CB5B7CE695D"
+    },
+    "contentType" : "json"
+}
+</textarea>
+        </li>
+        <li class='box-tip'>
+            <button id='btnSubmit'>submit</button>
+        </li>
+        <li class='box-input'>
+            <textarea class='txtBox' id='outBox'>
+            </textarea>
+        </li>
+    </ul>
+        
+    <div class='font-20' id='plotting'></div>
+    <script typ='text/javascript' data-main='main' src='/lib/require.2.1.15.js' ></script>
+</body>
+</html>
