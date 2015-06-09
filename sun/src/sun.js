@@ -502,7 +502,7 @@ sun.event = {
 sun.context.getQueryStringByName = function(name) {
     var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
 
-    if (result || result.length < 1) {
+    if (!result || result.length < 1) {
         return "";
     }
 
@@ -604,7 +604,7 @@ sun.location = {
             // @param sPathname {string}? 默认为当前的location.search
             // e.g.: ({ day: '50', '1-2' : '12341234' })
             updateSearch: function (oObject, sSearch) {
-                var _queryString = location.search || sSearch;
+                var _queryString = sSearch || location.search;
                     
                 // 返回新的localtion.search的值
                 function getNewUrlSearch(keyName, keyValue, _search) {
