@@ -5,9 +5,9 @@
 var sun = sun || {};
 
 sun.toolkit = {
-    
+
     array: {
-        // sun.toolkit.array.sort(arrayList, [bool]) 
+        // sun.toolkit.array.sort(arrayList, [bool])
         // >> ([1,2,32,4])
         // => [1, 2, 4, 32]
         // >> ([1,2,32,4], false)
@@ -29,7 +29,7 @@ sun.toolkit = {
             return arrayList.sort(sortNumber);
         },
 
-        // sun.toolkit.array.removeAt(arrayList, *numIndex) 
+        // sun.toolkit.array.removeAt(arrayList, *numIndex)
         // >> ([0, 11,22,33,44], 3)
         // => [0, 11, 22, 44]
         // >> ([0, 11,22,33,44], [2, 1, 0])
@@ -50,7 +50,7 @@ sun.toolkit = {
                 return arrayList;
             } else {
                 return arrayList.slice(0, numIndex).concat(arrayList.slice(numIndex + 1, arrayList.length));
-            }        
+            }
         }
     },
 
@@ -83,8 +83,8 @@ sun.toolkit = {
             return jsonObj;
         }
     },
-    
-    // sun.toolkit.extend(destination, *sources) 
+
+    // sun.toolkit.extend(destination, *sources)
     // => sun.toolkit.extend({a: 'a1', c: 1},{ b : 'b'}, { b: 'b1', c: 2})
     // => {a: "a1", c: 2, b: "b1"}
     extend: function(obj) {
@@ -98,7 +98,7 @@ sun.toolkit = {
 
         return obj;
     },
-    
+
     /**
      * >> ([3,2], function (v, i) { console.log(v, i) })
      * => 3 0
@@ -119,10 +119,10 @@ sun.toolkit = {
                     iterator(obj[item], item);
                 }
             }
-            
+
         }
     },
-    
+
     /**
      * format number
      * e.g. 12000 => 1,2000
@@ -133,10 +133,10 @@ sun.toolkit = {
         var isInt = function (num) {
             return (num % 1 === 0);
         };
-        
+
         amtStr = (isInt(amtStr)) ? amtStr : Number(amtStr).toFixed(0);
         amtStr = "" + amtStr;
-        
+
         var a, renum = '';
         var j = 0;
         var a1 = '', a2 = '', a3 = '';
@@ -184,7 +184,7 @@ sun.toolkit = {
         var j = 0;
         var a1 = '', a2 = '', a3 = '';
         var tes = /^-/;
-        
+
         isCurrency = (typeof (isCurrency) != 'undefined') ? isCurrency : true;
         var subfix = (isInt(amtStr) && isCurrency) ? '.00' : '';
         a = amtStr.replace(/,/g, "");
@@ -282,7 +282,7 @@ sun.toolkit = {
         }
         return null;
     },
-    
+
     // 获得当前浏览器JS的版本
     getJavascriptVersion: function getjsversion(){
         var n = navigator;
@@ -320,13 +320,13 @@ sun.toolkit = {
                            // tcf = new Function('o', 'var e,i=0;try{i=new Iterator(o)}catch(e){}return i');
                            tcf = function (o) {
                                var e, i=0;
-                               
+
                                try {
                                    i = new Iterator(o);
                                } catch(err) {
-                                   
+
                                }
-                               
+
                                return i;
                            };
                            i = tcf(o);
@@ -340,9 +340,9 @@ sun.toolkit = {
         }
         return javascriptVersion;
     },
-    
+
     /**
-     * 
+     *
      * >> ('&lt;span&gt;I am Hero!&lt;/span&gt;')
      * => '<span>I am Hero!</span>'
      */
@@ -352,13 +352,23 @@ sun.toolkit = {
     },
 
     /**
-     * 
+     *
      * >> ('<span>I am Hero!</span>')
      * => '&lt;span&gt;I am Hero!&lt;/span&gt;'
      */
     htmlEncode: function ( html ) {
-        return document.createElement( 'a' ).appendChild( 
+        return document.createElement( 'a' ).appendChild(
             document.createTextNode( html ) ).parentNode.innerHTML;
+    },
+
+    // 用于hybird中log显示
+    hybirdLog: function() {
+        var _arg = _.extend([], arguments);
+
+        _arg.unshift('\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////\r\n\r\n\r\n');
+        _arg.push('\r\n\r\n\r\n////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\');
+
+        console.log.call(console, _arg);
     },
 
     /**
@@ -381,7 +391,7 @@ sun.toolkit = {
 
     // 替换对应的字符窜
     // >> ('I am a boy', 'boy', 'girl')
-    // => "I am a girl" 
+    // => "I am a girl"
     replaceAll: function (oString, AFindText, ARepText) {
         var raRegExp = new RegExp(AFindText.replace(/([\(\)\[\]\{\}\^\$\+\-\*\?\.\"\'\|\/\\])/g, "\\$1"), "ig");
         return oString.replace(raRegExp, ARepText);
@@ -391,14 +401,14 @@ sun.toolkit = {
         window.location.reload();
 
         /* other ways
-            1 history.go(0) 
-            2 location.reload() 
-            3 location=location 
-            4 location.assign(location) 
-            5 document.execCommand('Refresh') 
-            6 window.navigate(location) 
-            7 location.replace(location) 
-            8 document.URL=location.href 
+            1 history.go(0)
+            2 location.reload()
+            3 location=location
+            4 location.assign(location)
+            5 document.execCommand('Refresh')
+            6 window.navigate(location)
+            7 location.replace(location)
+            8 document.URL=location.href
         */
     },
 
@@ -410,11 +420,11 @@ sun.toolkit = {
         var match = null;
         var idx = 0,
             val = null;
-        
+
         while ((match = reg.exec(txt)) !== null) {
             idx = (match[1] | 0) + 1;
             val = (typeof arguments[idx] !== 'undefined') ? arguments[idx] : '';
-            
+
             txt = txt.replace(match[0], val);
         }
 
@@ -446,7 +456,7 @@ sun.toolkit = {
     parseURL: function (url) {
         var a =  document.createElement('a');
         a.href = url;
-        
+
         return {
             source: url,
             protocol: a.protocol.replace(':',''),
