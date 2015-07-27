@@ -2,8 +2,10 @@ require.config({
     waitSeconds: 20
 });
 
-require([], function() {
+require(['cUtilObject'], function(cUtilObject) {
 
-    console.log('start');
+    window.cc = this;
+    
+    cc.cUtilObject = cUtilObject;
 
 });

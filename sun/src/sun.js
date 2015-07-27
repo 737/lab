@@ -610,7 +610,7 @@ sun.location = {
         function getNewUrlSearch(keyName, keyValue, _search) {
             if (keyName != null && keyValue != null) {
                 var newParams = keyName + '=' + keyValue;
-                var re = new RegExp("(?![\?\&])\\b" + keyName + "[=][^&#|]*", 'img');
+                var re = new RegExp("(?![\?\&])\\b" + keyName + "[=][^&#]*", 'img');
 
                 if (re.test(_search)) {
                     _search = _search.replace(re, newParams);
@@ -629,7 +629,7 @@ sun.location = {
         // 返回新的localtion.search的值
         function removeByName(keyName, _search) {
             if (keyName != null) {
-                var re = new RegExp("[\?\&]\\b" + keyName + "[=][^&#|]*", 'img');
+                var re = new RegExp("[\?\&]\\b" + keyName + "[=][^&#]*", 'img');
 
                 if (re.test(_search)) {
                     _search = _search.replace(re, '');

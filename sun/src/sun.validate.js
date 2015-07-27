@@ -218,6 +218,13 @@ sun.validate = sun.validate || {
         }
     },
 
+    // 是否为IOS设备
+    isIos: function () {
+        var isIos = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+
+        return isIos;
+    },
+
     // 是否为IP
     isIP: function(obj) {
         if (!obj || result.isNull(obj)) return false;
