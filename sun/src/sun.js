@@ -585,7 +585,7 @@ sun.context.localStorage = (function(global) {
 })(window);
 
 sun.location = {
-    __replaceState: function(sQueryString) {
+    _replaceState: function(sQueryString) {
         if (!!history) {
             //这里可以是你想给浏览器的一个State对象，为后面的StateEvent做准备。
             var state = {
@@ -599,57 +599,140 @@ sun.location = {
         }
     },
 
+    // 返回新的localtion.search的值
+    _getNewUrlSearch: function (keyName, keyValue, _search) {
+        if (keyName != null && keyValue != null) {
+            var newParams = keyName + '=' + keyValue;
+            var re = new RegExp("(?![\?\&])\\b" + keyName + "[=][^&#]*", 'img');
+
+            if (re.test(_search)) {
+                _search = _search.replace(re, newParams);
+            } else {
+                if (_search.indexOf('?') > -1) {
+                    _search += '&' + newParams;
+                } else {
+                    _search += '?' + newParams;
+                }
+            }
+        }
+
+        return _search;
+    },
+
+    // 返回新的localtion.search的值
+    _removeByName: function (keyName, _search) {
+        if (keyName != null) {
+            var re = new RegExp("[\?\&]\\b" + keyName + "[=][^&#]*", 'img');
+
+            if (re.test(_search)) {
+                _search = _search.replace(re, '');
+            }
+
+            if (!_.isEmpty(_search) && _search[0] == '&') {
+                _search = _search.replace('&', '?');
+            }
+        }
+
+        return _search;
+    },
+
+    // 根据传入的URL进行解析
+    parseUrl : function (sUrl) {
+        var url = sUrl || '';
+
+        url = url.replace(/\\/g, '/');
+
+        var host = '',
+        protocol = '',
+        port = '',
+        path = '',
+        query = '',
+        hash = '',
+
+        paths = [],
+        querys = {};
+        var a;
+        //解析协议名
+        if (url.indexOf('://') > -1) {
+            a = url.split(':');
+            protocol = a.shift() + ':';
+            url = a.join(':');
+        }
+        //解析主机名
+        if (url.indexOf('//') === 0) {
+            url = url.replace('//', '');
+            a = url.split('/');
+            host = a.shift();
+            url = a.join('/');
+            if (host.indexOf(':') > -1) {
+                a = host.split(':');
+                host = a[0];
+                port = a[1];
+            }
+        }
+        //解析路径，queryString，hash
+        if (url.search(/^(?:[^#]*)\?/i) > -1) {
+            url = url.replace(/\?+/g, '?');
+            a = url.split('?');
+            path = a.shift();
+            url = a.join('?');
+            a = url.split('#');
+            query = a.shift();
+            hash = a.join('#');
+        } else {
+            a = url.split('#');
+            path = a.shift();
+            url = a.join('#');
+            hash = url;
+        }
+
+        paths = path.split('/');
+
+        if (query) {
+            a = query.split(/&/);
+            var b;
+            for (var i = 0, len = a.length; i < len; i++) {
+                b = a[i].split('=');
+                querys[b[0]] = b[1] || '';
+            }
+        }
+
+        var _hostname = host + ':' + port;
+        var _origin = protocol + '//' + host + ':' + port;
+        var _search = '?' + url;
+        var _pathname = '/' + path;
+        var _href = _origin + _pathname + _search;
+
+        return {
+            hash : hash,
+            host : _hostname,
+            hostname: host,
+            href: _href,
+            origin: _origin,
+            pathname : _pathname,
+            paths : paths,
+            port : port,
+            protocol : protocol,
+            querys : querys,
+            search: _search,
+        };
+    },
+
     // 更新localtion.pathname
     // @param oObject {object} 段位和值的键值对: { {string} : {object} } => key为参数名称，value为值
     // @param sPathname {string}? 默认为当前的location.search
     // e.g.: ({ day: '50', '1-2' : '12341234' })
     updateSearch: function (oObject, sSearch) {
         var _queryString = sSearch || location.search;
-
-        // 返回新的localtion.search的值
-        function getNewUrlSearch(keyName, keyValue, _search) {
-            if (keyName != null && keyValue != null) {
-                var newParams = keyName + '=' + keyValue;
-                var re = new RegExp("(?![\?\&])\\b" + keyName + "[=][^&#]*", 'img');
-
-                if (re.test(_search)) {
-                    _search = _search.replace(re, newParams);
-                } else {
-                    if (_search.indexOf('?') > -1) {
-                        _search += '&' + newParams;
-                    } else {
-                        _search += '?' + newParams;
-                    }
-                }
-            }
-
-            return _search;
-        };
-
-        // 返回新的localtion.search的值
-        function removeByName(keyName, _search) {
-            if (keyName != null) {
-                var re = new RegExp("[\?\&]\\b" + keyName + "[=][^&#]*", 'img');
-
-                if (re.test(_search)) {
-                    _search = _search.replace(re, '');
-                }
-
-                if (!_.isEmpty(_search) && _search[0] == '&') {
-                    _search = _search.replace('&', '?');
-                }
-            }
-
-            return _search;
-        };
+        var self = this;
 
         if ((oObject instanceof Object) && !_.isEmpty(oObject)) {
             _.each(oObject, function (v, k) {
                 // 删除此key值
                 if (!v && v != '0') {
-                    _queryString = removeByName(k, _queryString);
+                    _queryString = self._removeByName(k, _queryString);
                 } else {
-                    _queryString = getNewUrlSearch(k, v, _queryString);
+                    _queryString = self._getNewUrlSearch(k, v, _queryString);
                 }
 
             });
@@ -659,7 +742,7 @@ sun.location = {
                 _queryString += '?' + _queryString
             }
 
-            this.__replaceState(_queryString);
+            this._replaceState(_queryString);
         }
 
         return location.href;
@@ -691,10 +774,43 @@ sun.location = {
                 }
             })
 
-            this.__replaceState(_pathnameList.join('') + location.search);
+            this._replaceState(_pathnameList.join('') + location.search);
         }
 
         return location.href;
+    },
+
+    // 只对传入的参数进行修改，不更改当前浏览器的URL
+    // @param oObject {object} 段位和值的键值对: { {string} : {object} } => key为参数名称，value为值
+    // @param sUrl {string}? url地址
+    // e.g.: ({ day: '', '1-2' : '12341234' }, 'https://www.baidu.com?day=50&1-2=222')
+    // 删除day ,更新1-2参数
+    formatSearch: function (oObject, sUrl) {
+        var _url = this.parseUrl(sUrl);
+        var _queryString = _url.search;
+        var resultUrl = sUrl;
+        var self = this;
+
+        if ((oObject instanceof Object) && !_.isEmpty(oObject)) {
+            _.each(oObject, function (v, k) {
+                // 删除此key值
+                if (!v && v != '0') {
+                    _queryString = self._removeByName(k, _queryString);
+                } else {
+                    _queryString = self._getNewUrlSearch(k, v, _queryString);
+                }
+
+            });
+
+            // 如果_queryString为空的话，history.replaceState不可执行
+            if (_queryString.indexOf('?') < 0) {
+                _queryString += '?' + _queryString
+            }
+
+            resultUrl = _queryString;
+        }
+
+        return _url.origin + _url.pathname + resultUrl;
     }
 };
 
