@@ -461,8 +461,6 @@ sun.autoBlur = function(nodeTrigger, nodeResult, fnblur) {
     self.event.add('click', document, callBack);
 };
 
-sun.context = sun.context || {};
-
 sun.event = {
     add: function (type, node, fun) {
         var _addEvent = null;
@@ -499,7 +497,7 @@ sun.event = {
     }
 };
 
-sun.context.getQueryStringByName = function(name) {
+sun.getQueryStringByName = function(name) {
     var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
 
     if (!result || result.length < 1) {
@@ -509,7 +507,7 @@ sun.context.getQueryStringByName = function(name) {
     return result[1];
 };
 
-sun.context.cookie = (function(){
+sun.cookie = (function(){
     // .eg article detail http://www.cnblogs.com/Darren_code/archive/2011/11/24/Cookie.html
     var self  = {};
 
@@ -553,7 +551,7 @@ sun.context.cookie = (function(){
     return self;
 })();
 
-sun.context.localStorage = (function(global) {
+sun.localStorage = (function(global) {
     var self = {
         _ls : global.localStorage
     };
@@ -722,7 +720,7 @@ sun.location = {
     // @param oObject {object} 段位和值的键值对: { {string} : {object} } => key为参数名称，value为值
     // @param sPathname {string}? 默认为当前的location.search
     // e.g.: ({ day: '50', '1-2' : '12341234' })
-    updateSearch: function (oObject, sSearch) {
+    pushStateSearch: function (oObject, sSearch) {
         var _queryString = sSearch || location.search;
         var self = this;
 
@@ -752,7 +750,7 @@ sun.location = {
     // @param oObject {object} 段位和值的键值对: { {number} : {object} } 其中number为0时，默认更新为最后一段
     // @param sPathname {string}? 默认为当前的location.pathname
     // e.g: ({ 1 : 'webapp', 0 : 'default.html' })
-    updatePathname: function(oObject, sPathname) {
+    pushStatePathname: function(oObject, sPathname) {
         var _pathname = sPathname || location.pathname;
         var _pathnameList = _pathname.match(/\/{1}[^\/]*/ig) || [];
 

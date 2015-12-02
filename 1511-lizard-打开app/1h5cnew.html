@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta content="telephone=no" name="format-detection">
+<title>非凡假期 一生必游</title>
+<script type='text/javascript' src='http://webresource.c-ctrip.com/code/lizard/2.1/web/lizard.seed.js'></script>
+<script type='text/javascript' src='http://pages.ctrip.com/commerce/wirelessResource/zeptoFl.js'></script>
+
+<!--h5分享-->
+<script type="text/javascript" src='http://pages.ctrip.com/hotel_h5/common/js/WeixinApi.js'></script>
+<script type="text/javascript">
+WeixinApi.ready(function (Api) {
+var wxData = {
+"imgUrl": '', // 分享的图片地址
+"link": '', //分享的链接地址，只有主会场加版本号，普通专辑不要加版本参数
+"title": '非凡假期 一生必游', // 分享的标题
+"desc": '非凡假期 一生必游' // 分享的描述信息
+}
+Api.shareToFriend(wxData);//分享给好友
+Api.shareToTimeline(wxData); //分享到朋友圈
+Api.shareToWeibo(wxData);//分享到腾讯微博
+}); </script> 
+<!--h5分享结束-->
+
+<style>
+body,div,p{margin:0; padding:0;}
+img{border:0;}
+
+</style>
+
+
+
+<script type="text/javascript">
+
+    require(['cGuiderService', 'cUtilDate'], function (cGuiderService, cUtilDate) {
+        $('.alink1').on('click', function (evt) {
+            var url = $(this).attr('lnk');
+            
+            cGuiderService.apply({
+                hybridCallback: function () {
+                    var hid = /\d*?(?=\.html)/img.exec(url);
+                    var _today = new cUtilDate();
+                    
+                    if (hid.length) {
+                        hid = parseInt(hid[0]);
+                    }
+                  
+                    if (hid) {
+                        cGuiderService.jump({
+                            "targetModel" : "app",
+                            "url" : "",
+                            "module" : "InlandHotel",
+                            "param" : {
+                                "hotelId" : hid,
+                                "checkInDate" : _today.format('Ymd'),
+                                "checkOutDate" : _today.addDay(1).format('Ymd'),
+                                "isBeforeDawn" : 0,
+                                "source_from_tag" : ""
+                            }
+                        });
+                    }
+                },
+                callback: function () {
+                    window.location.href = url + '?from=' + encodeURIComponent(location.href);
+                }
+            });
+        })
+    });
+</script>
+
+
+<script type="text/javascript">
+$(function(){
+	
+	
+	$('.alink2').click(function(){ CtripUtil.app_open_url($(this).attr('lnk'),2,'',''); });
+	
+
+})
+</script>
+
+
+
+
+</head>
+<body>
+<p><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_head.jpg" width="100%" style="display:block; float:left"/></p>
+<p>
+    <img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_menu1.jpg" width="33%" style="display:block; float:left; margin-right:1px;"/>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://pages.ctrip.com/destinationad/201510/wd/h5bnew.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_menu2.jpg" width="33%" style="display:block; float:left;margin-right:1px;"/></a>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://pages.ctrip.com/destinationad/201510/wd/h5cnew.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_menu3.jpg" width="33%" style="display:block; float:left"/></a>
+</p>
+
+
+
+<p><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_02.jpg" width="100%" style="display:block; float:left"/></p>
+<p>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/hotel/hoteldetail/427100.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_03.jpg" width="50%" style="display:block; float:left"/></a>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/hotel/hoteldetail/427098.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_04.jpg" width="50%" style="display:block; float:left"/></a>
+</p>
+<div style="clear:both;"></div>
+<p>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/hotel/hoteldetail/546163.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_06.jpg" width="50%" style="display:block; float:left"/></a>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/hotel/hoteldetail/427096.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_07.jpg" width="50%" style="display:block; float:left"/></a>
+</p>
+<div style="clear:both;"></div>
+<p>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/hotel/hoteldetail/427093.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_08.jpg" width="50%" style="display:block; float:left"/></a>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/hotel/hoteldetail/533945.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_09.jpg" width="50%" style="display:block; float:left"/></a>
+</p>
+<div style="clear:both;"></div>
+<p>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/hotel/hoteldetail/533948.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_09-07.jpg" width="50%" style="display:block; float:left"/></a>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/hotel/hoteldetail/548153.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_11.jpg" width="50%" style="display:block; float:left"/></a>
+</p>
+
+<p><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_12.jpg" width="100%" style="display:block; float:left"/></p>
+
+<p>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/diyfhxsdp/detail?productid=77011&salecityid=2&departcityid=2&from=http://pages.ctrip.com/destinationad/201510/wd/1h5anew.html"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_13.jpg" width="50%" style="display:block; float:left"/></a>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/diyfhxsdp/detail?productid=3870184&salecityid=2&departcityid=2&adt=2&cld=0"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_14.jpg" width="50%" style="display:block; float:left"/></a>
+</p>
+<div style="clear:both;"></div>
+<p>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/diyfhxsdp/detail?productid=2551996&salecityid=2&departcityid=2&adt=2&cld=0"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_15.jpg" width="50%" style="display:block; float:left"/></a>
+    <a href="javascript:;" target="_blank" class="alink1" lnk=
+"http://m.ctrip.com/webapp/diyfhxsdp/detail?productid=2737999&salecityid=28&departcityid=28&adt=2&cld=0"><img src="http://pages.ctrip.com/destinationad/201510/wd/images/h5_16.jpg" width="50%" style="display:block; float:left"/></a>
+</p>
+
+
+
+
+<input type='hidden' id='page_id' value='123456789123456789' />
+<script type='text/javascript' src='http://webresource.c-ctrip.com/code/cquery/LABjs/LAB.js'></script>
+<script type='text/javascript' src='http://pages.ctrip.com/commerce/PubResource/jq/ga.js' charset='utf-8'></script>
+</body>
+
+</html>

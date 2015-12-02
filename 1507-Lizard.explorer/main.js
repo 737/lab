@@ -1,11 +1,9 @@
-require.config({
-    waitSeconds: 20
-});
 
-require(['cUtilObject'], function(cUtilObject) {
+
+require(function() {
 
     window.cc = this;
-    
-    cc.cUtilObject = cUtilObject;
 
+    console.log(11);
+    
 });
