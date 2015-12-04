@@ -1,0 +1,17 @@
+{
+  "name": "gulp-test",
+  "version": "0.0.1",
+  "description": "gulp hello world",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {
+    "gulp-jasmine": "^2.2.1"
+  },
+  "scripts": {
+    "test": "npm start"
+  },
+  "author": "",
+  "license": "ISC"
+}
