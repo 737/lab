@@ -697,7 +697,7 @@ sun.location = {
 
         var _hostname = host + ':' + port;
         var _origin = protocol + '//' + host + ':' + port;
-        var _search = '?' + url;
+        var _search = !!url ? '?' + url : '';
         var _pathname = '/' + path;
         var _href = _origin + _pathname + _search;
 
@@ -805,10 +805,10 @@ sun.location = {
                 _queryString += '?' + _queryString
             }
 
-            resultUrl = _queryString;
+            resultUrl = _url.origin + _url.pathname + _queryString;
         }
 
-        return _url.origin + _url.pathname + resultUrl;
+        return resultUrl;
     }
 };
 
