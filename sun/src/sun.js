@@ -801,7 +801,7 @@ sun.location = {
             });
 
             // 如果_queryString为空的话，history.replaceState不可执行
-            if (_queryString.indexOf('?') < 0) {
+            if (!_.isEmpty(_queryString) && _queryString.indexOf('?') < 0) {
                 _queryString += '?' + _queryString
             }
 
