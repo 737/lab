@@ -190,7 +190,7 @@ function loaded () {
 
     myScroll = new IScroll('#wrapper', {
         startY: -pullDownOffset,
-        probeType: 2,
+        probeType: 3,
         mouseWheel: true 
     });
     
@@ -200,6 +200,8 @@ function loaded () {
     });
     
     myScroll.on('scroll', function () {
+        console.log(this.y);
+    
         if (this.y >= 5 && pullDownEl && !pullDownEl.className.match('flip')) {
             pullDownEl.className = 'flip';
             pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Release to refresh';
