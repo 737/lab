@@ -571,7 +571,7 @@ sun.localStorage = (function(global) {
         var val = this.get(name);
 
         if (!!val) {
-            this.__ls.removeItem("c");
+            this._ls.removeItem(name);
         }
     };
 
