@@ -84,22 +84,26 @@ require(['underscore', 'jquery', 'sun'], function() {
             codeAt = null,
             codeAtArray = [],   // 排序code
             _new = null;    // 临时变量
+
+        let v = null;
         
-        _.each(oObject, function(v, k) {
+        for (var k in oObject) {
+            v = oObject[k];
+
             // 迭代对象
             if (_.isObject(v) || _.isArray(v)) {
                 v = jsonSort(v);
             }
-            
+
             codeAt = getCharCodeAt(k, maxKeyLength);
-            
+
             codeAtArray.push(codeAt);
-            
+
             _new = {};
             _new[k] = v;
-            
+
             objectWithCharCode[codeAt] = _new;
-        });
+        };
         
         // 数据组排序
         codeAtArray.sort(function(a, b) {
